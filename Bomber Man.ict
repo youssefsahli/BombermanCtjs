@@ -12,7 +12,10 @@ libs:
   pointer.polyfill: {}
   gamepad: {}
   vkeys: {}
-startroom: -1
+  random: {}
+  matter:
+    matterUseStaticDeltaTime: true
+startroom: TLcH5mwHpp34rw
 contentTypes:
   - name: Items
     readableName: ''
@@ -87,7 +90,1181 @@ assets:
     icon: image
     name: Images
     lastmod: 1713013728204
-    entries: []
+    entries:
+      - lastmod: 1713046077766
+        type: texture
+        name: Bomb
+        untill: 0
+        grid:
+          - 2
+          - 1
+        axis:
+          - 31
+          - 33.75
+        marginx: 0
+        marginy: 0
+        imgWidth: 128
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: iQWGDM5qW9QRNLD.png
+        shape: circle
+        left: 32
+        right: 32
+        top: 32
+        bottom: 32
+        uid: QWGDM5qW9QRNLD
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/Bomberman.png
+        r: 19
+      - lastmod: 1713046040478
+        type: texture
+        name: Player
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 32
+          - 32
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: iDLdzqHPQDtzCFW.png
+        shape: rect
+        left: 32
+        right: 32
+        top: 32
+        bottom: 32
+        uid: DLdzqHPQDtzCFW
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/Player.png
+      - lastmod: 1713046113908
+        type: texture
+        name: TerrainTileset
+        untill: 0
+        grid:
+          - 3
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 192
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: iFqg8bFG9qpKD4M.png
+        shape: rect
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
+        uid: Fqg8bFG9qpKD4M
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/BombermanTerrain.png
+        ignoreTiledUse: true
+        r: 32
+  - type: folder
+    uid: Dtfzzf1MLnJW6B
+    colorClass: warning
+    icon: template
+    name: Entities
+    lastmod: 1713033002406
+    entries:
+      - type: template
+        baseClass: AnimatedSprite
+        name: Player
+        depth: 0
+        texture: DLdzqHPQDtzCFW
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events:
+          - eventKey: OnStep
+            lib: core
+            code: this.movementForce = 3
+            arguments: {}
+          - eventKey: OnActionDown
+            code: 'matter.push(this, actions.MoveX.value*this.movementForce, 0)'
+            arguments:
+              action: MoveX
+            lib: core
+          - eventKey: OnActionDown
+            code: 'matter.push(this, 0, actions.MoveY.value*this.movementForce)'
+            arguments:
+              action: MoveY
+            lib: core
+        extends:
+          matterEnable: true
+          matterConstraint: none
+          matterFriction: 0.5
+          matterDensity: 0.5
+          matterFrictionStatic: 0.5
+          matterFrictionAir: 0.3
+        lastmod: 1713047562753
+        uid: BC5dp7bw2mHL2t
+        behaviors: []
+  - type: folder
+    uid: wpCr5j4BgRdTR6
+    colorClass: success
+    icon: polyline
+    name: Levels
+    lastmod: 1713040661097
+    entries:
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 64
+        gridY: 64
+        diagonalGrid: false
+        disableGrid: true
+        simulate: true
+        width: 448
+        height: 320
+        restrictCamera: false
+        restrictMaxX: 1280
+        restrictMinX: 1280
+        restrictMaxY: 720
+        restrictMinY: 720
+        isUi: false
+        name: MVP
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds: []
+        copies:
+          - x: 224
+            'y': 158
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: BC5dp7bw2mHL2t
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles:
+          - depth: -1
+            tiles:
+              - x: 0
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+            extends: {}
+            hidden: false
+            cache: true
+        extends:
+          matterGravity:
+            - 0
+            - 0
+        lastmod: 1713046169375
+        events: []
+        behaviors: []
+        uid: TLcH5mwHpp34rw
 settings:
   authoring:
     author: Vallant & Sahli
@@ -103,12 +1280,12 @@ settings:
     usePixiLegacy: true
     transparent: false
     maxFPS: 60
-    pixelatedrender: false
+    pixelatedrender: true
     highDensity: true
     desktopMode: maximized
     hideCursor: false
     mobileScreenOrientation: unspecified
-    viewMode: scaleFit
+    viewMode: fastScaleInteger
   export:
     autocloseDesktop: true
     windows: true
