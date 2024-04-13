@@ -178,7 +178,7 @@ assets:
         source: /home/youssef/ct.js/Projects/Bomber Man/BombermanTerrain.png
         ignoreTiledUse: true
         r: 32
-      - lastmod: 1713051796339
+      - lastmod: 1713051464412
         type: texture
         name: Spawn
         untill: 0
@@ -186,8 +186,8 @@ assets:
           - 1
           - 1
         axis:
-          - 32
-          - 32
+          - 0
+          - 0
         marginx: 0
         marginy: 0
         imgWidth: 64
@@ -198,10 +198,10 @@ assets:
         offy: 0
         origname: ipWTfnpWNMF7dKB.png
         shape: rect
-        left: 32
-        right: 32
-        top: 32
-        bottom: 32
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
         uid: pWTfnpWNMF7dKB
         padding: 1
         isBlank: false
@@ -294,24 +294,6 @@ assets:
         lastmod: 1713051527091
         uid: gn2cjnqnWM6qFw
         behaviors: []
-      - type: template
-        baseClass: AnimatedSprite
-        name: Spawn Player
-        depth: 0
-        texture: pWTfnpWNMF7dKB
-        playAnimationOnStart: false
-        loopAnimation: true
-        animationFPS: 30
-        visible: false
-        events:
-          - eventKey: OnCreate
-            code: 'templates.copy(''Player'', this.x, this.y);'
-            arguments: {}
-            lib: core
-        extends: {}
-        lastmod: 1713051803593
-        uid: CFFWjhrgQWk6MC
-        behaviors: []
   - type: folder
     uid: wpCr5j4BgRdTR6
     colorClass: success
@@ -324,8 +306,8 @@ assets:
         onstep: ''
         ondraw: ''
         onleave: ''
-        gridX: 32
-        gridY: 32
+        gridX: 64
+        gridY: 64
         diagonalGrid: false
         disableGrid: false
         simulate: true
@@ -342,6 +324,18 @@ assets:
         follow: -1
         backgrounds: []
         copies:
+          - x: 224
+            'y': 158
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: BC5dp7bw2mHL2t
+            exts: {}
+            customProperties: {}
+            bindings: {}
           - x: -64
             'y': 0
             opacity: 1
@@ -687,18 +681,6 @@ assets:
               'y': 1
             rotation: 0
             uid: gn2cjnqnWM6qFw
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 222.71530973
-            'y': 159.76797499
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: CFFWjhrgQWk6MC
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1702,7 +1684,7 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713051839865
+        lastmod: 1713051425371
         events: []
         behaviors: []
         uid: TLcH5mwHpp34rw
