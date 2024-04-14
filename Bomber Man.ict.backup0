@@ -261,7 +261,7 @@ assets:
         uid: NRJwM4QtzB7mqp
         padding: 1
         isBlank: false
-      - lastmod: 1713092065087
+      - lastmod: 1713133538379
         type: texture
         name: Player Idle
         untill: 17
@@ -453,19 +453,19 @@ assets:
           /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
           Pack/Circle_05.png
         r: 72
-      - lastmod: 1713131970522
+      - lastmod: 1713132331812
         type: texture
         name: Explosion
         untill: 0
         grid:
-          - 1
+          - 4
           - 1
         axis:
-          - 31.083333333333332
-          - 33.666666666666664
+          - 32
+          - 32
         marginx: 0
         marginy: 0
-        imgWidth: 64
+        imgWidth: 256
         imgHeight: 64
         width: 64
         height: 64
@@ -480,7 +480,7 @@ assets:
         uid: r9b6c3FGjwLbtC
         padding: 1
         isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/Explosion_0002.png
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/Explosion.png
         r: 15
       - lastmod: 1713131551379
         type: texture
@@ -4383,7 +4383,7 @@ assets:
         uid: B5fKM133WhrjgQ
         emitters:
           - uid: t9r57Jnc6tLkdD
-            texture: r9b6c3FGjwLbtC
+            texture: PngLBJdzRP9t5d
             openedTabs:
               - texture
               - colors
@@ -4393,16 +4393,16 @@ assets:
               - spawning
               - shape
             textureBehavior: textureRandom
-            animatedSingleFramerate: 30
+            animatedSingleFramerate: 4
             settings:
               delay: 0
               lifetime:
                 min: 0.5
                 max: 0.5
               frequency: 0.008
-              spawnChance: 0.17
+              spawnChance: 0.42
               particlesPerWave: 1
-              emitterLifetime: 0
+              emitterLifetime: 0.4
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -4414,21 +4414,26 @@ assets:
                   config:
                     alpha:
                       list:
-                        - value: 0
+                        - value: 0.15500000000000003
                           time: 0
-                        - value: 0.66
-                          time: 0.753968253968254
+                        - value: 0.16000000000000003
+                          time: 0.40079365079365076
+                        - time: 0.6944444444444445
+                          value: 0.17000000000000004
                         - value: 0
                           time: 1
+                      isStepped: false
                 - type: color
                   config:
                     color:
                       list:
-                        - value: ffffff
+                        - value: FFF570
                           time: 0
-                        - value: ffffff
-                          time: 0.753968253968254
-                        - value: ffffff
+                        - value: FFE6B8
+                          time: 0.40079365079365076
+                        - time: 0.6944444444444445
+                          value: F0A3A8
+                        - value: FFE6E6
                           time: 1
                       isStepped: false
                 - type: blendMode
@@ -4440,13 +4445,14 @@ assets:
                       list:
                         - value: 0
                           time: 0
-                        - time: 0.43253968253968256
-                          value: 1.47
+                        - time: 0.3055555555555556
+                          value: 0.6500000000000002
                         - time: 0.7698412698412698
                           value: 0.72
                         - value: 0.3
                           time: 1
-                    minMult: 1
+                      isStepped: true
+                    minMult: 0.49
                 - type: moveSpeed
                   config:
                     speed:
@@ -4455,7 +4461,7 @@ assets:
                           time: 0
                         - value: 100
                           time: 1
-                    minMult: 1
+                    minMult: 0.57
                 - type: spawnShape
                   config:
                     type: torus
@@ -4482,6 +4488,7 @@ assets:
               - rotation
               - spawning
               - shape
+              - colors
             textureBehavior: textureRandom
             animatedSingleFramerate: 30
             settings:
@@ -4492,7 +4499,7 @@ assets:
               frequency: 0.054
               spawnChance: 0.85
               particlesPerWave: 1
-              emitterLifetime: 0
+              emitterLifetime: 0.4
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -4506,8 +4513,8 @@ assets:
                       list:
                         - value: 0
                           time: 0
-                        - value: 1
-                          time: 0.5
+                        - value: 0.24000000000000005
+                          time: 0.5595238095238095
                         - value: 0
                           time: 1
                 - type: color
@@ -4517,7 +4524,7 @@ assets:
                         - value: ffffff
                           time: 0
                         - value: ffffff
-                          time: 0.5
+                          time: 0.5595238095238095
                         - value: ffffff
                           time: 1
                 - type: blendMode
@@ -4529,7 +4536,11 @@ assets:
                       list:
                         - value: 0.21999999999999997
                           time: 0
-                        - value: 1.19
+                        - time: 0.496031746031746
+                          value: 0.6500000000000001
+                        - time: 0.8214285714285714
+                          value: 0.6600000000000001
+                        - value: 0
                           time: 1
                     minMult: 1
                 - type: moveSpeed
@@ -4545,8 +4556,8 @@ assets:
                   config:
                     type: torus
                     data:
-                      innerRadius: 185
-                      radius: 209
+                      innerRadius: 1
+                      radius: 113
                       x: 0
                       'y': 0
                       rotation: true
@@ -4568,12 +4579,14 @@ assets:
     lastmod: 1713131246914
     entries:
       - type: behavior
-        name: explode
+        name: Explode
         behaviorType: template
         events: []
         specification:
-          - type: text
-        lastmod: 1713131971637
+          - type: number
+            name: TimerExplosion
+            readableName: Timer Explosion
+        lastmod: 1713133606590
         uid: 7qL8Dk6Fpb91m9
 settings:
   authoring:
@@ -4625,4 +4638,5 @@ settings:
     alternativeLogo: false
     customLoadingText: ''
   fps: 30
-palette: []
+palette:
+  - '#FFFFFF'
