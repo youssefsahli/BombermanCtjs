@@ -15,7 +15,7 @@ libs:
   random: {}
   matter:
     matterUseStaticDeltaTime: true
-startroom: TLcH5mwHpp34rw
+startroom: PDmKwnTcN9fPqq
 contentTypes:
   - name: Items
     readableName: ''
@@ -82,7 +82,9 @@ actions:
       - code: vkeys.Vk1
       - code: gamepad.L2
       - code: gamepad.R2
-scripts: []
+scripts:
+  - name: New Script
+    code: /* Use scripts to define frequent functions and import small libraries */
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -259,35 +261,497 @@ assets:
         uid: NRJwM4QtzB7mqp
         padding: 1
         isBlank: false
-      - lastmod: 1713120578245
+      - lastmod: 1713092065087
         type: texture
         name: Player Idle
-        untill: 0
+        untill: 17
         grid:
-          - 6
           - 5
+          - 4
         axis:
           - 32
           - 32
         marginx: 0
         marginy: 0
-        imgWidth: 384
-        imgHeight: 320
+        imgWidth: 320
+        imgHeight: 256
         width: 64
         height: 64
         offx: 0
         offy: 0
         origname: ikc9df42Nz39cwj.png
         shape: rect
+        left: 15
+        right: 14
+        top: 29
+        bottom: 17
+        uid: kc9df42Nz39cwj
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridle.png
+        r: 16
+      - lastmod: 1713124087036
+        type: texture
+        name: Rock
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: i7TwWtGrpPt5whk.png
+        shape: rect
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
+        uid: 7TwWtGrpPt5whk
+        padding: 1
+        isBlank: false
+      - lastmod: 1713129347804
+        type: texture
+        name: Circle_01
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 256
+          - 256
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: ifNqmPNdQWDqrHQ.png
+        shape: circle
+        left: 256
+        right: 256
+        top: 256
+        bottom: 256
+        uid: fNqmPNdQWDqrHQ
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Circle_01.png
+        r: 197
+      - lastmod: 1713129339655
+        type: texture
+        name: Circle_03
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 256
+          - 256
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: i513zKBfGM9bnhb.png
+        shape: circle
+        left: 256
+        right: 256
+        top: 256
+        bottom: 256
+        uid: 513zKBfGM9bnhb
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Circle_03.png
+        r: 188
+        stripPoints:
+          - x: 0
+            'y': -256
+          - x: 243
+            'y': -79
+          - x: 150
+            'y': 207
+          - x: -150
+            'y': 207
+          - x: -243
+            'y': -79
+        closedStrip: true
+      - lastmod: 1713129360154
+        type: texture
+        name: Circle_04
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 256
+          - 256
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iFtq67m4tjfNB3F.png
+        shape: circle
+        left: 256
+        right: 256
+        top: 256
+        bottom: 256
+        uid: Ftq67m4tjfNB3F
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Circle_04.png
+        r: 164
+      - lastmod: 1713129372754
+        type: texture
+        name: Circle_05
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 256
+          - 256
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: ihH4r23BwDwp5m8.png
+        shape: circle
+        left: 256
+        right: 256
+        top: 256
+        bottom: 256
+        uid: hH4r23BwDwp5m8
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Circle_05.png
+        r: 72
+      - lastmod: 1713131970522
+        type: texture
+        name: Explosion
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 31.083333333333332
+          - 33.666666666666664
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: ir9b6c3FGjwLbtC.png
+        shape: circle
         left: 32
         right: 32
         top: 32
         bottom: 32
-        uid: kc9df42Nz39cwj
+        uid: r9b6c3FGjwLbtC
         padding: 1
         isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridlefront.png
-        r: 16
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/Explosion_0002.png
+        r: 15
+      - lastmod: 1713131551379
+        type: texture
+        name: Fire_01
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iP6dGP7w4Q4Fw8z.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: P6dGP7w4Q4Fw8z
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Fire_01.png
+      - lastmod: 1713131552339
+        type: texture
+        name: Fire_02
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: ikTBHD7hPhJLhkF.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: kTBHD7hPhJLhkF
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Fire_02.png
+      - lastmod: 1713131557848
+        type: texture
+        name: Flame_01
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: ibTHWnf9pTfFKGw.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: bTHWnf9pTfFKGw
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Flame_01.png
+      - lastmod: 1713131558983
+        type: texture
+        name: Flame_02
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iczhMC912GbDhN1.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: czhMC912GbDhN1
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Flame_02.png
+      - lastmod: 1713131560084
+        type: texture
+        name: Flame_03
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iP8FDQwBJ2974P5.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: P8FDQwBJ2974P5
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Flame_03.png
+      - lastmod: 1713131561014
+        type: texture
+        name: Flame_04
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: i88dw77H1F1fbtd.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: 88dw77H1F1fbtd
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Flame_04.png
+      - lastmod: 1713131570654
+        type: texture
+        name: Smoke_01
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: igNHkg43W9w1c4D.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: gNHkg43W9w1c4D
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Smoke_01.png
+      - lastmod: 1713131571730
+        type: texture
+        name: Smoke_02
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iTmRHpM5mB9bTKk.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: TmRHpM5mB9bTKk
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Smoke_02.png
+      - lastmod: 1713131572869
+        type: texture
+        name: Smoke_03
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 512
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iPngLBJdzRP9t5d.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: PngLBJdzRP9t5d
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Smoke_03.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -302,7 +766,7 @@ assets:
         texture: kc9df42Nz39cwj
         playAnimationOnStart: true
         loopAnimation: true
-        animationFPS: 10
+        animationFPS: 30
         visible: true
         events:
           - eventKey: OnActionDown
@@ -316,12 +780,27 @@ assets:
               action: MoveY
             lib: core
           - eventKey: OnCreate
-            code: this.movementForce = 3
+            code: |-
+              this.movementForce = 3
+              this.canPoseBomb = true
             arguments: {}
             lib: core
           - eventKey: OnDraw
-            code: 'if (this.rotation !== 0) matter.rotate(this, 0);'
+            code: 'if (this.rotation !== 0) matter.rotate(this, 0)'
             arguments: {}
+            lib: core
+          - eventKey: OnActionPress
+            code: |-
+              if (this.canPoseBomb) {
+                  var bomb = templates.copy('Bomb', this.x, this.y)
+                  bomb.explosionTimer = timer.add(3000, "BombTimer")
+                  this.canPoseBomb = false
+                  timer.add(500, "BombCountdown").then(() => {
+                      this.canPoseBomb = true
+                  })
+              }
+            arguments:
+              action: Jump
             lib: core
         extends:
           matterEnable: true
@@ -334,8 +813,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-          matterRestitution: 0
-        lastmod: 1713114417530
+        lastmod: 1713128865742
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -395,32 +873,40 @@ assets:
         behaviors: []
       - type: template
         baseClass: AnimatedSprite
-        name: Bomb
+        name: Rock
         depth: 0
-        texture: QWGDM5qW9QRNLD
-        playAnimationOnStart: true
+        texture: 7TwWtGrpPt5whk
+        playAnimationOnStart: false
         loopAnimation: true
-        animationFPS: 2
+        animationFPS: 30
         visible: true
         events:
           - eventKey: OnStep
             lib: core
-            code: ''
+            code: this.move();
             arguments: {}
-          - eventKey: Timer1
-            code: ''
-            arguments:
-              name: Tic Tac
-              isUi: false
-            lib: core
-          - eventKey: OnCreate
-            code: this.timer1 = 3;
-            arguments: {}
-            lib: core
-        extends: {}
-        lastmod: 1713114130090
-        uid: BmDL9K4f4rWn1K
+        extends:
+          matterEnable: true
+          matterStatic: true
+          matterConstraint: none
+        lastmod: 1713124365581
+        uid: cMPb1PPCNCM71Q
         behaviors: []
+      - type: template
+        baseClass: AnimatedSprite
+        name: Bomb
+        depth: 0
+        texture: QWGDM5qW9QRNLD
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends: {}
+        lastmod: 1713131971617
+        uid: TfWHLnj22N26db
+        behaviors:
+          - 7qL8Dk6Fpb91m9
   - type: folder
     uid: wpCr5j4BgRdTR6
     colorClass: success
@@ -1811,7 +2297,7 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713051839865
+        lastmod: 1713121410626
         events: []
         behaviors: []
         uid: TLcH5mwHpp34rw
@@ -2195,6 +2681,1597 @@ assets:
         events: []
         behaviors: []
         uid: qJMd25nRhqgjnn
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 32
+        gridY: 32
+        diagonalGrid: false
+        disableGrid: false
+        simulate: true
+        width: 448
+        height: 320
+        restrictCamera: true
+        restrictMaxX: 448
+        restrictMinX: 0
+        restrictMaxY: 320
+        restrictMinY: 0
+        isUi: false
+        name: MVP_PDmK
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds: []
+        copies:
+          - x: -64
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 192
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 192
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 222.71530973
+            'y': 159.76797499
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: CFFWjhrgQWk6MC
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 32
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 96
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles:
+          - depth: -1
+            tiles:
+              - x: 0
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+            extends: {}
+            hidden: false
+            cache: true
+        extends:
+          matterGravity:
+            - 0
+            - 0
+        lastmod: 1713126599614
+        events: []
+        behaviors: []
+        uid: PDmKwnTcN9fPqq
   - type: folder
     uid: n5FQDp8LhWT4cb
     colorClass: text
@@ -2302,6 +4379,202 @@ assets:
             showShapeVisualizer: false
         lastmod: 1713087266226
         type: tandem
+      - name: ExplosionEmitter
+        uid: B5fKM133WhrjgQ
+        emitters:
+          - uid: t9r57Jnc6tLkdD
+            texture: r9b6c3FGjwLbtC
+            openedTabs:
+              - texture
+              - colors
+              - scaling
+              - velocity
+              - rotation
+              - spawning
+              - shape
+            textureBehavior: textureRandom
+            animatedSingleFramerate: 30
+            settings:
+              delay: 0
+              lifetime:
+                min: 0.5
+                max: 0.5
+              frequency: 0.008
+              spawnChance: 0.17
+              particlesPerWave: 1
+              emitterLifetime: 0
+              maxParticles: 1000
+              maxSpeed: 0
+              pos:
+                x: 0
+                'y': 0
+              addAtBack: false
+              behaviors:
+                - type: alpha
+                  config:
+                    alpha:
+                      list:
+                        - value: 0
+                          time: 0
+                        - value: 0.66
+                          time: 0.753968253968254
+                        - value: 0
+                          time: 1
+                - type: color
+                  config:
+                    color:
+                      list:
+                        - value: ffffff
+                          time: 0
+                        - value: ffffff
+                          time: 0.753968253968254
+                        - value: ffffff
+                          time: 1
+                      isStepped: false
+                - type: blendMode
+                  config:
+                    blendMode: add
+                - type: scale
+                  config:
+                    scale:
+                      list:
+                        - value: 0
+                          time: 0
+                        - time: 0.43253968253968256
+                          value: 1.47
+                        - time: 0.7698412698412698
+                          value: 0.72
+                        - value: 0.3
+                          time: 1
+                    minMult: 1
+                - type: moveSpeed
+                  config:
+                    speed:
+                      list:
+                        - value: 187.5
+                          time: 0
+                        - value: 100
+                          time: 1
+                    minMult: 1
+                - type: spawnShape
+                  config:
+                    type: torus
+                    data:
+                      innerRadius: 0
+                      radius: 17
+                      x: 0
+                      'y': 0
+                      rotation: true
+                      affectRotation: false
+                - type: rotation
+                  config:
+                    minStart: 0
+                    maxStart: 360
+                    minSpeed: 0
+                    maxSpeed: 0
+                    accel: 0
+          - uid: zDRdmW2GBhJWjc
+            texture: gNHkg43W9w1c4D
+            openedTabs:
+              - texture
+              - scaling
+              - velocity
+              - rotation
+              - spawning
+              - shape
+            textureBehavior: textureRandom
+            animatedSingleFramerate: 30
+            settings:
+              delay: 0
+              lifetime:
+                min: 0.5
+                max: 0.5
+              frequency: 0.054
+              spawnChance: 0.85
+              particlesPerWave: 1
+              emitterLifetime: 0
+              maxParticles: 1000
+              maxSpeed: 0
+              pos:
+                x: 0
+                'y': 0
+              addAtBack: false
+              behaviors:
+                - type: alpha
+                  config:
+                    alpha:
+                      list:
+                        - value: 0
+                          time: 0
+                        - value: 1
+                          time: 0.5
+                        - value: 0
+                          time: 1
+                - type: color
+                  config:
+                    color:
+                      list:
+                        - value: ffffff
+                          time: 0
+                        - value: ffffff
+                          time: 0.5
+                        - value: ffffff
+                          time: 1
+                - type: blendMode
+                  config:
+                    blendMode: normal
+                - type: scale
+                  config:
+                    scale:
+                      list:
+                        - value: 0.21999999999999997
+                          time: 0
+                        - value: 1.19
+                          time: 1
+                    minMult: 1
+                - type: moveSpeed
+                  config:
+                    speed:
+                      list:
+                        - value: 149.99999999999994
+                          time: 0
+                        - value: 100
+                          time: 1
+                    minMult: 0.12
+                - type: spawnShape
+                  config:
+                    type: torus
+                    data:
+                      innerRadius: 185
+                      radius: 209
+                      x: 0
+                      'y': 0
+                      rotation: true
+                - type: rotation
+                  config:
+                    minStart: 0
+                    maxStart: 360
+                    minSpeed: 0
+                    maxSpeed: 0
+                    accel: 0
+            showShapeVisualizer: false
+        lastmod: 1713131971640
+        type: tandem
+  - type: folder
+    uid: bRnP7dgpfP1rmM
+    colorClass: error
+    icon: behavior
+    name: Behaviors
+    lastmod: 1713131246914
+    entries:
+      - type: behavior
+        name: explode
+        behaviorType: template
+        events: []
+        specification:
+          - type: text
+        lastmod: 1713131971637
+        uid: 7qL8Dk6Fpb91m9
 settings:
   authoring:
     author: Vallant & Sahli
