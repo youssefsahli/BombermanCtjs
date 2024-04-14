@@ -122,7 +122,7 @@ assets:
         r: 19
       - lastmod: 1713046040478
         type: texture
-        name: Player
+        name: Player Static
         untill: 0
         grid:
           - 1
@@ -232,6 +232,62 @@ assets:
         uid: KpRC5NPLJC99n8
         padding: 1
         isBlank: false
+      - lastmod: 1713085806443
+        type: texture
+        name: Exit To
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: iNRJwM4QtzB7mqp.png
+        shape: rect
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
+        uid: NRJwM4QtzB7mqp
+        padding: 1
+        isBlank: false
+      - lastmod: 1713092065087
+        type: texture
+        name: Player Idle
+        untill: 17
+        grid:
+          - 5
+          - 4
+        axis:
+          - 32
+          - 32
+        marginx: 0
+        marginy: 0
+        imgWidth: 320
+        imgHeight: 256
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: ikc9df42Nz39cwj.png
+        shape: rect
+        left: 15
+        right: 14
+        top: 29
+        bottom: 17
+        uid: kc9df42Nz39cwj
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridle.png
+        r: 16
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -243,8 +299,8 @@ assets:
         baseClass: AnimatedSprite
         name: Player
         depth: 0
-        texture: DLdzqHPQDtzCFW
-        playAnimationOnStart: false
+        texture: kc9df42Nz39cwj
+        playAnimationOnStart: true
         loopAnimation: true
         animationFPS: 30
         visible: true
@@ -264,7 +320,7 @@ assets:
             arguments: {}
             lib: core
         extends:
-          matterEnable: true
+          matterEnable: false
           matterConstraint: none
           matterFriction: 0.5
           matterDensity: 0.5
@@ -274,7 +330,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713051329609
+        lastmod: 1713098840160
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -309,8 +365,28 @@ assets:
             arguments: {}
             lib: core
         extends: {}
-        lastmod: 1713051776155
+        lastmod: 1713051803593
         uid: CFFWjhrgQWk6MC
+        behaviors: []
+      - type: template
+        baseClass: AnimatedSprite
+        name: Exit To
+        depth: 0
+        texture: NRJwM4QtzB7mqp
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events:
+          - eventKey: matterImpactTemplate
+            code: |
+              let Player = other
+            arguments:
+              template: BC5dp7bw2mHL2t
+            lib: matter
+        extends: {}
+        lastmod: 1713086602215
+        uid: 8WgFppHR1nqHbp
         behaviors: []
   - type: folder
     uid: wpCr5j4BgRdTR6
@@ -324,8 +400,8 @@ assets:
         onstep: ''
         ondraw: ''
         onleave: ''
-        gridX: 64
-        gridY: 64
+        gridX: 32
+        gridY: 32
         diagonalGrid: false
         disableGrid: false
         simulate: true
@@ -342,18 +418,6 @@ assets:
         follow: -1
         backgrounds: []
         copies:
-          - x: 224
-            'y': 158
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: BC5dp7bw2mHL2t
-            exts: {}
-            customProperties: {}
-            bindings: {}
           - x: -64
             'y': 0
             opacity: 1
@@ -699,6 +763,18 @@ assets:
               'y': 1
             rotation: 0
             uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 222.71530973
+            'y': 159.76797499
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: CFFWjhrgQWk6MC
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1702,7 +1778,7 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713051597003
+        lastmod: 1713051839865
         events: []
         behaviors: []
         uid: TLcH5mwHpp34rw
@@ -2086,6 +2162,113 @@ assets:
         events: []
         behaviors: []
         uid: qJMd25nRhqgjnn
+  - type: folder
+    uid: n5FQDp8LhWT4cb
+    colorClass: text
+    icon: zap
+    name: Effects
+    lastmod: 1713086862680
+    entries:
+      - name: WalkEmitter
+        uid: MMLtHK9njK3kKq
+        emitters:
+          - uid: p74QT8j6tthkdw
+            texture: Fqg8bFG9qpKD4M
+            openedTabs:
+              - texture
+              - velocity
+              - rotation
+              - spawning
+              - shape
+              - scaling
+            textureBehavior: textureRandom
+            animatedSingleFramerate: 30
+            settings:
+              delay: 0
+              lifetime:
+                min: 0.3
+                max: 0.3
+              frequency: 1
+              spawnChance: 1
+              particlesPerWave: 30
+              emitterLifetime: 0
+              maxParticles: 1000
+              maxSpeed: 0
+              pos:
+                x: 0
+                'y': 0
+              addAtBack: false
+              behaviors:
+                - type: alpha
+                  config:
+                    alpha:
+                      list:
+                        - value: 0
+                          time: 0
+                        - time: 0.2896825396825397
+                          value: 0.41
+                        - value: 0.42500000000000004
+                          time: 0.5
+                        - time: 0.7142857142857143
+                          value: 0.32999999999999996
+                        - value: 0.015
+                          time: 1
+                - type: color
+                  config:
+                    color:
+                      list:
+                        - value: ffffff
+                          time: 0
+                        - time: 0.2896825396825397
+                          value: FFFFFF
+                        - value: ffffff
+                          time: 0.5
+                        - time: 0.7142857142857143
+                          value: FFFFFF
+                        - value: ffffff
+                          time: 1
+                - type: blendMode
+                  config:
+                    blendMode: multiply
+                - type: scale
+                  config:
+                    scale:
+                      list:
+                        - value: 0.2
+                          time: 0
+                        - time: 0.6706349206349207
+                          value: 0.48000000000000004
+                        - value: 0.06999999999999998
+                          time: 1
+                    minMult: 1
+                - type: moveSpeed
+                  config:
+                    speed:
+                      list:
+                        - value: 337.49999999999994
+                          time: 0
+                        - value: 100
+                          time: 1
+                    minMult: 1
+                - type: spawnShape
+                  config:
+                    type: torus
+                    data:
+                      x: 0
+                      'y': 0
+                      radius: 30
+                      innerRadius: 10
+                      rotation: true
+                - type: rotation
+                  config:
+                    minStart: 0
+                    maxStart: 360
+                    minSpeed: 0
+                    maxSpeed: 0
+                    accel: 0
+            showShapeVisualizer: false
+        lastmod: 1713087266226
+        type: tandem
 settings:
   authoring:
     author: Vallant & Sahli
@@ -2106,7 +2289,7 @@ settings:
     desktopMode: maximized
     hideCursor: false
     mobileScreenOrientation: unspecified
-    viewMode: fastScaleInteger
+    viewMode: scaleFit
   export:
     autocloseDesktop: true
     windows: true
