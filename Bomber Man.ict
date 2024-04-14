@@ -355,6 +355,10 @@ assets:
             arguments:
               action: Jump
             lib: core
+          - eventKey: OnDraw
+            code: 'if (this.rotation !== 0) matter.rotate(this, 0);'
+            arguments: {}
+            lib: core
         extends:
           matterEnable: true
           matterConstraint: none
@@ -366,7 +370,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713125586255
+        lastmod: 1713128226531
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
