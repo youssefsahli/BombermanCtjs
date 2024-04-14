@@ -259,7 +259,7 @@ assets:
         uid: NRJwM4QtzB7mqp
         padding: 1
         isBlank: false
-      - lastmod: 1713114403406
+      - lastmod: 1713120578245
         type: texture
         name: Player Idle
         untill: 0
@@ -286,7 +286,7 @@ assets:
         uid: kc9df42Nz39cwj
         padding: 1
         isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridle.png
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridlefront.png
         r: 16
   - type: folder
     uid: Dtfzzf1MLnJW6B

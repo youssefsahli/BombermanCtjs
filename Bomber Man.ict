@@ -15,7 +15,7 @@ libs:
   random: {}
   matter:
     matterUseStaticDeltaTime: true
-startroom: TLcH5mwHpp34rw
+startroom: PDmKwnTcN9fPqq
 contentTypes:
   - name: Items
     readableName: ''
@@ -82,7 +82,9 @@ actions:
       - code: vkeys.Vk1
       - code: gamepad.L2
       - code: gamepad.R2
-scripts: []
+scripts:
+  - name: New Script
+    code: /* Use scripts to define frequent functions and import small libraries */
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -259,35 +261,62 @@ assets:
         uid: NRJwM4QtzB7mqp
         padding: 1
         isBlank: false
-      - lastmod: 1713120578245
+      - lastmod: 1713092065087
         type: texture
         name: Player Idle
-        untill: 0
+        untill: 17
         grid:
-          - 6
           - 5
+          - 4
         axis:
           - 32
           - 32
         marginx: 0
         marginy: 0
-        imgWidth: 384
-        imgHeight: 320
+        imgWidth: 320
+        imgHeight: 256
         width: 64
         height: 64
         offx: 0
         offy: 0
         origname: ikc9df42Nz39cwj.png
         shape: rect
-        left: 32
-        right: 32
-        top: 32
-        bottom: 32
+        left: 15
+        right: 14
+        top: 29
+        bottom: 17
         uid: kc9df42Nz39cwj
         padding: 1
         isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridlefront.png
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/playeridle.png
         r: 16
+      - lastmod: 1713124087036
+        type: texture
+        name: Rock
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: i7TwWtGrpPt5whk.png
+        shape: rect
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
+        uid: 7TwWtGrpPt5whk
+        padding: 1
+        isBlank: false
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -302,7 +331,7 @@ assets:
         texture: kc9df42Nz39cwj
         playAnimationOnStart: true
         loopAnimation: true
-        animationFPS: 10
+        animationFPS: 30
         visible: true
         events:
           - eventKey: OnActionDown
@@ -319,9 +348,12 @@ assets:
             code: this.movementForce = 3
             arguments: {}
             lib: core
-          - eventKey: OnDraw
-            code: 'if (this.rotation !== 0) matter.rotate(this, 0);'
-            arguments: {}
+          - eventKey: OnActionDown
+            code: |2-
+                  var bomb = templates.copy('Bomb', this.x, this.y); // Placez la bombe à la position du joueur
+                  bomb.timer = 3; // Démarrez le compte à rebours (3 secondes par exemple)
+            arguments:
+              action: Jump
             lib: core
         extends:
           matterEnable: true
@@ -334,8 +366,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-          matterRestitution: 0
-        lastmod: 1713114417530
+        lastmod: 1713125586255
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -395,31 +426,69 @@ assets:
         behaviors: []
       - type: template
         baseClass: AnimatedSprite
-        name: Bomb
+        name: Rock
         depth: 0
-        texture: QWGDM5qW9QRNLD
-        playAnimationOnStart: true
+        texture: 7TwWtGrpPt5whk
+        playAnimationOnStart: false
         loopAnimation: true
-        animationFPS: 2
+        animationFPS: 30
         visible: true
         events:
           - eventKey: OnStep
             lib: core
-            code: ''
+            code: this.move();
             arguments: {}
-          - eventKey: Timer1
-            code: ''
-            arguments:
-              name: Tic Tac
-              isUi: false
+        extends:
+          matterEnable: true
+          matterStatic: true
+          matterConstraint: none
+        lastmod: 1713124365581
+        uid: cMPb1PPCNCM71Q
+        behaviors: []
+      - type: template
+        baseClass: AnimatedSprite
+        name: Bomb
+        depth: 0
+        texture: QWGDM5qW9QRNLD
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events:
+          - eventKey: OnStep
             lib: core
-          - eventKey: OnCreate
-            code: this.timer1 = 3;
+            code: >
+              this.timer = 3; // temps en secondes avant l'explosion
+
+              // // Dans le code On Step de la bombe
+
+              // this.timer -= ct.delta; // Décompte
+
+              // if (this.timer <= 0) {
+
+              //     // L'explosion
+
+              //     ct.types.make('Explosion', this.x, this.y); // Créer une
+              explosion à la position de la bombe
+
+              //     this.kill = true; // Supprime la bombe
+
+
+              //     // Vérifier la collision avec les rochers
+
+              //     var rocks = ct.place.meetAll(this, this.x, this.y, 'Rock');
+
+              //     for (var i = 0; i < rocks.length; i++) {
+
+              //         rocks[i].kill = true; // Supprime les rochers touchés
+
+              //     }
+
+              // }
             arguments: {}
-            lib: core
         extends: {}
-        lastmod: 1713114130090
-        uid: BmDL9K4f4rWn1K
+        lastmod: 1713125582542
+        uid: TfWHLnj22N26db
         behaviors: []
   - type: folder
     uid: wpCr5j4BgRdTR6
@@ -1811,7 +1880,7 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713051839865
+        lastmod: 1713121410626
         events: []
         behaviors: []
         uid: TLcH5mwHpp34rw
@@ -2195,6 +2264,1597 @@ assets:
         events: []
         behaviors: []
         uid: qJMd25nRhqgjnn
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 32
+        gridY: 32
+        diagonalGrid: false
+        disableGrid: false
+        simulate: true
+        width: 448
+        height: 320
+        restrictCamera: true
+        restrictMaxX: 448
+        restrictMinX: 0
+        restrictMaxY: 320
+        restrictMinY: 0
+        isUi: false
+        name: MVP_PDmK
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds: []
+        copies:
+          - x: -64
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 192
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': -64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 192
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: -64
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 222.71530973
+            'y': 159.76797499
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: CFFWjhrgQWk6MC
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 32
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 96
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles:
+          - depth: -1
+            tiles:
+              - x: 0
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 0
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 0
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 2
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 192
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 128
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 192
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 256
+                'y': 256
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 384
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 320
+                'y': 64
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+              - x: 64
+                'y': 128
+                opacity: 1
+                tint: 16777215
+                scale:
+                  x: 1
+                  'y': 1
+                frame: 1
+                rotation: 0
+                texture: Fqg8bFG9qpKD4M
+            extends: {}
+            hidden: false
+            cache: true
+        extends:
+          matterGravity:
+            - 0
+            - 0
+        lastmod: 1713126599614
+        events: []
+        behaviors: []
+        uid: PDmKwnTcN9fPqq
   - type: folder
     uid: n5FQDp8LhWT4cb
     colorClass: text
