@@ -259,30 +259,30 @@ assets:
         uid: NRJwM4QtzB7mqp
         padding: 1
         isBlank: false
-      - lastmod: 1713092065087
+      - lastmod: 1713114403406
         type: texture
         name: Player Idle
-        untill: 17
+        untill: 0
         grid:
+          - 6
           - 5
-          - 4
         axis:
           - 32
           - 32
         marginx: 0
         marginy: 0
-        imgWidth: 320
-        imgHeight: 256
+        imgWidth: 384
+        imgHeight: 320
         width: 64
         height: 64
         offx: 0
         offy: 0
         origname: ikc9df42Nz39cwj.png
         shape: rect
-        left: 15
-        right: 14
-        top: 29
-        bottom: 17
+        left: 32
+        right: 32
+        top: 32
+        bottom: 32
         uid: kc9df42Nz39cwj
         padding: 1
         isBlank: false
@@ -302,7 +302,7 @@ assets:
         texture: kc9df42Nz39cwj
         playAnimationOnStart: true
         loopAnimation: true
-        animationFPS: 30
+        animationFPS: 10
         visible: true
         events:
           - eventKey: OnActionDown
@@ -319,8 +319,12 @@ assets:
             code: this.movementForce = 3
             arguments: {}
             lib: core
+          - eventKey: OnDraw
+            code: 'if (this.rotation !== 0) matter.rotate(this, 0);'
+            arguments: {}
+            lib: core
         extends:
-          matterEnable: false
+          matterEnable: true
           matterConstraint: none
           matterFriction: 0.5
           matterDensity: 0.5
@@ -330,7 +334,8 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713098840160
+          matterRestitution: 0
+        lastmod: 1713114417530
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -387,6 +392,34 @@ assets:
         extends: {}
         lastmod: 1713086602215
         uid: 8WgFppHR1nqHbp
+        behaviors: []
+      - type: template
+        baseClass: AnimatedSprite
+        name: Bomb
+        depth: 0
+        texture: QWGDM5qW9QRNLD
+        playAnimationOnStart: true
+        loopAnimation: true
+        animationFPS: 2
+        visible: true
+        events:
+          - eventKey: OnStep
+            lib: core
+            code: ''
+            arguments: {}
+          - eventKey: Timer1
+            code: ''
+            arguments:
+              name: Tic Tac
+              isUi: false
+            lib: core
+          - eventKey: OnCreate
+            code: this.timer1 = 3;
+            arguments: {}
+            lib: core
+        extends: {}
+        lastmod: 1713114130090
+        uid: BmDL9K4f4rWn1K
         behaviors: []
   - type: folder
     uid: wpCr5j4BgRdTR6
