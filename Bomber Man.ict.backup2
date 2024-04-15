@@ -920,9 +920,9 @@ assets:
         name: Bomb
         depth: 0
         texture: QWGDM5qW9QRNLD
-        playAnimationOnStart: false
+        playAnimationOnStart: true
         loopAnimation: true
-        animationFPS: 30
+        animationFPS: 4
         visible: true
         events:
           - eventKey: OnStep
@@ -933,14 +933,14 @@ assets:
           cgroup: Bomb
           TimerExplosion: 3
           timerExplosion: 3
-          radius: 64
+          radius: 100
           matterEnable: true
           matterRestitution: 0.2
           matterFriction: 0.5
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
           explosionTime: 3
-        lastmod: 1713202038500
+        lastmod: 1713206863673
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -4631,24 +4631,25 @@ assets:
 
               this.addChild(this.tickLabel)
 
-              console.log(this.explosionTime)
-
               this.explosionTimer = timer.add(this.explosionTime*1e3,
               "Explosion")
 
-              this.explosionTimer.then(() => {
-                  var me = this
-                  templates.each(
-                      function () {
-                          if (this !== me) {
-                              if (u.pdc(this.x, this.y, me.x, me.y) <= this.radius) {
-                                  if (this.cgroup === 'Destroyable') {
-                                      this.kill = true
-                                  }
-                              }
+
+              function getRocksInRadius(copy: BasicCopy) : Array<BasicCopy> {
+                  let copies = new Array()
+                      for (const rock of templates.list['Rock']) {
+                          if (u.pdc(rock.x, rock.y, copy.x, copy.y) <= copy.radius) {
+                                  copies.push(rock)
                           }
                       }
-                  )
+                  return copies
+              }
+
+
+
+              this.explosionTimer.then(() => {
+                  let rocks : Array<BasicCopy> = getRocksInRadius(this)
+                  rocks.forEach((e) => e.kill = true)
                   emitters.fire('ExplosionEmitter', this.x, this.y)
                   this.kill = true
               })
@@ -4666,7 +4667,7 @@ assets:
           - type: sliderAndNumber
             name: radius
             readableName: Destruction Radius
-        lastmod: 1713201974734
+        lastmod: 1713202533691
         uid: 7qL8Dk6Fpb91m9
   - type: folder
     uid: 85qk5WJqmpFKh9

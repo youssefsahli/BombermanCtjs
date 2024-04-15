@@ -750,7 +750,7 @@ assets:
         source: >-
           /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
           Pack/Smoke_03.png
-      - lastmod: 1713196100156
+      - lastmod: 1713206987420
         type: texture
         name: Rock
         untill: 0
@@ -758,8 +758,8 @@ assets:
           - 1
           - 1
         axis:
-          - 0
-          - 0
+          - 32
+          - 32
         marginx: 0
         marginy: 0
         imgWidth: 64
@@ -770,10 +770,10 @@ assets:
         offy: 0
         origname: iwPdPHGmzJCK5mQ.png
         shape: rect
-        left: 0
-        right: 64
-        top: 0
-        bottom: 64
+        left: 32
+        right: 32
+        top: 32
+        bottom: 32
         uid: wPdPHGmzJCK5mQ
         padding: 1
         isBlank: false
