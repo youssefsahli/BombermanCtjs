@@ -803,14 +803,14 @@ assets:
           cgroup: Bomb
           TimerExplosion: 3
           timerExplosion: 3
-          radius: 32
+          radius: 48
           matterEnable: true
           matterRestitution: 0.2
           matterFriction: 0.5
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
           explosionTime: 3
-        lastmod: 1713222338922
+        lastmod: 1713222515961
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -7230,7 +7230,7 @@ assets:
           - type: sliderAndNumber
             name: radius
             readableName: Destruction Radius
-        lastmod: 1713222364207
+        lastmod: 1713222501290
         uid: 7qL8Dk6Fpb91m9
   - type: folder
     uid: 85qk5WJqmpFKh9
