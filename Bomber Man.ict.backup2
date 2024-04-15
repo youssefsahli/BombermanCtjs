@@ -819,7 +819,6 @@ assets:
             code: |-
               if (this.canPoseBomb) {
                   var bomb = templates.copy('Bomb', this.x, this.y)
-                  bomb.explosionTimer = timer.add(3000, "BombTimer")
                   this.canPoseBomb = false
                   timer.add(500, "BombCountdown").then(() => {
                       this.canPoseBomb = true
@@ -835,11 +834,11 @@ assets:
           matterDensity: 0.5
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.3
-          cgroup: player
+          cgroup: Player
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713128865742
+        lastmod: 1713200766730
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -913,7 +912,7 @@ assets:
           matterConstraint: none
           cgroup: Destroyable
           matterDensity: 1
-        lastmod: 1713196195102
+        lastmod: 1713199798616
         uid: cMPb1PPCNCM71Q
         behaviors: []
       - type: template
@@ -940,7 +939,8 @@ assets:
           matterFriction: 0.5
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
-        lastmod: 1713197597247
+          explosionTime: 3
+        lastmod: 1713201036206
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -4437,9 +4437,9 @@ assets:
                 min: 0.5
                 max: 0.5
               frequency: 0.008
-              spawnChance: 0.42
-              particlesPerWave: 1
-              emitterLifetime: 0.4
+              spawnChance: 0.83
+              particlesPerWave: 7
+              emitterLifetime: 0.5
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -4534,10 +4534,10 @@ assets:
               lifetime:
                 min: 0.5
                 max: 0.5
-              frequency: 0.054
-              spawnChance: 0.85
-              particlesPerWave: 1
-              emitterLifetime: 0.4
+              frequency: 0.041
+              spawnChance: 0.96
+              particlesPerWave: 6
+              emitterLifetime: 0.5
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -4607,7 +4607,7 @@ assets:
                     maxSpeed: 0
                     accel: 0
             showShapeVisualizer: true
-        lastmod: 1713197738916
+        lastmod: 1713197807945
         type: tandem
   - type: folder
     uid: bRnP7dgpfP1rmM
@@ -4622,13 +4622,22 @@ assets:
         events:
           - eventKey: OnStep
             code: |-
-              this.timerExplosion -= u.time;
               this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
               if (this.timerExplosion <= 0) {
-                  let objs = place.occupiedMultiple(this, "Destroyable")
-                  if (objs) {
-                      console.log(objs)
-                  }
+                  var me = this
+                  templates.each(
+                      function () {
+                          if (this !== me) {
+                              if (u.pdc(this.x, this.y, me.x, me.y) <= this.radius) {
+                                  if (this.cgroup === 'Destroyable') {
+                                      this.kill = true
+                                  }
+                              }
+                          }
+                      }
+                  )
+
+
                   emitters.fire('ExplosionEmitter', this.x, this.y)
                   this.kill = true
               }
@@ -4636,7 +4645,7 @@ assets:
             lib: core
           - eventKey: OnCreate
             code: >-
-              this.tickLabel = new PIXI.Text(this.timerExplosion.timeLeft,
+              this.tickLabel = new PIXI.Text(this.explosionTime,
               styles.get('Explosion Tick'))
 
               this.tickLabel.y -= 16
@@ -4645,20 +4654,13 @@ assets:
 
               this.addChild(this.tickLabel)
 
-
-              function explode () {
-                  let objs = place.occupiedMultiple(this)
-                  if (objs) {
-                      
-                  }
-                  this.kill = true
-              }
+              this.explosionTimer = timer.add(this.explosionTime, "Explosion")
             arguments: {}
             lib: core
         specification:
           - type: sliderAndNumber
-            name: timerExplosion
-            readableName: Timer Explosion
+            name: explosionTime
+            readableName: Explosion Time
             required: true
           - type: sliderAndNumber
             name: radius
