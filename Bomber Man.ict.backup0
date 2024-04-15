@@ -81,14 +81,14 @@ actions:
       - code: gamepad.L2
       - code: gamepad.R2
 scripts:
-  - name: New Script
-    code: /* Use scripts to define frequent functions and import small libraries */
   - name: Rand
     code: >-
       function IntFromInterval(min: number, max: number) : number { // min and
       max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
       }
+  - name: New Script
+    code: /* Use scripts to define frequent functions and import small libraries */
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -674,6 +674,36 @@ assets:
         uid: zkd8CrhW7d9dd2
         padding: 1
         isBlank: false
+      - lastmod: 1713224164511
+        type: texture
+        name: Dirt
+        untill: 0
+        grid:
+          - 3
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 1536
+        imgHeight: 512
+        width: 512
+        height: 512
+        offx: 0
+        offy: 0
+        origname: iWMGQwkRh45k97p.png
+        shape: rect
+        left: 0
+        right: 512
+        top: 0
+        bottom: 512
+        uid: WMGQwkRh45k97p
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
+          Pack/Dirt_3x1.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -705,6 +735,13 @@ assets:
             code: |-
               this.movementForce = 3
               this.canPoseBomb = true
+              this.walkEmitter = emitters.follow(this, 'WalkEmitter', {
+                  position: {
+                      x: 0,
+                      y: 8
+                  },
+                  depth: 0
+              })
             arguments: {}
             lib: core
           - eventKey: OnDraw
@@ -739,7 +776,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713223043695
+        lastmod: 1713224597013
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -788,7 +825,7 @@ assets:
         visible: true
         events:
           - eventKey: OnCreate
-            code: 'this.currentFrame = Rand.IntFromInterval(0, this.totalFrames)'
+            code: 'this.currentFrame = IntFromInterval(0, this.totalFrames-1)'
             arguments: {}
             lib: core
         extends:
@@ -797,7 +834,7 @@ assets:
           matterConstraint: none
           cgroup: Destroyable
           matterDensity: 1
-        lastmod: 1713223519076
+        lastmod: 1713224058361
         uid: cMPb1PPCNCM71Q
         behaviors: []
       - type: template
@@ -6898,7 +6935,7 @@ assets:
         uid: MMLtHK9njK3kKq
         emitters:
           - uid: p74QT8j6tthkdw
-            texture: Fqg8bFG9qpKD4M
+            texture: WMGQwkRh45k97p
             openedTabs:
               - texture
               - velocity
@@ -6906,6 +6943,7 @@ assets:
               - spawning
               - shape
               - scaling
+              - colors
             textureBehavior: textureRandom
             animatedSingleFramerate: 30
             settings:
@@ -6945,7 +6983,7 @@ assets:
                         - value: ffffff
                           time: 0
                         - time: 0.2896825396825397
-                          value: FFFFFF
+                          value: 9E7C4F
                         - value: ffffff
                           time: 0.5
                         - time: 0.7142857142857143
@@ -6954,35 +6992,35 @@ assets:
                           time: 1
                 - type: blendMode
                   config:
-                    blendMode: multiply
+                    blendMode: add
                 - type: scale
                   config:
                     scale:
                       list:
-                        - value: 0.2
+                        - value: 0.09000000000000001
                           time: 0
-                        - time: 0.6706349206349207
-                          value: 0.48000000000000004
+                        - time: 0.5357142857142858
+                          value: 0.07000000000000002
                         - value: 0.06999999999999998
                           time: 1
-                    minMult: 1
+                    minMult: 0.11
                 - type: moveSpeed
                   config:
                     speed:
                       list:
-                        - value: 337.49999999999994
+                        - value: 74.99999999999994
                           time: 0
                         - value: 100
                           time: 1
-                    minMult: 1
+                    minMult: 0.2
                 - type: spawnShape
                   config:
                     type: torus
                     data:
                       x: 0
                       'y': 0
-                      radius: 30
-                      innerRadius: 10
+                      radius: 9
+                      innerRadius: 1
                       rotation: true
                 - type: rotation
                   config:
@@ -6991,8 +7029,8 @@ assets:
                     minSpeed: 0
                     maxSpeed: 0
                     accel: 0
-            showShapeVisualizer: false
-        lastmod: 1713087266226
+            showShapeVisualizer: true
+        lastmod: 1713224707789
         type: tandem
       - name: ExplosionEmitter
         uid: B5fKM133WhrjgQ
