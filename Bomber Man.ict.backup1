@@ -19,9 +19,7 @@ startroom: PDmKwnTcN9fPqq
 contentTypes:
   - name: Items
     readableName: ''
-    entries:
-      - Texture: -1
-        Name: Bomb
+    entries: []
     specification:
       - type: text
         name: Name
@@ -261,7 +259,7 @@ assets:
         uid: NRJwM4QtzB7mqp
         padding: 1
         isBlank: false
-      - lastmod: 1713092065087
+      - lastmod: 1713133538379
         type: texture
         name: Player Idle
         untill: 17
@@ -752,6 +750,34 @@ assets:
         source: >-
           /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
           Pack/Smoke_03.png
+      - lastmod: 1713196100156
+        type: texture
+        name: Rock
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: iwPdPHGmzJCK5mQ.png
+        shape: rect
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
+        uid: wPdPHGmzJCK5mQ
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/Rock.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -875,21 +901,19 @@ assets:
         baseClass: AnimatedSprite
         name: Rock
         depth: 0
-        texture: 7TwWtGrpPt5whk
+        texture: wPdPHGmzJCK5mQ
         playAnimationOnStart: false
         loopAnimation: true
         animationFPS: 30
         visible: true
-        events:
-          - eventKey: OnStep
-            lib: core
-            code: this.move();
-            arguments: {}
+        events: []
         extends:
           matterEnable: true
           matterStatic: true
           matterConstraint: none
-        lastmod: 1713124365581
+          cgroup: Destroyable
+          matterDensity: 1
+        lastmod: 1713196195102
         uid: cMPb1PPCNCM71Q
         behaviors: []
       - type: template
@@ -901,9 +925,22 @@ assets:
         loopAnimation: true
         animationFPS: 30
         visible: true
-        events: []
-        extends: {}
-        lastmod: 1713131971617
+        events:
+          - eventKey: OnStep
+            code: ''
+            arguments: {}
+            lib: core
+        extends:
+          cgroup: Bomb
+          TimerExplosion: 3
+          timerExplosion: 3
+          radius: 64
+          matterEnable: true
+          matterRestitution: 0.2
+          matterFriction: 0.5
+          matterFrictionStatic: 0.5
+          matterFrictionAir: 0.1
+        lastmod: 1713197508220
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -4579,13 +4616,93 @@ assets:
     lastmod: 1713131246914
     entries:
       - type: behavior
-        name: explode
+        name: Explode
         behaviorType: template
-        events: []
+        events:
+          - eventKey: OnStep
+            code: |-
+              this.timerExplosion -= u.time;
+              this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
+              if (this.timerExplosion <= 0) {
+                  let objs = place.occupiedMultiple(this, "Destroyable")
+                  if (objs) {
+                      console.log(objs)
+                  }
+                  this.kill = true
+              }
+            arguments: {}
+            lib: core
+          - eventKey: OnCreate
+            code: >-
+              this.tickLabel = new PIXI.Text(this.timerExplosion.timeLeft,
+              styles.get('Explosion Tick'))
+
+              this.tickLabel.y -= 16
+
+              this.tickLabel.x -= 16
+
+              this.addChild(this.tickLabel)
+
+
+              function explode () {
+                  let objs = place.occupiedMultiple(this)
+                  if (objs) {
+                      
+                  }
+                  this.kill = true
+              }
+            arguments: {}
+            lib: core
         specification:
-          - type: text
-        lastmod: 1713131971637
+          - type: sliderAndNumber
+            name: timerExplosion
+            readableName: Timer Explosion
+            required: true
+          - type: sliderAndNumber
+            name: radius
+            readableName: Destruction Radius
+        lastmod: 1713196604761
         uid: 7qL8Dk6Fpb91m9
+  - type: folder
+    uid: 85qk5WJqmpFKh9
+    colorClass: accent1
+    icon: translate
+    name: Styles
+    lastmod: 1713196772538
+    entries:
+      - type: style
+        name: Explosion Tick
+        uid: fmG41MJfdhd99Q
+        font:
+          family: '"CTPROJFONTArsenal regular", "Arsenal regular", sans-serif'
+          halign: left
+          italic: false
+          size: 25
+          weight: '400'
+          wrap: false
+          wrapPosition: 640
+          lineHeight: 33.29
+        lastmod: 1713197019819
+        shadow:
+          color: '#000000'
+          x: 0
+          'y': 0
+          blur: 0
+        fill:
+          type: '0'
+      - type: font
+        typefaceName: Arsenal regular
+        weight: '400'
+        italic: false
+        origname: fFgQw4Lr31899F8.ttf
+        lastmod: 1713196868447
+        bitmapFont: true
+        bitmapFontSize: 16
+        bitmapFontLineHeight: 18
+        charsets:
+          - allInFont
+        customCharset: ''
+        uid: FgQw4Lr31899F8
 settings:
   authoring:
     author: Vallant & Sahli

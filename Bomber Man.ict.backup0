@@ -19,9 +19,7 @@ startroom: PDmKwnTcN9fPqq
 contentTypes:
   - name: Items
     readableName: ''
-    entries:
-      - Texture: -1
-        Name: Bomb
+    entries: []
     specification:
       - type: text
         name: Name
@@ -752,6 +750,34 @@ assets:
         source: >-
           /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
           Pack/Smoke_03.png
+      - lastmod: 1713196100156
+        type: texture
+        name: Rock
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 64
+        imgHeight: 64
+        width: 64
+        height: 64
+        offx: 0
+        offy: 0
+        origname: iwPdPHGmzJCK5mQ.png
+        shape: rect
+        left: 0
+        right: 64
+        top: 0
+        bottom: 64
+        uid: wPdPHGmzJCK5mQ
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/Rock.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -875,21 +901,19 @@ assets:
         baseClass: AnimatedSprite
         name: Rock
         depth: 0
-        texture: 7TwWtGrpPt5whk
+        texture: wPdPHGmzJCK5mQ
         playAnimationOnStart: false
         loopAnimation: true
         animationFPS: 30
         visible: true
-        events:
-          - eventKey: OnStep
-            lib: core
-            code: this.move();
-            arguments: {}
+        events: []
         extends:
           matterEnable: true
           matterStatic: true
           matterConstraint: none
-        lastmod: 1713124365581
+          cgroup: Destroyable
+          matterDensity: 1
+        lastmod: 1713196195102
         uid: cMPb1PPCNCM71Q
         behaviors: []
       - type: template
@@ -901,9 +925,22 @@ assets:
         loopAnimation: true
         animationFPS: 30
         visible: true
-        events: []
-        extends: {}
-        lastmod: 1713131971617
+        events:
+          - eventKey: OnStep
+            code: ''
+            arguments: {}
+            lib: core
+        extends:
+          cgroup: Bomb
+          TimerExplosion: 3
+          timerExplosion: 3
+          radius: 64
+          matterEnable: true
+          matterRestitution: 0.2
+          matterFriction: 0.5
+          matterFrictionStatic: 0.5
+          matterFrictionAir: 0.1
+        lastmod: 1713197597247
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -4400,9 +4437,9 @@ assets:
                 min: 0.5
                 max: 0.5
               frequency: 0.008
-              spawnChance: 0.42
-              particlesPerWave: 1
-              emitterLifetime: 0.4
+              spawnChance: 0.83
+              particlesPerWave: 7
+              emitterLifetime: 0.5
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -4414,13 +4451,13 @@ assets:
                   config:
                     alpha:
                       list:
-                        - value: 0.15500000000000003
+                        - value: 0.455
                           time: 0
-                        - value: 0.16000000000000003
-                          time: 0.40079365079365076
                         - time: 0.6944444444444445
                           value: 0.17000000000000004
-                        - value: 0
+                        - value: 0.385
+                          time: 0.9285714285714286
+                        - value: 0.68
                           time: 1
                       isStepped: false
                 - type: color
@@ -4429,27 +4466,27 @@ assets:
                       list:
                         - value: FFF570
                           time: 0
-                        - value: FFE6B8
-                          time: 0.40079365079365076
                         - time: 0.6944444444444445
                           value: F0A3A8
+                        - value: FFE6B8
+                          time: 0.9285714285714286
                         - value: FFE6E6
                           time: 1
                       isStepped: false
                 - type: blendMode
                   config:
-                    blendMode: add
+                    blendMode: normal
                 - type: scale
                   config:
                     scale:
                       list:
                         - value: 0
                           time: 0
-                        - time: 0.3055555555555556
-                          value: 0.6500000000000002
-                        - time: 0.7698412698412698
-                          value: 0.72
-                        - value: 0.3
+                        - time: 0.33333333333333337
+                          value: 0.22000000000000025
+                        - time: 0.7341269841269841
+                          value: 0.29
+                        - value: 0.02999999999999997
                           time: 1
                       isStepped: true
                     minMult: 0.49
@@ -4479,6 +4516,7 @@ assets:
                     minSpeed: 0
                     maxSpeed: 0
                     accel: 0
+            showShapeVisualizer: false
           - uid: zDRdmW2GBhJWjc
             texture: gNHkg43W9w1c4D
             openedTabs:
@@ -4496,10 +4534,10 @@ assets:
               lifetime:
                 min: 0.5
                 max: 0.5
-              frequency: 0.054
-              spawnChance: 0.85
-              particlesPerWave: 1
-              emitterLifetime: 0.4
+              frequency: 0.041
+              spawnChance: 0.96
+              particlesPerWave: 6
+              emitterLifetime: 0.5
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -4529,17 +4567,17 @@ assets:
                           time: 1
                 - type: blendMode
                   config:
-                    blendMode: normal
+                    blendMode: add
                 - type: scale
                   config:
                     scale:
                       list:
                         - value: 0.21999999999999997
                           time: 0
-                        - time: 0.496031746031746
-                          value: 0.6500000000000001
-                        - time: 0.8214285714285714
-                          value: 0.6600000000000001
+                        - time: 0.4841269841269841
+                          value: 0.27000000000000013
+                        - time: 0.8174603174603174
+                          value: 0.30000000000000016
                         - value: 0
                           time: 1
                     minMult: 1
@@ -4557,7 +4595,7 @@ assets:
                     type: torus
                     data:
                       innerRadius: 1
-                      radius: 113
+                      radius: 9
                       x: 0
                       'y': 0
                       rotation: true
@@ -4568,8 +4606,8 @@ assets:
                     minSpeed: 0
                     maxSpeed: 0
                     accel: 0
-            showShapeVisualizer: false
-        lastmod: 1713131971640
+            showShapeVisualizer: true
+        lastmod: 1713197807945
         type: tandem
   - type: folder
     uid: bRnP7dgpfP1rmM
@@ -4581,13 +4619,92 @@ assets:
       - type: behavior
         name: Explode
         behaviorType: template
-        events: []
+        events:
+          - eventKey: OnStep
+            code: |-
+              this.timerExplosion -= u.time;
+              this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
+              if (this.timerExplosion <= 0) {
+                  let objs = place.occupiedMultiple(this, "Destroyable")
+                  if (objs) {
+                      console.log(objs)
+                  }
+                  emitters.fire('ExplosionEmitter', this.x, this.y)
+                  this.kill = true
+              }
+            arguments: {}
+            lib: core
+          - eventKey: OnCreate
+            code: >-
+              this.tickLabel = new PIXI.Text(this.timerExplosion.timeLeft,
+              styles.get('Explosion Tick'))
+
+              this.tickLabel.y -= 16
+
+              this.tickLabel.x -= 16
+
+              this.addChild(this.tickLabel)
+
+
+              function explode () {
+                  let objs = place.occupiedMultiple(this)
+                  if (objs) {
+                      
+                  }
+                  this.kill = true
+              }
+            arguments: {}
+            lib: core
         specification:
-          - type: number
-            name: TimerExplosion
+          - type: sliderAndNumber
+            name: timerExplosion
             readableName: Timer Explosion
-        lastmod: 1713133606590
+            required: true
+          - type: sliderAndNumber
+            name: radius
+            readableName: Destruction Radius
+        lastmod: 1713196604761
         uid: 7qL8Dk6Fpb91m9
+  - type: folder
+    uid: 85qk5WJqmpFKh9
+    colorClass: accent1
+    icon: translate
+    name: Styles
+    lastmod: 1713196772538
+    entries:
+      - type: style
+        name: Explosion Tick
+        uid: fmG41MJfdhd99Q
+        font:
+          family: '"CTPROJFONTArsenal regular", "Arsenal regular", sans-serif'
+          halign: left
+          italic: false
+          size: 25
+          weight: '400'
+          wrap: false
+          wrapPosition: 640
+          lineHeight: 33.29
+        lastmod: 1713197019819
+        shadow:
+          color: '#000000'
+          x: 0
+          'y': 0
+          blur: 0
+        fill:
+          type: '0'
+      - type: font
+        typefaceName: Arsenal regular
+        weight: '400'
+        italic: false
+        origname: fFgQw4Lr31899F8.ttf
+        lastmod: 1713196868447
+        bitmapFont: true
+        bitmapFontSize: 16
+        bitmapFontLineHeight: 18
+        charsets:
+          - allInFont
+        customCharset: ''
+        uid: FgQw4Lr31899F8
 settings:
   authoring:
     author: Vallant & Sahli
