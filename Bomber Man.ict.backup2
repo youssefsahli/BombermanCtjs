@@ -87,8 +87,11 @@ scripts:
       max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
       }
-  - name: New Script
-    code: /* Use scripts to define frequent functions and import small libraries */
+  - name: Eq
+    code: |-
+      function approxeq (v1, v2, epsilon = 0.01) {
+          return Math.abs(v1 - v2) <= epsilon
+      }
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -591,35 +594,6 @@ assets:
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/Rock.png
         r: 16
-      - lastmod: 1713222142732
-        type: texture
-        name: Bomberman
-        untill: 23
-        grid:
-          - 5
-          - 5
-        axis:
-          - 16
-          - 16
-        marginx: 0
-        marginy: 0
-        imgWidth: 160
-        imgHeight: 160
-        width: 32
-        height: 32
-        offx: 0
-        offy: 0
-        origname: ihNC26kd2ftKpj5.png
-        shape: rect
-        left: 16
-        right: 16
-        top: 16
-        bottom: 16
-        uid: hNC26kd2ftKpj5
-        padding: 1
-        isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/Bomberman2.png
-        r: 16
       - lastmod: 1713221645554
         type: texture
         name: Wall
@@ -704,6 +678,64 @@ assets:
         source: >-
           /home/youssef/.cache/linux64/bundledAssets/textures/Kenney's Particle
           Pack/Dirt_3x1.png
+      - lastmod: 1713292672302
+        type: texture
+        name: BombermanWalk
+        untill: 0
+        grid:
+          - 3
+          - 1
+        axis:
+          - 16
+          - 16
+        marginx: 0
+        marginy: 0
+        imgWidth: 96
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iTDfHmzKg3NzTk5.png
+        shape: rect
+        left: 16
+        right: 16
+        top: 16
+        bottom: 16
+        uid: TDfHmzKg3NzTk5
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanWalk.png
+        r: 16
+      - lastmod: 1713292243264
+        type: texture
+        name: BombermanIdle
+        untill: 0
+        grid:
+          - 4
+          - 1
+        axis:
+          - 16
+          - 16
+        marginx: 0
+        marginy: 0
+        imgWidth: 128
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: i64wBF7MHQ8dK1n.png
+        shape: rect
+        left: 16
+        right: 16
+        top: 16
+        bottom: 16
+        uid: 64wBF7MHQ8dK1n
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanIdle.png
+        r: 16
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -715,10 +747,10 @@ assets:
         baseClass: AnimatedSprite
         name: Player
         depth: 0
-        texture: hNC26kd2ftKpj5
+        texture: 64wBF7MHQ8dK1n
         playAnimationOnStart: true
         loopAnimation: true
-        animationFPS: 15
+        animationFPS: 6
         visible: true
         events:
           - eventKey: OnActionDown
@@ -735,15 +767,25 @@ assets:
             code: |-
               this.movementForce = 3
               this.canPoseBomb = true
+              this.playerShadow = emitters.follow(this, 'PlayerEmitter')
             arguments: {}
             lib: core
           - eventKey: OnDraw
-            code: |
+            code: >-
               if (this.rotation !== 0) matter.rotate(this, 0)
-              if (this.hspeed <= 0) 
-                  this.scale.x = -1
-              else
-                  this.scale.x = 1
+
+              let almostStopped = (approxeq(this.hspeed, 0) &&
+              approxeq(this.vspeed, 0))
+
+              this.scale.x = this.hspeed < 0 ? -1 : 1
+
+              this.tex = almostStopped ? "BombermanIdle" : "BombermanWalk"
+
+              this.animationSpeed = 0.1 * (this.hspeed + 1)
+
+              // if (almostStopped) this.playerShadow.pause()
+
+              // else this.playerShadow.resume()
             arguments: {}
             lib: core
           - eventKey: OnActionPress
@@ -758,6 +800,16 @@ assets:
             arguments:
               action: Jump
             lib: core
+          - eventKey: OnActionPress
+            code: 'emitters.follow(this, ''WalkEmitter'')'
+            arguments:
+              action: MoveX
+            lib: core
+          - eventKey: OnActionPress
+            code: 'emitters.follow(this, ''WalkEmitter'')'
+            arguments:
+              action: MoveY
+            lib: core
         extends:
           matterEnable: true
           matterConstraint: none
@@ -769,7 +821,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713223043695
+        lastmod: 1713293026100
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -6944,10 +6996,10 @@ assets:
               lifetime:
                 min: 0.3
                 max: 0.3
-              frequency: 1
+              frequency: 0.5
               spawnChance: 1
               particlesPerWave: 30
-              emitterLifetime: 0
+              emitterLifetime: 1
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -6961,12 +7013,12 @@ assets:
                       list:
                         - value: 0
                           time: 0
-                        - time: 0.2896825396825397
-                          value: 0.41
-                        - value: 0.42500000000000004
-                          time: 0.5
-                        - time: 0.7142857142857143
-                          value: 0.32999999999999996
+                        - time: 0.34920634920634924
+                          value: 0.13999999999999996
+                        - value: 0.11500000000000005
+                          time: 0.6309523809523809
+                        - time: 0.8333333333333334
+                          value: 0.06999999999999995
                         - value: 0.015
                           time: 1
                 - type: color
@@ -6975,17 +7027,17 @@ assets:
                       list:
                         - value: ffffff
                           time: 0
-                        - time: 0.2896825396825397
+                        - time: 0.34920634920634924
                           value: 9E7C4F
                         - value: ffffff
-                          time: 0.5
-                        - time: 0.7142857142857143
+                          time: 0.6309523809523809
+                        - time: 0.8333333333333334
                           value: FFFFFF
                         - value: ffffff
                           time: 1
                 - type: blendMode
                   config:
-                    blendMode: multiply
+                    blendMode: screen
                 - type: scale
                   config:
                     scale:
@@ -7022,8 +7074,8 @@ assets:
                     minSpeed: 0
                     maxSpeed: 0
                     accel: 0
-            showShapeVisualizer: true
-        lastmod: 1713224295354
+            showShapeVisualizer: false
+        lastmod: 1713225011667
         type: tandem
       - name: ExplosionEmitter
         uid: B5fKM133WhrjgQ
@@ -7217,6 +7269,95 @@ assets:
                     accel: 0
             showShapeVisualizer: true
         lastmod: 1713197807945
+        type: tandem
+      - name: PlayerEmitter
+        uid: QBfhCWTzWdhKBR
+        emitters:
+          - uid: h1BJmPkJDpP2cJ
+            texture: 64wBF7MHQ8dK1n
+            openedTabs:
+              - texture
+              - velocity
+              - shape
+              - spawning
+              - colors
+            textureBehavior: textureRandom
+            animatedSingleFramerate: 30
+            settings:
+              delay: 0
+              lifetime:
+                min: 0.5
+                max: 0.5
+              frequency: 0.025
+              spawnChance: 0.54
+              particlesPerWave: 1
+              emitterLifetime: 0
+              maxParticles: 1000
+              maxSpeed: 0
+              pos:
+                x: 0
+                'y': 0
+              addAtBack: false
+              behaviors:
+                - type: alpha
+                  config:
+                    alpha:
+                      list:
+                        - value: 0
+                          time: 0
+                        - value: 0.09
+                          time: 0.44047619047619047
+                        - value: 0
+                          time: 1
+                - type: color
+                  config:
+                    color:
+                      list:
+                        - value: ffffff
+                          time: 0
+                        - value: ffffff
+                          time: 0.44047619047619047
+                        - value: ffffff
+                          time: 1
+                - type: blendMode
+                  config:
+                    blendMode: add
+                - type: scale
+                  config:
+                    scale:
+                      list:
+                        - value: 1
+                          time: 0
+                        - value: 0.3
+                          time: 1
+                    minMult: 1
+                - type: moveSpeed
+                  config:
+                    speed:
+                      list:
+                        - value: 10
+                          time: 0
+                        - value: 0
+                          time: 1
+                      isStepped: true
+                    minMult: 0.01
+                - type: spawnShape
+                  config:
+                    type: torus
+                    data:
+                      innerRadius: 0
+                      radius: 1
+                      x: 0
+                      'y': 0
+                      rotation: true
+                - type: rotation
+                  config:
+                    minStart: 0
+                    maxStart: 0
+                    minSpeed: 0
+                    maxSpeed: 0
+                    accel: 0
+        lastmod: 1713293506836
         type: tandem
   - type: folder
     uid: bRnP7dgpfP1rmM
