@@ -87,8 +87,11 @@ scripts:
       max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
       }
-  - name: New Script
-    code: /* Use scripts to define frequent functions and import small libraries */
+  - name: Eq
+    code: |-
+      function approxeq (v1, v2, epsilon = 0.01) {
+          return Math.abs(v1 - v2) <= epsilon
+      }
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -743,7 +746,7 @@ assets:
       - type: template
         baseClass: AnimatedSprite
         name: Player
-        depth: 0
+        depth: 2
         texture: 64wBF7MHQ8dK1n
         playAnimationOnStart: true
         loopAnimation: true
@@ -764,16 +767,27 @@ assets:
             code: |-
               this.movementForce = 3
               this.canPoseBomb = true
+              this.playerShadow = emitters.follow(this, 'PlayerEmitter', {
+                  depth: 1
+              })
             arguments: {}
             lib: core
           - eventKey: OnDraw
             code: >-
               if (this.rotation !== 0) matter.rotate(this, 0)
 
+              let almostStopped = (approxeq(this.hspeed, 0) &&
+              approxeq(this.vspeed, 0))
+
               this.scale.x = this.hspeed < 0 ? -1 : 1
 
-              this.tex = (this.hspeed === 0 && this.vspeed === 0) ?
-              "BombermanIdle" : "BombermanWalk"
+              this.tex = almostStopped ? "BombermanIdle" : "BombermanWalk"
+
+              this.animationSpeed = 0.1 * (this.hspeed + 1)
+
+              // if (almostStopped) this.playerShadow.pause()
+
+              // else this.playerShadow.resume()
             arguments: {}
             lib: core
           - eventKey: OnActionPress
@@ -809,7 +823,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713292663149
+        lastmod: 1713293648388
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -7257,6 +7271,95 @@ assets:
                     accel: 0
             showShapeVisualizer: true
         lastmod: 1713197807945
+        type: tandem
+      - name: PlayerEmitter
+        uid: QBfhCWTzWdhKBR
+        emitters:
+          - uid: h1BJmPkJDpP2cJ
+            texture: 64wBF7MHQ8dK1n
+            openedTabs:
+              - texture
+              - velocity
+              - shape
+              - spawning
+              - colors
+            textureBehavior: textureRandom
+            animatedSingleFramerate: 30
+            settings:
+              delay: 0
+              lifetime:
+                min: 0.5
+                max: 0.5
+              frequency: 0.025
+              spawnChance: 0.54
+              particlesPerWave: 1
+              emitterLifetime: 0
+              maxParticles: 1000
+              maxSpeed: 0
+              pos:
+                x: 0
+                'y': 0
+              addAtBack: false
+              behaviors:
+                - type: alpha
+                  config:
+                    alpha:
+                      list:
+                        - value: 0
+                          time: 0
+                        - value: 0.54
+                          time: 0.503968253968254
+                        - value: 0
+                          time: 1
+                - type: color
+                  config:
+                    color:
+                      list:
+                        - value: ffffff
+                          time: 0
+                        - value: ffffff
+                          time: 0.503968253968254
+                        - value: ffffff
+                          time: 1
+                - type: blendMode
+                  config:
+                    blendMode: multiply
+                - type: scale
+                  config:
+                    scale:
+                      list:
+                        - value: 1
+                          time: 0
+                        - value: 0.3
+                          time: 1
+                    minMult: 1
+                - type: moveSpeed
+                  config:
+                    speed:
+                      list:
+                        - value: 10
+                          time: 0
+                        - value: 0
+                          time: 1
+                      isStepped: true
+                    minMult: 0.01
+                - type: spawnShape
+                  config:
+                    type: torus
+                    data:
+                      innerRadius: 0
+                      radius: 1
+                      x: 0
+                      'y': 0
+                      rotation: true
+                - type: rotation
+                  config:
+                    minStart: 0
+                    maxStart: 0
+                    minSpeed: 0
+                    maxSpeed: 0
+                    accel: 0
+        lastmod: 1713293722450
         type: tandem
   - type: folder
     uid: bRnP7dgpfP1rmM
