@@ -736,6 +736,34 @@ assets:
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanIdle.png
         r: 16
+      - lastmod: 1713336190746
+        type: texture
+        name: Explosion
+        untill: 0
+        grid:
+          - 12
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 384
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: ib8GJWLtCfc1J4m.png
+        shape: rect
+        left: 0
+        right: 384
+        top: 0
+        bottom: 32
+        uid: b8GJWLtCfc1J4m
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/Explosion.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -746,7 +774,7 @@ assets:
       - type: template
         baseClass: AnimatedSprite
         name: Player
-        depth: 0
+        depth: 2
         texture: 64wBF7MHQ8dK1n
         playAnimationOnStart: true
         loopAnimation: true
@@ -767,7 +795,9 @@ assets:
             code: |-
               this.movementForce = 3
               this.canPoseBomb = true
-              this.playerShadow = emitters.follow(this, 'PlayerEmitter')
+              this.playerShadow = emitters.follow(this, 'PlayerEmitter', {
+                  depth: 1
+              })
             arguments: {}
             lib: core
           - eventKey: OnDraw
@@ -791,7 +821,8 @@ assets:
           - eventKey: OnActionPress
             code: |-
               if (this.canPoseBomb) {
-                  var bomb = templates.copy('Bomb', this.x, this.y)
+                  var bomb = templates.copy('Bomb', this.x+this.hspeed, this.y+this.vspeed)
+                  matter.launch(bomb, this.hspeed, this.vspeed)
                   this.canPoseBomb = false
                   timer.add(500, "BombCountdown").then(() => {
                       this.canPoseBomb = true
@@ -821,7 +852,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713293026100
+        lastmod: 1713293648388
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -907,10 +938,28 @@ assets:
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
           explosionTime: 3
-        lastmod: 1713222515961
+        lastmod: 1713293876319
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
+      - type: template
+        baseClass: AnimatedSprite
+        name: Explosion
+        depth: 0
+        texture: b8GJWLtCfc1J4m
+        playAnimationOnStart: true
+        loopAnimation: true
+        animationFPS: 10
+        visible: true
+        events:
+          - eventKey: OnAnimationComplete
+            code: this.kill = true
+            arguments: {}
+            lib: core
+        extends: {}
+        lastmod: 1713336360950
+        uid: W7GqF4Bpgq3Dj9
+        behaviors: []
   - type: folder
     uid: wpCr5j4BgRdTR6
     colorClass: success
@@ -7305,8 +7354,8 @@ assets:
                       list:
                         - value: 0
                           time: 0
-                        - value: 0.09
-                          time: 0.44047619047619047
+                        - value: 0.54
+                          time: 0.503968253968254
                         - value: 0
                           time: 1
                 - type: color
@@ -7316,12 +7365,12 @@ assets:
                         - value: ffffff
                           time: 0
                         - value: ffffff
-                          time: 0.44047619047619047
+                          time: 0.503968253968254
                         - value: ffffff
                           time: 1
                 - type: blendMode
                   config:
-                    blendMode: add
+                    blendMode: multiply
                 - type: scale
                   config:
                     scale:
@@ -7357,7 +7406,7 @@ assets:
                     minSpeed: 0
                     maxSpeed: 0
                     accel: 0
-        lastmod: 1713293506836
+        lastmod: 1713293722450
         type: tandem
   - type: folder
     uid: bRnP7dgpfP1rmM
@@ -7372,17 +7421,23 @@ assets:
         events:
           - eventKey: OnCreate
             code: >-
-              this.tickLabel = new PIXI.Text(this.explosionTime,
+              // this.tickLabel = new PIXI.Text(this.explosionTime,
               styles.get('Explosion Tick'))
 
-              this.tickLabel.y -= 8
+              // this.tickLabel.y -= 8
 
-              this.tickLabel.x -= 8
+              // this.tickLabel.x -= 8
 
-              this.addChild(this.tickLabel)
+              // this.addChild(this.tickLabel)
 
               this.explosionTimer = timer.add(this.explosionTime*1e3,
               "Explosion")
+
+              this.colorTinter = (timeLeft: number): number => {
+                  if (timeLeft <= 0) return 0xFF0000
+                  let c = Math.round((timeLeft/this.explosionTime) * 255)
+                  return (255 << 16) | (c << 8) | c;
+              }
 
 
               function getRocksInRadius(copy: BasicCopy) : Array<BasicCopy> {
@@ -7401,11 +7456,16 @@ assets:
                   rocks.forEach((e) => e.kill = true)
                   emitters.fire('ExplosionEmitter', this.x, this.y)
                   this.kill = true
+                  templates.copy('Explosion', this.x, this.y)
               })
             arguments: {}
             lib: core
           - eventKey: OnStep
-            code: this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
+            code: >-
+              // this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
+
+              (this as BasicCopy).tint =
+              this.colorTinter(this.explosionTimer.timeLeft)
             arguments: {}
             lib: core
         specification:
@@ -7416,7 +7476,7 @@ assets:
           - type: sliderAndNumber
             name: radius
             readableName: Destruction Radius
-        lastmod: 1713222808359
+        lastmod: 1713336397376
         uid: 7qL8Dk6Fpb91m9
   - type: folder
     uid: 85qk5WJqmpFKh9
