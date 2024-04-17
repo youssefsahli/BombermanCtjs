@@ -823,6 +823,33 @@ assets:
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/BombAnimation.png
         r: 16
+      - lastmod: 1713385348697
+        type: texture
+        name: Exit
+        untill: 0
+        grid:
+          - 1
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 32
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iWRtfF6Tk9B9PCM.png
+        shape: rect
+        left: 0
+        right: 32
+        top: 0
+        bottom: 32
+        uid: WRtfF6Tk9B9PCM
+        padding: 1
+        isBlank: false
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -1037,6 +1064,22 @@ assets:
         uid: qkzWpHFn92ckGw
         behaviors:
           - bkBmfgFMbDkkh2
+      - type: template
+        baseClass: AnimatedSprite
+        name: Exit
+        depth: 0
+        texture: WRtfF6Tk9B9PCM
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends:
+          roomChangeTimer: 1000
+        lastmod: 1713386100674
+        uid: Mc42LMQGFznwPk
+        behaviors:
+          - GqjR5p2LbQPWqB
   - type: folder
     uid: wpCr5j4BgRdTR6
     colorClass: success
@@ -7535,9 +7578,10 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713383878768
+        lastmod: 1713387985166
         events: []
-        behaviors: []
+        behaviors:
+          - D2QzrCH25djNhz
         uid: bpc4PHTrr1Hrz1
   - type: folder
     uid: n5FQDp8LhWT4cb
@@ -8020,6 +8064,42 @@ assets:
             readableName: Randomized Tile ?
         lastmod: 1713383404706
         uid: bkBmfgFMbDkkh2
+      - type: behavior
+        name: Exit Behavior
+        behaviorType: template
+        events:
+          - eventKey: matterActiveTemplate
+            code: >-
+              this.roomChangeTimer -= u.time
+
+              if (this.nextRoom && this.roomChangeTimer < 0)
+              rooms.switch(this.nextRoom.name)
+            arguments:
+              template: BC5dp7bw2mHL2t
+            lib: matter
+        specification:
+          - type: room
+            name: nextRoom
+            readableName: Next Room
+          - type: checkbox
+            name: isEnd
+            readableName: End ?
+          - type: number
+            name: roomChangeTimer
+            readableName: Time to change Room (ms)
+        lastmod: 1713387317515
+        uid: GqjR5p2LbQPWqB
+      - type: behavior
+        name: Level
+        behaviorType: room
+        events:
+          - eventKey: OnRoomStart
+            code: this.ui = rooms.append('GUI Layer')
+            arguments: {}
+            lib: core
+        specification: []
+        lastmod: 1713387865007
+        uid: D2QzrCH25djNhz
   - type: folder
     uid: 85qk5WJqmpFKh9
     colorClass: accent1
@@ -8060,6 +8140,98 @@ assets:
           - allInFont
         customCharset: ''
         uid: FgQw4Lr31899F8
+  - type: folder
+    uid: 1Trc62p1DF7zpQ
+    colorClass: text
+    icon: button
+    name: UX
+    lastmod: 1713387343153
+    entries:
+      - type: template
+        baseClass: AnimatedSprite
+        name: HealthBar
+        depth: 0
+        texture: qCgWM33TgM25DG
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends: {}
+        lastmod: 1713387378717
+        uid: rmqHhhwWcw6rKD
+        behaviors: []
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 64
+        gridY: 64
+        diagonalGrid: false
+        disableGrid: false
+        simulate: true
+        width: 448
+        height: 320
+        restrictCamera: false
+        restrictMaxX: 1280
+        restrictMinX: 1280
+        restrictMaxY: 720
+        restrictMinY: 720
+        isUi: true
+        name: GUI Layer
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds: []
+        copies:
+          - x: 0
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: rmqHhhwWcw6rKD
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles: []
+        extends: {}
+        lastmod: 1713387576294
+        events: []
+        behaviors: []
+        uid: q43W3HDGpJ4RGM
+      - lastmod: 1713388070884
+        type: texture
+        name: HealthBarAnimationFrames
+        untill: 0
+        grid:
+          - 11
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 440
+        imgHeight: 32
+        width: 40
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iqCgWM33TgM25DG.png
+        shape: rect
+        left: 0
+        right: 1600
+        top: 0
+        bottom: 64
+        uid: qCgWM33TgM25DG
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/ct.js/Projects/Bomber
+          Man/export/HealthBarAnimationFramesReversed32x.png
 settings:
   authoring:
     author: Vallant & Sahli
