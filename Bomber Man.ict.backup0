@@ -736,7 +736,7 @@ assets:
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanIdle.png
         r: 16
-      - lastmod: 1713336190746
+      - lastmod: 1713336579129
         type: texture
         name: Explosion
         untill: 0
@@ -744,26 +744,85 @@ assets:
           - 12
           - 1
         axis:
+          - 48
+          - 48
+        marginx: 0
+        marginy: 0
+        imgWidth: 1152
+        imgHeight: 96
+        width: 96
+        height: 96
+        offx: 0
+        offy: 0
+        origname: ib8GJWLtCfc1J4m.png
+        shape: rect
+        left: 48
+        right: 48
+        top: 48
+        bottom: 48
+        uid: b8GJWLtCfc1J4m
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/Explosion.png
+        r: 47
+      - lastmod: 1713383797068
+        type: texture
+        name: rock3
+        untill: 0
+        grid:
+          - 2
+          - 2
+        axis:
           - 0
           - 0
         marginx: 0
         marginy: 0
-        imgWidth: 384
+        imgWidth: 64
+        imgHeight: 64
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: itBj2BdmfrcjBmm.png
+        shape: rect
+        left: 0
+        right: 32
+        top: 0
+        bottom: 32
+        uid: tBj2BdmfrcjBmm
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/rock3.png
+        r: 16
+      - lastmod: 1713384682516
+        type: texture
+        name: BombAnimation
+        untill: 0
+        grid:
+          - 10
+          - 1
+        axis:
+          - 16
+          - 16
+        marginx: 0
+        marginy: 0
+        imgWidth: 320
         imgHeight: 32
         width: 32
         height: 32
         offx: 0
         offy: 0
-        origname: ib8GJWLtCfc1J4m.png
+        origname: igWqq2g53cdgPJ5.png
         shape: rect
-        left: 0
-        right: 384
-        top: 0
-        bottom: 32
-        uid: b8GJWLtCfc1J4m
+        left: 16
+        right: 16
+        top: 16
+        bottom: 16
+        uid: gWqq2g53cdgPJ5
         padding: 1
         isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/Explosion.png
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/BombAnimation.png
+        r: 16
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -812,10 +871,6 @@ assets:
               this.tex = almostStopped ? "BombermanIdle" : "BombermanWalk"
 
               this.animationSpeed = 0.1 * (this.hspeed + 1)
-
-              // if (almostStopped) this.playerShadow.pause()
-
-              // else this.playerShadow.resume()
             arguments: {}
             lib: core
           - eventKey: OnActionPress
@@ -852,7 +907,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713293648388
+        lastmod: 1713375288126
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -901,23 +956,26 @@ assets:
         visible: true
         events:
           - eventKey: OnCreate
-            code: 'this.currentFrame = IntFromInterval(0, this.totalFrames-1)'
+            code: ''
             arguments: {}
             lib: core
         extends:
           matterEnable: true
           matterStatic: true
           matterConstraint: none
-          cgroup: Destroyable
+          cgroup: ''
           matterDensity: 1
-        lastmod: 1713224058361
+          destroyable: true
+          randomTile: true
+        lastmod: 1713383947592
         uid: cMPb1PPCNCM71Q
-        behaviors: []
+        behaviors:
+          - bkBmfgFMbDkkh2
       - type: template
         baseClass: AnimatedSprite
         name: Bomb
         depth: 0
-        texture: QWGDM5qW9QRNLD
+        texture: gWqq2g53cdgPJ5
         playAnimationOnStart: true
         loopAnimation: true
         animationFPS: 4
@@ -938,7 +996,7 @@ assets:
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
           explosionTime: 3
-        lastmod: 1713293876319
+        lastmod: 1713384702403
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -960,6 +1018,25 @@ assets:
         lastmod: 1713336485005
         uid: W7GqF4Bpgq3Dj9
         behaviors: []
+      - type: template
+        baseClass: AnimatedSprite
+        name: RockSolid
+        depth: 0
+        texture: tBj2BdmfrcjBmm
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends:
+          randomTile: true
+          destroyable: false
+          matterEnable: true
+          matterStatic: true
+        lastmod: 1713383954395
+        uid: qkzWpHFn92ckGw
+        behaviors:
+          - bkBmfgFMbDkkh2
   - type: folder
     uid: wpCr5j4BgRdTR6
     colorClass: success
@@ -1638,8 +1715,188 @@ assets:
             exts: {}
             customProperties: {}
             bindings: {}
-          - x: 0
-            'y': 0
+          - x: 160
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 160
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 160
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 160
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 288
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 288
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 288
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 288
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 352
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 352
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 352
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 352
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 96
+            'y': 64
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 96
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 96
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 96
+            'y': 256
             opacity: 1
             tint: 16777215
             scale:
@@ -1651,7 +1908,7 @@ assets:
             customProperties: {}
             bindings: {}
           - x: 32
-            'y': 0
+            'y': 96
             opacity: 1
             tint: 16777215
             scale:
@@ -1659,6 +1916,54 @@ assets:
               'y': 1
             rotation: 0
             uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 32
+            'y': 160
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 32
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 32
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1670,7 +1975,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1682,7 +1987,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1694,7 +1999,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1706,7 +2011,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1718,7 +2023,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1730,7 +2035,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1742,7 +2047,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1754,7 +2059,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1766,7 +2071,7 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -1778,11 +2083,47 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
-          - x: 160
+          - x: 384
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 32
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
             'y': 64
             opacity: 1
             tint: 16777215
@@ -1790,11 +2131,23 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
-          - x: 160
+          - x: 416
+            'y': 96
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
             'y': 128
             opacity: 1
             tint: 16777215
@@ -1802,11 +2155,23 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
-          - x: 160
+          - x: 416
+            'y': 160
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
             'y': 192
             opacity: 1
             tint: 16777215
@@ -1814,11 +2179,23 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
-          - x: 160
+          - x: 416
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
             'y': 256
             opacity: 1
             tint: 16777215
@@ -1826,11 +2203,275 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 352
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 320
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
           - x: 288
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 256
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 224
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 192
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 160
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 128
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 96
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 64
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 32
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 32
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 160
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 128
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
+            'y': 96
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 0
             'y': 64
             opacity: 1
             tint: 16777215
@@ -1838,139 +2479,19 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
-          - x: 288
-            'y': 128
+          - x: 0
+            'y': 32
             opacity: 1
             tint: 16777215
             scale:
               x: 1
               'y': 1
             rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 288
-            'y': 192
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 288
-            'y': 256
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 352
-            'y': 64
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 352
-            'y': 128
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 352
-            'y': 192
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 352
-            'y': 256
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 96
-            'y': 64
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 96
-            'y': 128
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 96
-            'y': 192
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
-            exts: {}
-            customProperties: {}
-            bindings: {}
-          - x: 96
-            'y': 256
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: cMPb1PPCNCM71Q
+            uid: qkzWpHFn92ckGw
             exts: {}
             customProperties: {}
             bindings: {}
@@ -7014,7 +7535,7 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713222302196
+        lastmod: 1713383878768
         events: []
         behaviors: []
         uid: bpc4PHTrr1Hrz1
@@ -7144,12 +7665,12 @@ assets:
             settings:
               delay: 0
               lifetime:
-                min: 0.5
+                min: 0.2
                 max: 0.5
               frequency: 0.008
-              spawnChance: 0.83
+              spawnChance: 0.33
               particlesPerWave: 7
-              emitterLifetime: 0.5
+              emitterLifetime: 0.4
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -7242,12 +7763,12 @@ assets:
             settings:
               delay: 0
               lifetime:
-                min: 0.5
+                min: 0.2
                 max: 0.5
               frequency: 0.041
-              spawnChance: 0.96
+              spawnChance: 0.35
               particlesPerWave: 6
-              emitterLifetime: 0.5
+              emitterLifetime: 0.4
               maxParticles: 1000
               maxSpeed: 0
               pos:
@@ -7282,12 +7803,12 @@ assets:
                   config:
                     scale:
                       list:
-                        - value: 0.21999999999999997
+                        - value: 0.11999999999999997
                           time: 0
                         - time: 0.4841269841269841
-                          value: 0.27000000000000013
-                        - time: 0.8174603174603174
-                          value: 0.30000000000000016
+                          value: 0.08000000000000013
+                        - time: 0.8015873015873016
+                          value: 0.09000000000000016
                         - value: 0
                           time: 1
                     minMult: 1
@@ -7305,7 +7826,7 @@ assets:
                     type: torus
                     data:
                       innerRadius: 1
-                      radius: 9
+                      radius: 49
                       x: 0
                       'y': 0
                       rotation: true
@@ -7317,7 +7838,7 @@ assets:
                     maxSpeed: 0
                     accel: 0
             showShapeVisualizer: true
-        lastmod: 1713197807945
+        lastmod: 1713383550049
         type: tandem
       - name: PlayerEmitter
         uid: QBfhCWTzWdhKBR
@@ -7478,6 +7999,27 @@ assets:
             readableName: Destruction Radius
         lastmod: 1713336397376
         uid: 7qL8Dk6Fpb91m9
+      - type: behavior
+        name: Rock
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: >-
+              if (this.randomTile) this.currentFrame = IntFromInterval(0,
+              this.totalFrames-1)
+
+              this.cgroup = this.destroyable? "Destroyable" : null
+            arguments: {}
+            lib: core
+        specification:
+          - type: checkbox
+            name: destroyable
+            readableName: Destroyable?
+          - type: checkbox
+            name: randomTile
+            readableName: Randomized Tile ?
+        lastmod: 1713383404706
+        uid: bkBmfgFMbDkkh2
   - type: folder
     uid: 85qk5WJqmpFKh9
     colorClass: accent1
@@ -7538,7 +8080,7 @@ settings:
     desktopMode: maximized
     hideCursor: false
     mobileScreenOrientation: unspecified
-    viewMode: scaleFit
+    viewMode: fastScaleInteger
   export:
     autocloseDesktop: true
     windows: true
