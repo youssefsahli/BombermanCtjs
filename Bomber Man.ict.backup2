@@ -7578,22 +7578,11 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713387902833
+        lastmod: 1713387985166
         events: []
         behaviors:
           - D2QzrCH25djNhz
         uid: bpc4PHTrr1Hrz1
-      - type: behavior
-        name: Level
-        behaviorType: room
-        events:
-          - eventKey: OnRoomStart
-            code: this.ui = rooms.append('GUI Layer')
-            arguments: {}
-            lib: core
-        specification: []
-        lastmod: 1713387865007
-        uid: D2QzrCH25djNhz
   - type: folder
     uid: n5FQDp8LhWT4cb
     colorClass: text
@@ -8100,6 +8089,17 @@ assets:
             readableName: Time to change Room (ms)
         lastmod: 1713387317515
         uid: GqjR5p2LbQPWqB
+      - type: behavior
+        name: Level
+        behaviorType: room
+        events:
+          - eventKey: OnRoomStart
+            code: this.ui = rooms.append('GUI Layer')
+            arguments: {}
+            lib: core
+        specification: []
+        lastmod: 1713387865007
+        uid: D2QzrCH25djNhz
   - type: folder
     uid: 85qk5WJqmpFKh9
     colorClass: accent1
@@ -8202,7 +8202,7 @@ assets:
         events: []
         behaviors: []
         uid: q43W3HDGpJ4RGM
-      - lastmod: 1713387768163
+      - lastmod: 1713388070884
         type: texture
         name: HealthBarAnimationFrames
         untill: 0
@@ -8214,10 +8214,10 @@ assets:
           - 0
         marginx: 0
         marginy: 0
-        imgWidth: 880
-        imgHeight: 64
-        width: 80
-        height: 64
+        imgWidth: 440
+        imgHeight: 32
+        width: 40
+        height: 32
         offx: 0
         offy: 0
         origname: iqCgWM33TgM25DG.png
@@ -8231,7 +8231,7 @@ assets:
         isBlank: false
         source: >-
           /home/youssef/ct.js/Projects/Bomber
-          Man/export/HealthBarAnimationFramesReversed.png
+          Man/export/HealthBarAnimationFramesReversed32x.png
 settings:
   authoring:
     author: Vallant & Sahli

@@ -92,6 +92,22 @@ scripts:
       function approxeq (v1, v2, epsilon = 0.01) {
           return Math.abs(v1 - v2) <= epsilon
       }
+  - name: Collisions
+    code: |-
+      /**
+       * @param {BasicCopy} copy
+       * @param {string} cType
+       * @param {number} cRadius
+       * @description Returns an Array of all copy with the cType cgroup
+       */
+      function getXInRadius(copy, cType: string, cRadius: number) {
+              let copies = place.traceCircle({
+                  x: copy.x,
+                  y: copy.y,
+                  radius: cRadius,
+              }, cType, true);
+              return copies
+          }
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -884,6 +900,7 @@ assets:
               this.playerShadow = emitters.follow(this, 'PlayerEmitter', {
                   depth: 1
               })
+              this.lives = 3;
             arguments: {}
             lib: core
           - eventKey: OnDraw
@@ -934,7 +951,7 @@ assets:
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713384777098
+        lastmod: 1713544818169
         uid: BC5dp7bw2mHL2t
         behaviors: []
       - type: template
@@ -7584,6 +7601,244 @@ assets:
           - D2QzrCH25djNhz
         uid: bpc4PHTrr1Hrz1
   - type: folder
+    uid: bRnP7dgpfP1rmM
+    colorClass: error
+    icon: behavior
+    name: Behaviors
+    lastmod: 1713131246914
+    entries:
+      - type: behavior
+        name: Explode
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: |2
+                  this.explosionTimer = timer.add(this.explosionTime * 1e3, "Explosion")
+                  this.colorTinter = (timeLeft: number): number => {
+                      if (timeLeft <= 0) return 0xFF0000
+                      let color = Math.round((timeLeft / this.explosionTime) * 255)
+                      return (255 << 16) | (color << 8) | color;
+                  }
+
+                  this.explosionTimer.then(() => {
+                      let players: Array<BasicCopy> = getXInRadius(this, 'Player', this.radius)
+                      players.forEach((player) => player.lives <= 0 ? player.kill = true : player.lives--)
+                      let rocks: Array<BasicCopy> = getXInRadius(this, 'Rock', this.radius)
+                      rocks.forEach((rock) => rock.kill = true)
+                      emitters.fire('ExplosionEmitter', this.x, this.y)
+                      this.kill = true
+                      templates.copy('Explosion', this.x, this.y)
+                  })
+            arguments: {}
+            lib: core
+          - eventKey: OnStep
+            code: >-
+              // this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
+
+              (this as BasicCopy).tint =
+              this.colorTinter(this.explosionTimer.timeLeft)
+            arguments: {}
+            lib: core
+        specification:
+          - type: sliderAndNumber
+            name: explosionTime
+            readableName: Explosion Time
+            required: true
+          - type: sliderAndNumber
+            name: radius
+            readableName: Destruction Radius
+        lastmod: 1713548882457
+        uid: 7qL8Dk6Fpb91m9
+      - type: behavior
+        name: Rock
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: >-
+              if (this.randomTile) this.currentFrame = IntFromInterval(0,
+              this.totalFrames-1)
+
+              this.cgroup = this.destroyable? "Destroyable" : null
+            arguments: {}
+            lib: core
+        specification:
+          - type: checkbox
+            name: destroyable
+            readableName: Destroyable?
+          - type: checkbox
+            name: randomTile
+            readableName: Randomized Tile ?
+        lastmod: 1713383404706
+        uid: bkBmfgFMbDkkh2
+      - type: behavior
+        name: Exit Behavior
+        behaviorType: template
+        events:
+          - eventKey: matterActiveTemplate
+            code: >-
+              this.roomChangeTimer -= u.time
+
+              if (this.nextRoom && this.roomChangeTimer < 0)
+              rooms.switch(this.nextRoom.name)
+            arguments:
+              template: BC5dp7bw2mHL2t
+            lib: matter
+        specification:
+          - type: room
+            name: nextRoom
+            readableName: Next Room
+          - type: checkbox
+            name: isEnd
+            readableName: End ?
+          - type: number
+            name: roomChangeTimer
+            readableName: Time to change Room (ms)
+        lastmod: 1713387317515
+        uid: GqjR5p2LbQPWqB
+      - type: behavior
+        name: Level
+        behaviorType: room
+        events:
+          - eventKey: OnRoomStart
+            code: this.ui = rooms.append('GUI Layer')
+            arguments: {}
+            lib: core
+        specification: []
+        lastmod: 1713387865007
+        uid: D2QzrCH25djNhz
+  - type: folder
+    uid: 85qk5WJqmpFKh9
+    colorClass: accent1
+    icon: translate
+    name: Styles
+    lastmod: 1713196772538
+    entries:
+      - type: style
+        name: Explosion Tick
+        uid: fmG41MJfdhd99Q
+        font:
+          family: '"CTPROJFONTArsenal regular", "Arsenal regular", sans-serif'
+          halign: left
+          italic: false
+          size: 16
+          weight: '400'
+          wrap: false
+          wrapPosition: 640
+          lineHeight: 21.28
+        lastmod: 1713222217296
+        shadow:
+          color: '#000000'
+          x: 0
+          'y': 0
+          blur: 0
+        fill:
+          type: '0'
+      - type: font
+        typefaceName: Arsenal regular
+        weight: '400'
+        italic: false
+        origname: fFgQw4Lr31899F8.ttf
+        lastmod: 1713196868447
+        bitmapFont: true
+        bitmapFontSize: 16
+        bitmapFontLineHeight: 18
+        charsets:
+          - allInFont
+        customCharset: ''
+        uid: FgQw4Lr31899F8
+  - type: folder
+    uid: 1Trc62p1DF7zpQ
+    colorClass: text
+    icon: button
+    name: UX
+    lastmod: 1713387343153
+    entries:
+      - type: template
+        baseClass: AnimatedSprite
+        name: HealthBar
+        depth: 0
+        texture: qCgWM33TgM25DG
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends: {}
+        lastmod: 1713387378717
+        uid: rmqHhhwWcw6rKD
+        behaviors: []
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 64
+        gridY: 64
+        diagonalGrid: false
+        disableGrid: false
+        simulate: true
+        width: 448
+        height: 320
+        restrictCamera: false
+        restrictMaxX: 1280
+        restrictMinX: 1280
+        restrictMaxY: 720
+        restrictMinY: 720
+        isUi: true
+        name: GUI Layer
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds: []
+        copies:
+          - x: 0
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: rmqHhhwWcw6rKD
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles: []
+        extends: {}
+        lastmod: 1713387576294
+        events: []
+        behaviors: []
+        uid: q43W3HDGpJ4RGM
+      - lastmod: 1713388070884
+        type: texture
+        name: HealthBarAnimationFrames
+        untill: 0
+        grid:
+          - 11
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 440
+        imgHeight: 32
+        width: 40
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iqCgWM33TgM25DG.png
+        shape: rect
+        left: 0
+        right: 1600
+        top: 0
+        bottom: 64
+        uid: qCgWM33TgM25DG
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/ct.js/Projects/Bomber
+          Man/export/HealthBarAnimationFramesReversed32x.png
+  - type: folder
     uid: n5FQDp8LhWT4cb
     colorClass: text
     icon: zap
@@ -7973,265 +8228,6 @@ assets:
                     accel: 0
         lastmod: 1713293722450
         type: tandem
-  - type: folder
-    uid: bRnP7dgpfP1rmM
-    colorClass: error
-    icon: behavior
-    name: Behaviors
-    lastmod: 1713131246914
-    entries:
-      - type: behavior
-        name: Explode
-        behaviorType: template
-        events:
-          - eventKey: OnCreate
-            code: >-
-              // this.tickLabel = new PIXI.Text(this.explosionTime,
-              styles.get('Explosion Tick'))
-
-              // this.tickLabel.y -= 8
-
-              // this.tickLabel.x -= 8
-
-              // this.addChild(this.tickLabel)
-
-              this.explosionTimer = timer.add(this.explosionTime*1e3,
-              "Explosion")
-
-              this.colorTinter = (timeLeft: number): number => {
-                  if (timeLeft <= 0) return 0xFF0000
-                  let c = Math.round((timeLeft/this.explosionTime) * 255)
-                  return (255 << 16) | (c << 8) | c;
-              }
-
-
-              function getRocksInRadius(copy: BasicCopy) : Array<BasicCopy> {
-                  let copies = place.traceCircle({
-                      x: copy.x,
-                      y: copy.y,
-                      radius: copy.radius
-                  }, 'Destroyable', true);
-                  return copies
-              }
-
-
-
-              this.explosionTimer.then(() => {
-                  let rocks : Array<BasicCopy> = getRocksInRadius(this)
-                  rocks.forEach((e) => e.kill = true)
-                  emitters.fire('ExplosionEmitter', this.x, this.y)
-                  this.kill = true
-                  templates.copy('Explosion', this.x, this.y)
-              })
-            arguments: {}
-            lib: core
-          - eventKey: OnStep
-            code: >-
-              // this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
-
-              (this as BasicCopy).tint =
-              this.colorTinter(this.explosionTimer.timeLeft)
-            arguments: {}
-            lib: core
-        specification:
-          - type: sliderAndNumber
-            name: explosionTime
-            readableName: Explosion Time
-            required: true
-          - type: sliderAndNumber
-            name: radius
-            readableName: Destruction Radius
-        lastmod: 1713336397376
-        uid: 7qL8Dk6Fpb91m9
-      - type: behavior
-        name: Rock
-        behaviorType: template
-        events:
-          - eventKey: OnCreate
-            code: >-
-              if (this.randomTile) this.currentFrame = IntFromInterval(0,
-              this.totalFrames-1)
-
-              this.cgroup = this.destroyable? "Destroyable" : null
-            arguments: {}
-            lib: core
-        specification:
-          - type: checkbox
-            name: destroyable
-            readableName: Destroyable?
-          - type: checkbox
-            name: randomTile
-            readableName: Randomized Tile ?
-        lastmod: 1713383404706
-        uid: bkBmfgFMbDkkh2
-      - type: behavior
-        name: Exit Behavior
-        behaviorType: template
-        events:
-          - eventKey: matterActiveTemplate
-            code: >-
-              this.roomChangeTimer -= u.time
-
-              if (this.nextRoom && this.roomChangeTimer < 0)
-              rooms.switch(this.nextRoom.name)
-            arguments:
-              template: BC5dp7bw2mHL2t
-            lib: matter
-        specification:
-          - type: room
-            name: nextRoom
-            readableName: Next Room
-          - type: checkbox
-            name: isEnd
-            readableName: End ?
-          - type: number
-            name: roomChangeTimer
-            readableName: Time to change Room (ms)
-        lastmod: 1713387317515
-        uid: GqjR5p2LbQPWqB
-      - type: behavior
-        name: Level
-        behaviorType: room
-        events:
-          - eventKey: OnRoomStart
-            code: this.ui = rooms.append('GUI Layer')
-            arguments: {}
-            lib: core
-        specification: []
-        lastmod: 1713387865007
-        uid: D2QzrCH25djNhz
-  - type: folder
-    uid: 85qk5WJqmpFKh9
-    colorClass: accent1
-    icon: translate
-    name: Styles
-    lastmod: 1713196772538
-    entries:
-      - type: style
-        name: Explosion Tick
-        uid: fmG41MJfdhd99Q
-        font:
-          family: '"CTPROJFONTArsenal regular", "Arsenal regular", sans-serif'
-          halign: left
-          italic: false
-          size: 16
-          weight: '400'
-          wrap: false
-          wrapPosition: 640
-          lineHeight: 21.28
-        lastmod: 1713222217296
-        shadow:
-          color: '#000000'
-          x: 0
-          'y': 0
-          blur: 0
-        fill:
-          type: '0'
-      - type: font
-        typefaceName: Arsenal regular
-        weight: '400'
-        italic: false
-        origname: fFgQw4Lr31899F8.ttf
-        lastmod: 1713196868447
-        bitmapFont: true
-        bitmapFontSize: 16
-        bitmapFontLineHeight: 18
-        charsets:
-          - allInFont
-        customCharset: ''
-        uid: FgQw4Lr31899F8
-  - type: folder
-    uid: 1Trc62p1DF7zpQ
-    colorClass: text
-    icon: button
-    name: UX
-    lastmod: 1713387343153
-    entries:
-      - type: template
-        baseClass: AnimatedSprite
-        name: HealthBar
-        depth: 0
-        texture: qCgWM33TgM25DG
-        playAnimationOnStart: false
-        loopAnimation: true
-        animationFPS: 30
-        visible: true
-        events: []
-        extends: {}
-        lastmod: 1713387378717
-        uid: rmqHhhwWcw6rKD
-        behaviors: []
-      - type: room
-        oncreate: ''
-        onstep: ''
-        ondraw: ''
-        onleave: ''
-        gridX: 64
-        gridY: 64
-        diagonalGrid: false
-        disableGrid: false
-        simulate: true
-        width: 448
-        height: 320
-        restrictCamera: false
-        restrictMaxX: 1280
-        restrictMinX: 1280
-        restrictMaxY: 720
-        restrictMinY: 720
-        isUi: true
-        name: GUI Layer
-        backgroundColor: '#000000'
-        follow: -1
-        backgrounds: []
-        copies:
-          - x: 0
-            'y': 0
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: rmqHhhwWcw6rKD
-            exts: {}
-            customProperties: {}
-            bindings: {}
-        tiles: []
-        extends: {}
-        lastmod: 1713387576294
-        events: []
-        behaviors: []
-        uid: q43W3HDGpJ4RGM
-      - lastmod: 1713388070884
-        type: texture
-        name: HealthBarAnimationFrames
-        untill: 0
-        grid:
-          - 11
-          - 1
-        axis:
-          - 0
-          - 0
-        marginx: 0
-        marginy: 0
-        imgWidth: 440
-        imgHeight: 32
-        width: 40
-        height: 32
-        offx: 0
-        offy: 0
-        origname: iqCgWM33TgM25DG.png
-        shape: rect
-        left: 0
-        right: 1600
-        top: 0
-        bottom: 64
-        uid: qCgWM33TgM25DG
-        padding: 1
-        isBlank: false
-        source: >-
-          /home/youssef/ct.js/Projects/Bomber
-          Man/export/HealthBarAnimationFramesReversed32x.png
 settings:
   authoring:
     author: Vallant & Sahli
