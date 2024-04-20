@@ -1038,7 +1038,7 @@ assets:
           launchAction: ''
           bomb: TfWHLnj22N26db
           hurtTexture: 64Pcmm4bcBkDNP
-        lastmod: 1713643019275
+        lastmod: 1713643570182
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
@@ -1103,7 +1103,7 @@ assets:
           randomTile: true
           maxHealth: 1
           dieTexture: DN2z1z76jrfP9z
-        lastmod: 1713641916240
+        lastmod: 1713643561740
         uid: cMPb1PPCNCM71Q
         behaviors:
           - bkBmfgFMbDkkh2
@@ -1134,7 +1134,7 @@ assets:
           matterFrictionAir: 0.1
           explosionTime: 1
           damage: 1
-        lastmod: 1713643387052
+        lastmod: 1713644592787
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -1171,7 +1171,7 @@ assets:
           destroyable: false
           matterEnable: true
           matterStatic: true
-        lastmod: 1713605001663
+        lastmod: 1713643541902
         uid: qkzWpHFn92ckGw
         behaviors:
           - bkBmfgFMbDkkh2
@@ -7735,12 +7735,8 @@ assets:
                       return (255 << 16) | (color << 8) | color;
                   }
 
-                  
                   this.explosionTimer.then(() => {
-                      let players: Array<BasicCopy> = behaviorInRadius(this.x, this.y, 'Player', this.radius)
-                      console.log(players)
                       let objects: Array<BasicCopy> = behaviorInRadius(this.x, this.y, 'Health', this.radius)
-                      players.forEach((player) => player.damage())
                       objects.forEach((o) => o.damage())
                       emitters.fire('ExplosionEmitter', this.x, this.y)
                       this.kill = true
@@ -7767,7 +7763,9 @@ assets:
           - type: number
             name: damage
             readableName: Damage
-        lastmod: 1713643374802
+            array: false
+            fixedLength: 1
+        lastmod: 1713644583046
         uid: 7qL8Dk6Fpb91m9
       - type: behavior
         name: Rock
@@ -7778,7 +7776,7 @@ assets:
               if (this.randomTile) this.currentFrame = IntFromInterval(0,
               this.totalFrames-1)
 
-              this.cgroup = this.destroyable? "Destroyable" : null
+              this.cgroup = this.destroyable ? "Destroyable" : null
             arguments: {}
             lib: core
         specification:
@@ -7788,7 +7786,7 @@ assets:
           - type: checkbox
             name: randomTile
             readableName: Randomized Tile ?
-        lastmod: 1713604956107
+        lastmod: 1713644403582
         uid: bkBmfgFMbDkkh2
       - type: behavior
         name: Exit Behavior
@@ -7857,7 +7855,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-        lastmod: 1713643344605
+        lastmod: 1713643516611
         uid: 5zf9gNNDpcJ4DJ
       - type: behavior
         name: BasicEnemy
@@ -7924,10 +7922,10 @@ assets:
           - type: sliderAndNumber
             name: fleeing
             readableName: Fleeing
-          - type: text
+          - type: sliderAndNumber
             name: roaming
             readableName: Roaming
-        lastmod: 1713641978201
+        lastmod: 1713643963406
         uid: qW21LMMR65fMcb
       - type: behavior
         name: Player
@@ -8033,7 +8031,7 @@ assets:
           - type: tandem
             name: shadow
             readableName: Shadow
-        lastmod: 1713641602668
+        lastmod: 1713643958216
         uid: fM86kwpJ7mNRfL
   - type: folder
     uid: 85qk5WJqmpFKh9
@@ -8093,7 +8091,7 @@ assets:
         visible: true
         events: []
         extends: {}
-        lastmod: 1713387378717
+        lastmod: 1713644206615
         uid: rmqHhhwWcw6rKD
         behaviors: []
       - type: room
@@ -8137,7 +8135,7 @@ assets:
         events: []
         behaviors: []
         uid: q43W3HDGpJ4RGM
-      - lastmod: 1713557149412
+      - lastmod: 1713644104904
         type: texture
         name: HealthBarAnimationFrames
         untill: 0

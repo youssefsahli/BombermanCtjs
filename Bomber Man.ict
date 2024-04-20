@@ -1134,7 +1134,7 @@ assets:
           matterFrictionAir: 0.1
           explosionTime: 1
           damage: 1
-        lastmod: 1713643387052
+        lastmod: 1713644592787
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -7763,7 +7763,9 @@ assets:
           - type: number
             name: damage
             readableName: Damage
-        lastmod: 1713643486694
+            array: false
+            fixedLength: 1
+        lastmod: 1713644583046
         uid: 7qL8Dk6Fpb91m9
       - type: behavior
         name: Rock
@@ -7774,7 +7776,7 @@ assets:
               if (this.randomTile) this.currentFrame = IntFromInterval(0,
               this.totalFrames-1)
 
-              this.cgroup = this.destroyable? "Destroyable" : null
+              this.cgroup = this.destroyable ? "Destroyable" : null
             arguments: {}
             lib: core
         specification:
@@ -7784,7 +7786,7 @@ assets:
           - type: checkbox
             name: randomTile
             readableName: Randomized Tile ?
-        lastmod: 1713643524679
+        lastmod: 1713644403582
         uid: bkBmfgFMbDkkh2
       - type: behavior
         name: Exit Behavior
