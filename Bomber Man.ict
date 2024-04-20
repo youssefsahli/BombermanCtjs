@@ -126,6 +126,8 @@ scripts:
           }, false, true).filter((v) => templates.isCopy(v))
           return copies ? copies.filter((v, i, arr) => behaviors.has(v, bName)) : []
       }
+  - name: Global Player
+    code: let PlayerInfo;
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -7942,6 +7944,7 @@ assets:
           - eventKey: OnCreate
             code: |-
               this.canPoseBomb = true
+              PlayerInfo = this;
               this.poseBomb = () => {
                   if (this.canPoseBomb) {
                       var bomb = templates.copy('Bomb', this.x+Math.sign(this.hspeed) *16, this.y+Math.sign(this.vspeed)*16)
@@ -7970,7 +7973,7 @@ assets:
           - type: template
             name: bomb
             readableName: Bomb
-        lastmod: 1713642915127
+        lastmod: 1713645655570
         uid: hkqDP8GpPhDNWK
       - type: behavior
         name: Character
@@ -8089,17 +8092,21 @@ assets:
         visible: true
         events:
           - eventKey: OnCreate
-            code: |-
+            code: |
               this.currentFrame = 0;
-               if (templates.copy('Bomberman').currentHealth == 4) this.currentFrame = 2;
-                if (templates.copy('Bomberman').currentHealth == 3) this.currentFrame = 4;
-                 if (templates.copy('Bomberman').currentHealth == 2) this.currentFrame = 6;
-                  if (templates.copy('Bomberman').currentHealth == 1) this.currentFrame = 8;
-                   if (templates.copy('Bomberman').currentHealth == 0) this.currentFrame = 10;
+            arguments: {}
+            lib: core
+          - eventKey: OnStep
+            code: |2-
+               if (PlayerInfo.currentHealth == 4) this.currentFrame = 2;
+                if (PlayerInfo.currentHealth == 3) this.currentFrame = 4;
+                 if (PlayerInfo.currentHealth == 2) this.currentFrame = 6;
+                  if (PlayerInfo.currentHealth == 1) this.currentFrame = 8;
+                   if (PlayerInfo.currentHealth == 0) this.currentFrame = 10;
             arguments: {}
             lib: core
         extends: {}
-        lastmod: 1713644942961
+        lastmod: 1713645719835
         uid: rmqHhhwWcw6rKD
         behaviors: []
       - type: room
@@ -8143,7 +8150,7 @@ assets:
         events: []
         behaviors: []
         uid: q43W3HDGpJ4RGM
-      - lastmod: 1713644104904
+      - lastmod: 1713645803241
         type: texture
         name: HealthBarAnimationFrames
         untill: 0
