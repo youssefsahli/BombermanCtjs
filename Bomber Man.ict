@@ -1030,7 +1030,7 @@ assets:
           canRotate: false
           idleTexture: 64wBF7MHQ8dK1n
           walkTexture: TDfHmzKg3NzTk5
-          maxHealth: 2
+          maxHealth: 5
           explosionTexture: -1
           dieTexture: 64Pcmm4bcBkDNP
           launchTexture: 6qJtMGgGFnzRL1
@@ -1038,7 +1038,7 @@ assets:
           launchAction: ''
           bomb: TfWHLnj22N26db
           hurtTexture: 64Pcmm4bcBkDNP
-        lastmod: 1713643570182
+        lastmod: 1713644938350
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
@@ -8087,9 +8087,19 @@ assets:
         loopAnimation: true
         animationFPS: 30
         visible: true
-        events: []
+        events:
+          - eventKey: OnCreate
+            code: |-
+              this.currentFrame = 0;
+               if (templates.copy('Bomberman').currentHealth == 4) this.currentFrame = 2;
+                if (templates.copy('Bomberman').currentHealth == 3) this.currentFrame = 4;
+                 if (templates.copy('Bomberman').currentHealth == 2) this.currentFrame = 6;
+                  if (templates.copy('Bomberman').currentHealth == 1) this.currentFrame = 8;
+                   if (templates.copy('Bomberman').currentHealth == 0) this.currentFrame = 10;
+            arguments: {}
+            lib: core
         extends: {}
-        lastmod: 1713644206615
+        lastmod: 1713644942961
         uid: rmqHhhwWcw6rKD
         behaviors: []
       - type: room
