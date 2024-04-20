@@ -126,6 +126,8 @@ scripts:
           }, false, true).filter((v) => templates.isCopy(v))
           return copies ? copies.filter((v, i, arr) => behaviors.has(v, bName)) : []
       }
+  - name: Global Player
+    code: let PlayerInfo;
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -1030,7 +1032,7 @@ assets:
           canRotate: false
           idleTexture: 64wBF7MHQ8dK1n
           walkTexture: TDfHmzKg3NzTk5
-          maxHealth: 2
+          maxHealth: 5
           explosionTexture: -1
           dieTexture: 64Pcmm4bcBkDNP
           launchTexture: 6qJtMGgGFnzRL1
@@ -1038,7 +1040,7 @@ assets:
           launchAction: ''
           bomb: TfWHLnj22N26db
           hurtTexture: 64Pcmm4bcBkDNP
-        lastmod: 1713643019275
+        lastmod: 1713644938350
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
@@ -1103,7 +1105,7 @@ assets:
           randomTile: true
           maxHealth: 1
           dieTexture: DN2z1z76jrfP9z
-        lastmod: 1713641916240
+        lastmod: 1713643561740
         uid: cMPb1PPCNCM71Q
         behaviors:
           - bkBmfgFMbDkkh2
@@ -1171,7 +1173,7 @@ assets:
           destroyable: false
           matterEnable: true
           matterStatic: true
-        lastmod: 1713605001663
+        lastmod: 1713643541902
         uid: qkzWpHFn92ckGw
         behaviors:
           - bkBmfgFMbDkkh2
@@ -7710,11 +7712,1779 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713568085191
+        lastmod: 1713648774994
         events: []
         behaviors:
           - D2QzrCH25djNhz
         uid: bpc4PHTrr1Hrz1
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 32
+        gridY: 32
+        diagonalGrid: false
+        disableGrid: false
+        simulate: true
+        width: 1280
+        height: 720
+        restrictCamera: false
+        restrictMaxX: 1280
+        restrictMinX: 1280
+        restrictMaxY: 720
+        restrictMinY: 720
+        isUi: false
+        name: Test Room 2
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds:
+          - depth: 0
+            texture: Fqg8bFG9qpKD4M
+            shiftX: 0
+            shiftY: 0
+            parallaxX: 1
+            parallaxY: 1
+            movementX: 0
+            movementY: 0
+            scaleX: 1
+            scaleY: 1
+            repeat: repeat
+        copies:
+          - x: 384
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 512
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 608
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 672
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 768
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 832
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 192
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 480
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 896
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 832
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 768
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 672
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 608
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 512
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 544
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 480
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 384
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: gn2cjnqnWM6qFw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 480
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 416
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 512
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 608
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 672
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 768
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 832
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 224
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 480
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 864
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 832
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 512
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 448
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 608
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 672
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 768
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 832
+            'y': 512
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: qkzWpHFn92ckGw
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: CFFWjhrgQWk6MC
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 800
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 768
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 736
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 672
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 672
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 704
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 256
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 608
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 608
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 512
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 512
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 384
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 320
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 480
+            'y': 288
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 544
+            'y': 448
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 576
+            'y': 352
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+          - x: 640
+            'y': 416
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: cMPb1PPCNCM71Q
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles: []
+        extends: {}
+        lastmod: 1713648777196
+        events: []
+        behaviors: []
+        uid: R2GJ65kQ22MP7f
   - type: folder
     uid: bRnP7dgpfP1rmM
     colorClass: error
@@ -7784,7 +9554,7 @@ assets:
           - type: checkbox
             name: randomTile
             readableName: Randomized Tile ?
-        lastmod: 1713604956107
+        lastmod: 1713643524679
         uid: bkBmfgFMbDkkh2
       - type: behavior
         name: Exit Behavior
@@ -7853,7 +9623,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-        lastmod: 1713643344605
+        lastmod: 1713643516611
         uid: 5zf9gNNDpcJ4DJ
       - type: behavior
         name: BasicEnemy
@@ -7920,10 +9690,10 @@ assets:
           - type: sliderAndNumber
             name: fleeing
             readableName: Fleeing
-          - type: text
+          - type: sliderAndNumber
             name: roaming
             readableName: Roaming
-        lastmod: 1713641978201
+        lastmod: 1713643963406
         uid: qW21LMMR65fMcb
       - type: behavior
         name: Player
@@ -7942,6 +9712,7 @@ assets:
           - eventKey: OnCreate
             code: |-
               this.canPoseBomb = true
+              PlayerInfo = this;
               this.poseBomb = () => {
                   if (this.canPoseBomb) {
                       var bomb = templates.copy('Bomb', this.x+Math.sign(this.hspeed) *16, this.y+Math.sign(this.vspeed)*16)
@@ -7970,7 +9741,7 @@ assets:
           - type: template
             name: bomb
             readableName: Bomb
-        lastmod: 1713642915127
+        lastmod: 1713645655570
         uid: hkqDP8GpPhDNWK
       - type: behavior
         name: Character
@@ -8029,7 +9800,7 @@ assets:
           - type: tandem
             name: shadow
             readableName: Shadow
-        lastmod: 1713641602668
+        lastmod: 1713643958216
         uid: fM86kwpJ7mNRfL
   - type: folder
     uid: 85qk5WJqmpFKh9
@@ -8087,9 +9858,23 @@ assets:
         loopAnimation: true
         animationFPS: 30
         visible: true
-        events: []
+        events:
+          - eventKey: OnCreate
+            code: |
+              this.currentFrame = 0;
+            arguments: {}
+            lib: core
+          - eventKey: OnStep
+            code: |2-
+               if (PlayerInfo.currentHealth == 4) this.currentFrame = 2;
+                if (PlayerInfo.currentHealth == 3) this.currentFrame = 4;
+                 if (PlayerInfo.currentHealth == 2) this.currentFrame = 6;
+                  if (PlayerInfo.currentHealth == 1) this.currentFrame = 8;
+                   if (PlayerInfo.currentHealth == 0) this.currentFrame = 10;
+            arguments: {}
+            lib: core
         extends: {}
-        lastmod: 1713387378717
+        lastmod: 1713645719835
         uid: rmqHhhwWcw6rKD
         behaviors: []
       - type: room
@@ -8133,7 +9918,7 @@ assets:
         events: []
         behaviors: []
         uid: q43W3HDGpJ4RGM
-      - lastmod: 1713557149412
+      - lastmod: 1713645803241
         type: texture
         name: HealthBarAnimationFrames
         untill: 0
