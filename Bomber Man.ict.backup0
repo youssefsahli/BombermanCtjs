@@ -940,7 +940,7 @@ assets:
         padding: 1
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/WallDestroy.png
-      - lastmod: 1713620997038
+      - lastmod: 1713643199937
         type: texture
         name: BombermanLaunch
         untill: 0
@@ -1030,7 +1030,7 @@ assets:
           canRotate: false
           idleTexture: 64wBF7MHQ8dK1n
           walkTexture: TDfHmzKg3NzTk5
-          maxHealth: 5
+          maxHealth: 2
           explosionTexture: -1
           dieTexture: 64Pcmm4bcBkDNP
           launchTexture: 6qJtMGgGFnzRL1
@@ -1038,7 +1038,7 @@ assets:
           launchAction: ''
           bomb: TfWHLnj22N26db
           hurtTexture: 64Pcmm4bcBkDNP
-        lastmod: 1713641653407
+        lastmod: 1713643019275
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
@@ -1103,7 +1103,7 @@ assets:
           randomTile: true
           maxHealth: 1
           dieTexture: DN2z1z76jrfP9z
-        lastmod: 1713619906723
+        lastmod: 1713641916240
         uid: cMPb1PPCNCM71Q
         behaviors:
           - bkBmfgFMbDkkh2
@@ -1133,7 +1133,8 @@ assets:
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
           explosionTime: 3
-        lastmod: 1713384708661
+          damage: 1
+        lastmod: 1713643213061
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -7765,7 +7766,7 @@ assets:
           - type: number
             name: damage
             readableName: Damage
-        lastmod: 1713618116841
+        lastmod: 1713643221194
         uid: 7qL8Dk6Fpb91m9
       - type: behavior
         name: Rock
@@ -7811,7 +7812,7 @@ assets:
           - type: number
             name: roomChangeTimer
             readableName: Time to change Room (ms)
-        lastmod: 1713387317515
+        lastmod: 1713642157640
         uid: GqjR5p2LbQPWqB
       - type: behavior
         name: Level
@@ -7822,7 +7823,7 @@ assets:
             arguments: {}
             lib: core
         specification: []
-        lastmod: 1713387865007
+        lastmod: 1713641991163
         uid: D2QzrCH25djNhz
       - type: behavior
         name: Health
@@ -7842,12 +7843,11 @@ assets:
                       },
                       duration: 500,
                       curve: tween.easeInCubic
+                  }).then(() => {
+                      if (this.currentHealth<=0) this.kill = true
                   })
+                  
               }
-            arguments: {}
-            lib: core
-          - eventKey: OnAnimationComplete
-            code: this.kill = true
             arguments: {}
             lib: core
         specification:
@@ -7855,7 +7855,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-        lastmod: 1713641568738
+        lastmod: 1713643173645
         uid: 5zf9gNNDpcJ4DJ
       - type: behavior
         name: BasicEnemy
@@ -7925,7 +7925,7 @@ assets:
           - type: text
             name: roaming
             readableName: Roaming
-        lastmod: 1713639445418
+        lastmod: 1713641978201
         uid: qW21LMMR65fMcb
       - type: behavior
         name: Player
@@ -7972,7 +7972,7 @@ assets:
           - type: template
             name: bomb
             readableName: Bomb
-        lastmod: 1713641744751
+        lastmod: 1713642915127
         uid: hkqDP8GpPhDNWK
       - type: behavior
         name: Character
