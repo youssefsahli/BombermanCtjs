@@ -124,7 +124,6 @@ scripts:
               y: y,
               radius: cRadius,
           }, false, true).filter((v) => templates.isCopy(v))
-          console.log(copies)
           return copies ? copies.filter((v, i, arr) => behaviors.has(v, bName)) : []
       }
 assets:
@@ -941,6 +940,35 @@ assets:
         padding: 1
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/WallDestroy.png
+      - lastmod: 1713620997038
+        type: texture
+        name: BombermanLaunch
+        untill: 0
+        grid:
+          - 4
+          - 1
+        axis:
+          - 16
+          - 16
+        marginx: 0
+        marginy: 0
+        imgWidth: 128
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: i6qJtMGgGFnzRL1.png
+        shape: rect
+        left: 16
+        right: 16
+        top: 16
+        bottom: 16
+        uid: 6qJtMGgGFnzRL1
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanLaunch.png
+        r: 16
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -959,15 +987,18 @@ assets:
         visible: true
         events:
           - eventKey: OnCreate
-            code: this.canPoseBomb = true
+            code: |-
+              this.canPoseBomb = true
+              this.forceAnimation = false
             arguments: {}
             lib: core
           - eventKey: OnActionPress
             code: |-
               if (this.canPoseBomb) {
-                  var bomb = templates.copy('Bomb', this.x+this.hspeed, this.y+this.vspeed)
+                  var bomb = templates.copy('Bomb', this.x+Math.sign(this.hspeed) *16, this.y+Math.sign(this.vspeed)*16)
                   matter.launch(bomb, this.hspeed, this.vspeed)
                   this.canPoseBomb = false
+                  this.tex = 'BombermanLaunch'
                   timer.add(500, "BombCountdown").then(() => {
                       this.canPoseBomb = true
                   })
@@ -982,7 +1013,7 @@ assets:
           matterDensity: 1
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.3
-          cgroup: ''
+          cgroup: Player
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
@@ -993,7 +1024,8 @@ assets:
           walkTexture: TDfHmzKg3NzTk5
           maxHealth: 0
           explosionTexture: -1
-        lastmod: 1713617104204
+          dieTexture: -1
+        lastmod: 1713621141928
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
@@ -7788,20 +7820,21 @@ assets:
 
               this.damage = (v: number = 1) => {
                   this.currentHealth = u.clamp(0, this.currentHealth-v, this.maxHealth)
-                  if (this.currentHealth > 0) {
-                      this.tint = 0xFF0000
-                      tween.add({
-                          obj: this,
-                          fields: {
-                              tint: 0xFFFFFF
-                          },
-                          duration: 500,
-                          curve: tween.easeInCubic
-                      })
-                  } else {
+                  this.tint = 0xFF0000
+                  tween.add({
+                      obj: this,
+                      fields: {
+                          tint: 0xFFFFFF
+                      },
+                      duration: 500,
+                      curve: tween.easeInCubic
+                  })
+                  if (this.currentHealth <= 0) {
                       if (this.dieTexture) {
                           this.tex = this.dieTexture
                           this.play()
+                      } else {
+                          this.kill
                       }
                   }
               }
@@ -7819,7 +7852,7 @@ assets:
           - type: texture
             name: dieTexture
             readableName: Die Animation
-        lastmod: 1713619816126
+        lastmod: 1713626064395
         uid: 5zf9gNNDpcJ4DJ
       - type: behavior
         name: BasicEnemy
@@ -7910,8 +7943,7 @@ assets:
               if (this.shadow !== null) {
                   this.shadowInstance = emitters.follow(this, this.shadow, {depth: 1})
               }
-
-              this.cgroup = 'Player'
+              this.forcedAnimation = false
             arguments: {}
             lib: core
           - eventKey: OnDraw
@@ -7926,10 +7958,12 @@ assets:
 
               this.scale.x = this.hspeed < 0 ? -1 : 1
 
-              this.tex = almostStopped ? this.idleTexture : (this.walkTexture ||
-              this.idleTexture)
-
-              this.animationSpeed = 0.1 * (this.hspeed + 1)
+              if (this.forcedAnimation) {
+                  let is_finished = ((this as BasicCopy).currentFrame >= this.totalFrames)
+              } else {
+                  this.tex = almostStopped ? this.idleTexture : (this.walkTexture || this.idleTexture)
+                  this.animationSpeed = 0.1 * (this.hspeed + 1)
+              }
             arguments: {}
             lib: core
         specification:
@@ -7949,7 +7983,10 @@ assets:
           - type: texture
             name: walkTexture
             readableName: Walk Texture
-        lastmod: 1713604997502
+          - type: texture
+            name: launchTexture
+            readableName: Launch Texture
+        lastmod: 1713626566632
         uid: hkqDP8GpPhDNWK
   - type: folder
     uid: 85qk5WJqmpFKh9
