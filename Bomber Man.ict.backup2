@@ -15,6 +15,14 @@ libs:
   random: {}
   matter:
     matterUseStaticDeltaTime: true
+  filters: {}
+  flow: {}
+  tween: {}
+  transition: {}
+  akatemplate:
+    toptop: ' '
+    botbot: ' '
+    csscss: ' '
 startroom: bpc4PHTrr1Hrz1
 contentTypes:
   - name: Items
@@ -91,6 +99,33 @@ scripts:
     code: |-
       function approxeq (v1, v2, epsilon = 0.01) {
           return Math.abs(v1 - v2) <= epsilon
+      }
+  - name: Collisions
+    code: >-
+      /**
+       * @param {BasicCopy} copy
+       * @param {string} cType
+       * @param {number} cRadius
+       * @description Returns an Array of all copy with the cType cgroup
+       */
+      function cgroupInRadius(x: number, y: number, cType: string, cRadius:
+      number): any[] {
+              return place.traceCircle({
+                  x: x,
+                  y: y,
+                  radius: cRadius,
+              }, cType, true);
+          }
+
+      function behaviorInRadius(x: number, y: number, bName: string, cRadius:
+      number): any[] {
+          let copies : any[] = place.traceCircle({
+              x: x,
+              y: y,
+              radius: cRadius,
+          }, false, true).filter((v) => templates.isCopy(v))
+          console.log(copies)
+          return copies ? copies.filter((v, i, arr) => behaviors.has(v, bName)) : []
       }
 assets:
   - type: folder
@@ -850,6 +885,62 @@ assets:
         uid: WRtfF6Tk9B9PCM
         padding: 1
         isBlank: false
+      - lastmod: 1713619489716
+        type: texture
+        name: EndiveMan
+        untill: 0
+        grid:
+          - 3
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 96
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iCQhj3Mr1jcckCt.png
+        shape: rect
+        left: 0
+        right: 96
+        top: 0
+        bottom: 32
+        uid: CQhj3Mr1jcckCt
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/EndiveMan.png
+      - lastmod: 1713619780578
+        type: texture
+        name: WallDestroy
+        untill: 0
+        grid:
+          - 4
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 128
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iDN2z1z76jrfP9z.png
+        shape: rect
+        left: 0
+        right: 128
+        top: 0
+        bottom: 32
+        uid: DN2z1z76jrfP9z
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/WallDestroy.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -859,7 +950,7 @@ assets:
     entries:
       - type: template
         baseClass: AnimatedSprite
-        name: Player
+        name: Bomberman
         depth: 2
         texture: 64wBF7MHQ8dK1n
         playAnimationOnStart: true
@@ -867,37 +958,8 @@ assets:
         animationFPS: 6
         visible: true
         events:
-          - eventKey: OnActionDown
-            code: 'matter.push(this, actions.MoveX.value*this.movementForce, 0)'
-            arguments:
-              action: MoveX
-            lib: core
-          - eventKey: OnActionDown
-            code: 'matter.push(this, 0, actions.MoveY.value*this.movementForce)'
-            arguments:
-              action: MoveY
-            lib: core
           - eventKey: OnCreate
-            code: |-
-              this.movementForce = 3
-              this.canPoseBomb = true
-              this.playerShadow = emitters.follow(this, 'PlayerEmitter', {
-                  depth: 1
-              })
-            arguments: {}
-            lib: core
-          - eventKey: OnDraw
-            code: >-
-              if (this.rotation !== 0) matter.rotate(this, 0)
-
-              let almostStopped = (approxeq(this.hspeed, 0) &&
-              approxeq(this.vspeed, 0))
-
-              this.scale.x = this.hspeed < 0 ? -1 : 1
-
-              this.tex = almostStopped ? "BombermanIdle" : "BombermanWalk"
-
-              this.animationSpeed = 0.1 * (this.hspeed + 1)
+            code: this.canPoseBomb = true
             arguments: {}
             lib: core
           - eventKey: OnActionPress
@@ -913,16 +975,6 @@ assets:
             arguments:
               action: Jump
             lib: core
-          - eventKey: OnActionPress
-            code: 'emitters.follow(this, ''WalkEmitter'')'
-            arguments:
-              action: MoveX
-            lib: core
-          - eventKey: OnActionPress
-            code: 'emitters.follow(this, ''WalkEmitter'')'
-            arguments:
-              action: MoveY
-            lib: core
         extends:
           matterEnable: true
           matterConstraint: none
@@ -930,13 +982,22 @@ assets:
           matterDensity: 1
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.3
-          cgroup: Player
+          cgroup: ''
           matterRopeStiffness: 0.01
           matterRopeDamping: 0.01
           matterRopeLength: 128
-        lastmod: 1713384777098
+          movementForce: 3
+          shadow: QBfhCWTzWdhKBR
+          canRotate: false
+          idleTexture: 64wBF7MHQ8dK1n
+          walkTexture: TDfHmzKg3NzTk5
+          maxHealth: 0
+          explosionTexture: -1
+        lastmod: 1713617104204
         uid: BC5dp7bw2mHL2t
-        behaviors: []
+        behaviors:
+          - hkqDP8GpPhDNWK
+          - 5zf9gNNDpcJ4DJ
       - type: template
         baseClass: AnimatedSprite
         name: Wall
@@ -965,11 +1026,11 @@ assets:
         visible: false
         events:
           - eventKey: OnCreate
-            code: 'templates.copy(''Player'', this.x, this.y);'
+            code: 'templates.copy(''Bomberman'', this.x, this.y);'
             arguments: {}
             lib: core
         extends: {}
-        lastmod: 1713221690489
+        lastmod: 1713568102040
         uid: CFFWjhrgQWk6MC
         behaviors: []
       - type: template
@@ -978,8 +1039,8 @@ assets:
         depth: 0
         texture: wPdPHGmzJCK5mQ
         playAnimationOnStart: false
-        loopAnimation: true
-        animationFPS: 30
+        loopAnimation: false
+        animationFPS: 7
         visible: true
         events:
           - eventKey: OnCreate
@@ -994,10 +1055,13 @@ assets:
           matterDensity: 1
           destroyable: true
           randomTile: true
-        lastmod: 1713383947592
+          maxHealth: 1
+          dieTexture: DN2z1z76jrfP9z
+        lastmod: 1713619906723
         uid: cMPb1PPCNCM71Q
         behaviors:
           - bkBmfgFMbDkkh2
+          - 5zf9gNNDpcJ4DJ
       - type: template
         baseClass: AnimatedSprite
         name: Bomb
@@ -1042,7 +1106,7 @@ assets:
             arguments: {}
             lib: core
         extends: {}
-        lastmod: 1713336485005
+        lastmod: 1713618408571
         uid: W7GqF4Bpgq3Dj9
         behaviors: []
       - type: template
@@ -1060,7 +1124,7 @@ assets:
           destroyable: false
           matterEnable: true
           matterStatic: true
-        lastmod: 1713383954395
+        lastmod: 1713605001663
         uid: qkzWpHFn92ckGw
         behaviors:
           - bkBmfgFMbDkkh2
@@ -1080,6 +1144,27 @@ assets:
         uid: Mc42LMQGFznwPk
         behaviors:
           - GqjR5p2LbQPWqB
+      - type: folder
+        uid: LkmrJF5FJ2mM6R
+        colorClass: error
+        icon: platformer
+        name: Enemies
+        lastmod: 1713559903502
+        entries:
+          - type: template
+            baseClass: AnimatedSprite
+            name: Endive Man
+            depth: 0
+            texture: CQhj3Mr1jcckCt
+            playAnimationOnStart: false
+            loopAnimation: true
+            animationFPS: 30
+            visible: true
+            events: []
+            extends: {}
+            lastmod: 1713559952852
+            uid: wQpGrKPFzQrkqw
+            behaviors: []
   - type: folder
     uid: wpCr5j4BgRdTR6
     colorClass: success
@@ -7578,11 +7663,110 @@ assets:
           matterGravity:
             - 0
             - 0
-        lastmod: 1713387902833
+        lastmod: 1713568085191
         events: []
         behaviors:
           - D2QzrCH25djNhz
         uid: bpc4PHTrr1Hrz1
+  - type: folder
+    uid: bRnP7dgpfP1rmM
+    colorClass: error
+    icon: behavior
+    name: Behaviors
+    lastmod: 1713131246914
+    entries:
+      - type: behavior
+        name: Explode
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: |2
+                  this.explosionTimer = timer.add(this.explosionTime * 1e3, "Explosion")
+                  this.colorTinter = (timeLeft: number): number => {
+                      if (timeLeft <= 0) return 0xFF0000
+                      let color = Math.round((timeLeft / this.explosionTime) * 255)
+                      return (255 << 16) | (color << 8) | color;
+                  }
+
+                  
+                  this.explosionTimer.then(() => {
+                      let players: Array<BasicCopy> = behaviorInRadius(this.x, this.y, 'Player', this.radius)
+                      let objects: Array<BasicCopy> = behaviorInRadius(this.x, this.y, 'Health', this.radius)
+                      players.forEach((player) => player.damage())
+                      objects.forEach((o) => o.damage())
+                      emitters.fire('ExplosionEmitter', this.x, this.y)
+                      this.kill = true
+                      templates.copy('Explosion', this.x, this.y)
+                  })
+            arguments: {}
+            lib: core
+          - eventKey: OnStep
+            code: >-
+              // this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
+
+              (this as BasicCopy).tint =
+              this.colorTinter(this.explosionTimer.timeLeft)
+            arguments: {}
+            lib: core
+        specification:
+          - type: sliderAndNumber
+            name: explosionTime
+            readableName: Explosion Time
+            required: true
+          - type: sliderAndNumber
+            name: radius
+            readableName: Destruction Radius
+          - type: number
+            name: damage
+            readableName: Damage
+        lastmod: 1713618116841
+        uid: 7qL8Dk6Fpb91m9
+      - type: behavior
+        name: Rock
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: >-
+              if (this.randomTile) this.currentFrame = IntFromInterval(0,
+              this.totalFrames-1)
+
+              this.cgroup = this.destroyable? "Destroyable" : null
+            arguments: {}
+            lib: core
+        specification:
+          - type: checkbox
+            name: destroyable
+            readableName: Destroyable?
+          - type: checkbox
+            name: randomTile
+            readableName: Randomized Tile ?
+        lastmod: 1713604956107
+        uid: bkBmfgFMbDkkh2
+      - type: behavior
+        name: Exit Behavior
+        behaviorType: template
+        events:
+          - eventKey: matterActiveTemplate
+            code: >-
+              this.roomChangeTimer -= u.time
+
+              if (this.nextRoom && this.roomChangeTimer < 0)
+              rooms.switch(this.nextRoom.name)
+            arguments:
+              template: BC5dp7bw2mHL2t
+            lib: matter
+        specification:
+          - type: room
+            name: nextRoom
+            readableName: Next Room
+          - type: checkbox
+            name: isEnd
+            readableName: End ?
+          - type: number
+            name: roomChangeTimer
+            readableName: Time to change Room (ms)
+        lastmod: 1713387317515
+        uid: GqjR5p2LbQPWqB
       - type: behavior
         name: Level
         behaviorType: room
@@ -7594,6 +7778,311 @@ assets:
         specification: []
         lastmod: 1713387865007
         uid: D2QzrCH25djNhz
+      - type: behavior
+        name: Health
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: |-
+              this.currentHealth = this.maxHealth
+
+              this.damage = (v: number = 1) => {
+                  this.currentHealth = u.clamp(0, this.currentHealth-v, this.maxHealth)
+                  if (this.currentHealth > 0) {
+                      this.tint = 0xFF0000
+                      tween.add({
+                          obj: this,
+                          fields: {
+                              tint: 0xFFFFFF
+                          },
+                          duration: 500,
+                          curve: tween.easeInCubic
+                      })
+                  } else {
+                      if (this.dieTexture) {
+                          this.tex = this.dieTexture
+                          this.play()
+                      }
+                  }
+              }
+            arguments: {}
+            lib: core
+          - eventKey: OnAnimationComplete
+            code: this.kill = true
+            arguments: {}
+            lib: core
+        specification:
+          - type: number
+            name: maxHealth
+            readableName: Max Health
+            required: true
+          - type: texture
+            name: dieTexture
+            readableName: Die Animation
+        lastmod: 1713619816126
+        uid: 5zf9gNNDpcJ4DJ
+      - type: behavior
+        name: BasicEnemy
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: >-
+              /**
+               * All AI behavior values are N btw. [0-10]
+               * Timers values are Y btw. [100-5000] (ms)
+               * Y=ymax​(1−​N/Nmax​) for linear interp.
+               */
+
+              const MAX_TIME_VALUE = 5000
+
+              const MIN_TIME_VALUE = 100
+
+              const MAX_N_VALUE = 10
+
+              const MIN_N_VALUE = 0
+
+              const Y_INTERCEPT = MIN_TIME_VALUE
+
+              const SLOPE =  (MAX_TIME_VALUE - MIN_TIME_VALUE) / (MAX_N_VALUE -
+              MIN_N_VALUE)
+
+
+              function getConstrainedN(N: number): number {
+                  return u.clamp(MIN_N_VALUE, N, MAX_N_VALUE)
+              }
+
+
+              function getTimeValue(N: number): number {
+                  return (SLOPE * (getConstrainedN(N) + Y_INTERCEPT))
+              }
+
+
+              function addAiTimer(N: number) {
+                  return timer.add(getTimeValue(N))
+              }
+
+              this.roamingTimer = addAiTimer(this.roaming)
+
+              this.aggressivityTimer = addAiTimer(this.aggressivity)
+
+              this.fleeingTimer = addAiTimer(this.fleeing)
+            arguments: {}
+            lib: core
+          - eventKey: OnStep
+            code: |-
+              /**
+               * @description Unused speed vector
+               */
+              this.speedVector = Matter.Vector.create(this.hspeed, this.vspeed)
+            arguments: {}
+            lib: core
+        specification:
+          - type: sliderAndNumber
+            name: speed
+            readableName: Speed
+          - type: sliderAndNumber
+            name: aggressivity
+            readableName: Agressivity
+          - type: sliderAndNumber
+            name: fleeing
+            readableName: Fleeing
+          - type: text
+            name: roaming
+            readableName: Roaming
+        lastmod: 1713608575286
+        uid: qW21LMMR65fMcb
+      - type: behavior
+        name: Player
+        behaviorType: template
+        events:
+          - eventKey: OnActionDown
+            code: 'matter.push(this, actions.MoveX.value*this.movementForce, 0)'
+            arguments:
+              action: MoveX
+            lib: core
+          - eventKey: OnActionDown
+            code: 'matter.push(this, 0, actions.MoveY.value*this.movementForce)'
+            arguments:
+              action: MoveY
+            lib: core
+          - eventKey: OnCreate
+            code: |-
+              if (this.shadow !== null) {
+                  this.shadowInstance = emitters.follow(this, this.shadow, {depth: 1})
+              }
+
+              this.cgroup = 'Player'
+            arguments: {}
+            lib: core
+          - eventKey: OnDraw
+            code: >-
+              if (!this.canRotate) {
+                  if (this.rotation !== 0) matter.rotate(this, 0)
+              }
+
+
+              let almostStopped = (approxeq(this.hspeed, 0) &&
+              approxeq(this.vspeed, 0))
+
+              this.scale.x = this.hspeed < 0 ? -1 : 1
+
+              this.tex = almostStopped ? this.idleTexture : (this.walkTexture ||
+              this.idleTexture)
+
+              this.animationSpeed = 0.1 * (this.hspeed + 1)
+            arguments: {}
+            lib: core
+        specification:
+          - type: sliderAndNumber
+            name: movementForce
+            readableName: Movement Force
+            required: true
+          - type: tandem
+            name: shadow
+            readableName: Shadow
+          - type: checkbox
+            name: canRotate
+            readableName: Can Rotate
+          - type: texture
+            name: idleTexture
+            readableName: Idle Texture
+          - type: texture
+            name: walkTexture
+            readableName: Walk Texture
+        lastmod: 1713604997502
+        uid: hkqDP8GpPhDNWK
+  - type: folder
+    uid: 85qk5WJqmpFKh9
+    colorClass: accent1
+    icon: translate
+    name: Styles
+    lastmod: 1713196772538
+    entries:
+      - type: style
+        name: Explosion Tick
+        uid: fmG41MJfdhd99Q
+        font:
+          family: '"CTPROJFONTArsenal regular", "Arsenal regular", sans-serif'
+          halign: left
+          italic: false
+          size: 16
+          weight: '400'
+          wrap: false
+          wrapPosition: 640
+          lineHeight: 21.28
+        lastmod: 1713222217296
+        shadow:
+          color: '#000000'
+          x: 0
+          'y': 0
+          blur: 0
+        fill:
+          type: '0'
+      - type: font
+        typefaceName: Arsenal regular
+        weight: '400'
+        italic: false
+        origname: fFgQw4Lr31899F8.ttf
+        lastmod: 1713196868447
+        bitmapFont: true
+        bitmapFontSize: 16
+        bitmapFontLineHeight: 18
+        charsets:
+          - allInFont
+        customCharset: ''
+        uid: FgQw4Lr31899F8
+  - type: folder
+    uid: 1Trc62p1DF7zpQ
+    colorClass: text
+    icon: button
+    name: UX
+    lastmod: 1713387343153
+    entries:
+      - type: template
+        baseClass: AnimatedSprite
+        name: HealthBar
+        depth: 0
+        texture: qCgWM33TgM25DG
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends: {}
+        lastmod: 1713387378717
+        uid: rmqHhhwWcw6rKD
+        behaviors: []
+      - type: room
+        oncreate: ''
+        onstep: ''
+        ondraw: ''
+        onleave: ''
+        gridX: 64
+        gridY: 64
+        diagonalGrid: false
+        disableGrid: false
+        simulate: true
+        width: 448
+        height: 320
+        restrictCamera: false
+        restrictMaxX: 1280
+        restrictMinX: 1280
+        restrictMaxY: 720
+        restrictMinY: 720
+        isUi: true
+        name: GUI Layer
+        backgroundColor: '#000000'
+        follow: -1
+        backgrounds: []
+        copies:
+          - x: 0
+            'y': 0
+            opacity: 1
+            tint: 16777215
+            scale:
+              x: 1
+              'y': 1
+            rotation: 0
+            uid: rmqHhhwWcw6rKD
+            exts: {}
+            customProperties: {}
+            bindings: {}
+        tiles: []
+        extends: {}
+        lastmod: 1713387576294
+        events: []
+        behaviors: []
+        uid: q43W3HDGpJ4RGM
+      - lastmod: 1713557149412
+        type: texture
+        name: HealthBarAnimationFrames
+        untill: 0
+        grid:
+          - 11
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 440
+        imgHeight: 32
+        width: 40
+        height: 32
+        offx: 0
+        offy: 0
+        origname: iqCgWM33TgM25DG.png
+        shape: rect
+        left: 0
+        right: 1600
+        top: 0
+        bottom: 64
+        uid: qCgWM33TgM25DG
+        padding: 1
+        isBlank: false
+        source: >-
+          /home/youssef/ct.js/Projects/Bomber
+          Man/export/HealthBarAnimationFramesReversed32x.png
   - type: folder
     uid: n5FQDp8LhWT4cb
     colorClass: text
@@ -7984,254 +8473,6 @@ assets:
                     accel: 0
         lastmod: 1713293722450
         type: tandem
-  - type: folder
-    uid: bRnP7dgpfP1rmM
-    colorClass: error
-    icon: behavior
-    name: Behaviors
-    lastmod: 1713131246914
-    entries:
-      - type: behavior
-        name: Explode
-        behaviorType: template
-        events:
-          - eventKey: OnCreate
-            code: >-
-              // this.tickLabel = new PIXI.Text(this.explosionTime,
-              styles.get('Explosion Tick'))
-
-              // this.tickLabel.y -= 8
-
-              // this.tickLabel.x -= 8
-
-              // this.addChild(this.tickLabel)
-
-              this.explosionTimer = timer.add(this.explosionTime*1e3,
-              "Explosion")
-
-              this.colorTinter = (timeLeft: number): number => {
-                  if (timeLeft <= 0) return 0xFF0000
-                  let c = Math.round((timeLeft/this.explosionTime) * 255)
-                  return (255 << 16) | (c << 8) | c;
-              }
-
-
-              function getRocksInRadius(copy: BasicCopy) : Array<BasicCopy> {
-                  let copies = place.traceCircle({
-                      x: copy.x,
-                      y: copy.y,
-                      radius: copy.radius
-                  }, 'Destroyable', true);
-                  return copies
-              }
-
-
-
-              this.explosionTimer.then(() => {
-                  let rocks : Array<BasicCopy> = getRocksInRadius(this)
-                  rocks.forEach((e) => e.kill = true)
-                  emitters.fire('ExplosionEmitter', this.x, this.y)
-                  this.kill = true
-                  templates.copy('Explosion', this.x, this.y)
-              })
-            arguments: {}
-            lib: core
-          - eventKey: OnStep
-            code: >-
-              // this.tickLabel.text = this.explosionTimer.timeLeft.toFixed(1)
-
-              (this as BasicCopy).tint =
-              this.colorTinter(this.explosionTimer.timeLeft)
-            arguments: {}
-            lib: core
-        specification:
-          - type: sliderAndNumber
-            name: explosionTime
-            readableName: Explosion Time
-            required: true
-          - type: sliderAndNumber
-            name: radius
-            readableName: Destruction Radius
-        lastmod: 1713336397376
-        uid: 7qL8Dk6Fpb91m9
-      - type: behavior
-        name: Rock
-        behaviorType: template
-        events:
-          - eventKey: OnCreate
-            code: >-
-              if (this.randomTile) this.currentFrame = IntFromInterval(0,
-              this.totalFrames-1)
-
-              this.cgroup = this.destroyable? "Destroyable" : null
-            arguments: {}
-            lib: core
-        specification:
-          - type: checkbox
-            name: destroyable
-            readableName: Destroyable?
-          - type: checkbox
-            name: randomTile
-            readableName: Randomized Tile ?
-        lastmod: 1713383404706
-        uid: bkBmfgFMbDkkh2
-      - type: behavior
-        name: Exit Behavior
-        behaviorType: template
-        events:
-          - eventKey: matterActiveTemplate
-            code: >-
-              this.roomChangeTimer -= u.time
-
-              if (this.nextRoom && this.roomChangeTimer < 0)
-              rooms.switch(this.nextRoom.name)
-            arguments:
-              template: BC5dp7bw2mHL2t
-            lib: matter
-        specification:
-          - type: room
-            name: nextRoom
-            readableName: Next Room
-          - type: checkbox
-            name: isEnd
-            readableName: End ?
-          - type: number
-            name: roomChangeTimer
-            readableName: Time to change Room (ms)
-        lastmod: 1713387317515
-        uid: GqjR5p2LbQPWqB
-  - type: folder
-    uid: 85qk5WJqmpFKh9
-    colorClass: accent1
-    icon: translate
-    name: Styles
-    lastmod: 1713196772538
-    entries:
-      - type: style
-        name: Explosion Tick
-        uid: fmG41MJfdhd99Q
-        font:
-          family: '"CTPROJFONTArsenal regular", "Arsenal regular", sans-serif'
-          halign: left
-          italic: false
-          size: 16
-          weight: '400'
-          wrap: false
-          wrapPosition: 640
-          lineHeight: 21.28
-        lastmod: 1713222217296
-        shadow:
-          color: '#000000'
-          x: 0
-          'y': 0
-          blur: 0
-        fill:
-          type: '0'
-      - type: font
-        typefaceName: Arsenal regular
-        weight: '400'
-        italic: false
-        origname: fFgQw4Lr31899F8.ttf
-        lastmod: 1713196868447
-        bitmapFont: true
-        bitmapFontSize: 16
-        bitmapFontLineHeight: 18
-        charsets:
-          - allInFont
-        customCharset: ''
-        uid: FgQw4Lr31899F8
-  - type: folder
-    uid: 1Trc62p1DF7zpQ
-    colorClass: text
-    icon: button
-    name: UX
-    lastmod: 1713387343153
-    entries:
-      - type: template
-        baseClass: AnimatedSprite
-        name: HealthBar
-        depth: 0
-        texture: qCgWM33TgM25DG
-        playAnimationOnStart: false
-        loopAnimation: true
-        animationFPS: 30
-        visible: true
-        events: []
-        extends: {}
-        lastmod: 1713387378717
-        uid: rmqHhhwWcw6rKD
-        behaviors: []
-      - type: room
-        oncreate: ''
-        onstep: ''
-        ondraw: ''
-        onleave: ''
-        gridX: 64
-        gridY: 64
-        diagonalGrid: false
-        disableGrid: false
-        simulate: true
-        width: 448
-        height: 320
-        restrictCamera: false
-        restrictMaxX: 1280
-        restrictMinX: 1280
-        restrictMaxY: 720
-        restrictMinY: 720
-        isUi: true
-        name: GUI Layer
-        backgroundColor: '#000000'
-        follow: -1
-        backgrounds: []
-        copies:
-          - x: 0
-            'y': 0
-            opacity: 1
-            tint: 16777215
-            scale:
-              x: 1
-              'y': 1
-            rotation: 0
-            uid: rmqHhhwWcw6rKD
-            exts: {}
-            customProperties: {}
-            bindings: {}
-        tiles: []
-        extends: {}
-        lastmod: 1713387576294
-        events: []
-        behaviors: []
-        uid: q43W3HDGpJ4RGM
-      - lastmod: 1713387768163
-        type: texture
-        name: HealthBarAnimationFrames
-        untill: 0
-        grid:
-          - 11
-          - 1
-        axis:
-          - 0
-          - 0
-        marginx: 0
-        marginy: 0
-        imgWidth: 880
-        imgHeight: 64
-        width: 80
-        height: 64
-        offx: 0
-        offy: 0
-        origname: iqCgWM33TgM25DG.png
-        shape: rect
-        left: 0
-        right: 1600
-        top: 0
-        bottom: 64
-        uid: qCgWM33TgM25DG
-        padding: 1
-        isBlank: false
-        source: >-
-          /home/youssef/ct.js/Projects/Bomber
-          Man/export/HealthBarAnimationFramesReversed.png
 settings:
   authoring:
     author: Vallant & Sahli
