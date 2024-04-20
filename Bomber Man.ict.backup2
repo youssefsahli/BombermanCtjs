@@ -940,7 +940,7 @@ assets:
         padding: 1
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/WallDestroy.png
-      - lastmod: 1713642767210
+      - lastmod: 1713643199937
         type: texture
         name: BombermanLaunch
         untill: 0
@@ -1132,9 +1132,9 @@ assets:
           matterFriction: 0.5
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
-          explosionTime: 3
+          explosionTime: 1
           damage: 1
-        lastmod: 1713641884883
+        lastmod: 1713643387052
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -7735,11 +7735,8 @@ assets:
                       return (255 << 16) | (color << 8) | color;
                   }
 
-                  
                   this.explosionTimer.then(() => {
-                      let players: Array<BasicCopy> = behaviorInRadius(this.x, this.y, 'Player', this.radius)
                       let objects: Array<BasicCopy> = behaviorInRadius(this.x, this.y, 'Health', this.radius)
-                      players.forEach((player) => player.damage())
                       objects.forEach((o) => o.damage())
                       emitters.fire('ExplosionEmitter', this.x, this.y)
                       this.kill = true
@@ -7766,7 +7763,7 @@ assets:
           - type: number
             name: damage
             readableName: Damage
-        lastmod: 1713643072874
+        lastmod: 1713643486694
         uid: 7qL8Dk6Fpb91m9
       - type: behavior
         name: Rock
@@ -7834,6 +7831,7 @@ assets:
               this.currentHealth = this.maxHealth
 
               this.damage = (v: number = 1) => {
+                  console.log(this.cgroup+" damaged")
                   this.currentHealth = u.clamp(0, this.currentHealth-v, this.maxHealth)
                   this.tint = 0xFF0000
                   tween.add({
@@ -7855,7 +7853,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-        lastmod: 1713643173645
+        lastmod: 1713643344605
         uid: 5zf9gNNDpcJ4DJ
       - type: behavior
         name: BasicEnemy
