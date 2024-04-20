@@ -969,6 +969,34 @@ assets:
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanLaunch.png
         r: 16
+      - lastmod: 1713640769436
+        type: texture
+        name: BombermanDie
+        untill: 0
+        grid:
+          - 4
+          - 1
+        axis:
+          - 0
+          - 0
+        marginx: 0
+        marginy: 0
+        imgWidth: 128
+        imgHeight: 32
+        width: 32
+        height: 32
+        offx: 0
+        offy: 0
+        origname: i64Pcmm4bcBkDNP.png
+        shape: rect
+        left: 0
+        right: 128
+        top: 0
+        bottom: 32
+        uid: 64Pcmm4bcBkDNP
+        padding: 1
+        isBlank: false
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanDie.png
   - type: folder
     uid: Dtfzzf1MLnJW6B
     colorClass: warning
@@ -985,27 +1013,7 @@ assets:
         loopAnimation: true
         animationFPS: 6
         visible: true
-        events:
-          - eventKey: OnCreate
-            code: |-
-              this.canPoseBomb = true
-              this.forceAnimation = false
-            arguments: {}
-            lib: core
-          - eventKey: OnActionPress
-            code: |-
-              if (this.canPoseBomb) {
-                  var bomb = templates.copy('Bomb', this.x+Math.sign(this.hspeed) *16, this.y+Math.sign(this.vspeed)*16)
-                  matter.launch(bomb, this.hspeed, this.vspeed)
-                  this.canPoseBomb = false
-                  this.tex = 'BombermanLaunch'
-                  timer.add(500, "BombCountdown").then(() => {
-                      this.canPoseBomb = true
-                  })
-              }
-            arguments:
-              action: Jump
-            lib: core
+        events: []
         extends:
           matterEnable: true
           matterConstraint: none
@@ -1022,14 +1030,20 @@ assets:
           canRotate: false
           idleTexture: 64wBF7MHQ8dK1n
           walkTexture: TDfHmzKg3NzTk5
-          maxHealth: 0
+          maxHealth: 5
           explosionTexture: -1
-          dieTexture: -1
-        lastmod: 1713621141928
+          dieTexture: 64Pcmm4bcBkDNP
+          launchTexture: 6qJtMGgGFnzRL1
+          launchCooldown: 500
+          launchAction: ''
+          bomb: TfWHLnj22N26db
+          hurtTexture: 64Pcmm4bcBkDNP
+        lastmod: 1713641618560
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
           - 5zf9gNNDpcJ4DJ
+          - fM86kwpJ7mNRfL
       - type: template
         baseClass: AnimatedSprite
         name: Wall
@@ -7829,14 +7843,6 @@ assets:
                       duration: 500,
                       curve: tween.easeInCubic
                   })
-                  if (this.currentHealth <= 0) {
-                      if (this.dieTexture) {
-                          this.tex = this.dieTexture
-                          this.play()
-                      } else {
-                          this.kill
-                      }
-                  }
               }
             arguments: {}
             lib: core
@@ -7849,10 +7855,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-          - type: texture
-            name: dieTexture
-            readableName: Die Animation
-        lastmod: 1713626064395
+        lastmod: 1713641568738
         uid: 5zf9gNNDpcJ4DJ
       - type: behavior
         name: BasicEnemy
@@ -7922,7 +7925,7 @@ assets:
           - type: text
             name: roaming
             readableName: Roaming
-        lastmod: 1713608575286
+        lastmod: 1713639445418
         uid: qW21LMMR65fMcb
       - type: behavior
         name: Player
@@ -7940,13 +7943,49 @@ assets:
             lib: core
           - eventKey: OnCreate
             code: |-
+              this.canPoseBomb = true
+              this.poseBomb = () => {
+                  if (this.canPoseBomb) {
+                      var bomb = templates.copy('Bomb', this.x+Math.sign(this.hspeed) *16, this.y+Math.sign(this.vspeed)*16)
+                      matter.launch(bomb, this.hspeed, this.vspeed)
+                      this.canPoseBomb = false
+                      timer.add(this.launchCooldown, "BombCountdown").then(() => {
+                          this.canPoseBomb = true
+                      })
+                  }
+              }
+            arguments: {}
+            lib: core
+        specification:
+          - type: sliderAndNumber
+            name: movementForce
+            readableName: Movement Force
+            required: true
+          - type: number
+            name: launchCooldown
+            readableName: Launch Cooldown
+          - type: template
+            name: bomb
+            readableName: Bomb
+        lastmod: 1713641483397
+        uid: hkqDP8GpPhDNWK
+      - type: behavior
+        name: Character
+        behaviorType: template
+        events:
+          - eventKey: OnCreate
+            code: |-
               if (this.shadow !== null) {
                   this.shadowInstance = emitters.follow(this, this.shadow, {depth: 1})
               }
-              this.forcedAnimation = false
+
+              this.playForcedAnimation = (texture: any): void => {
+                  this.tex = texture
+                  this.forcedAnimation = true
+              }
             arguments: {}
             lib: core
-          - eventKey: OnDraw
+          - eventKey: OnStep
             code: >-
               if (!this.canRotate) {
                   if (this.rotation !== 0) matter.rotate(this, 0)
@@ -7960,6 +7999,8 @@ assets:
 
               if (this.forcedAnimation) {
                   let is_finished = ((this as BasicCopy).currentFrame >= this.totalFrames)
+                  if (is_finished) 
+                      this.forcedAnimation = false
               } else {
                   this.tex = almostStopped ? this.idleTexture : (this.walkTexture || this.idleTexture)
                   this.animationSpeed = 0.1 * (this.hspeed + 1)
@@ -7967,16 +8008,6 @@ assets:
             arguments: {}
             lib: core
         specification:
-          - type: sliderAndNumber
-            name: movementForce
-            readableName: Movement Force
-            required: true
-          - type: tandem
-            name: shadow
-            readableName: Shadow
-          - type: checkbox
-            name: canRotate
-            readableName: Can Rotate
           - type: texture
             name: idleTexture
             readableName: Idle Texture
@@ -7984,10 +8015,19 @@ assets:
             name: walkTexture
             readableName: Walk Texture
           - type: texture
+            name: hurtTexture
+            readableName: hurtTexture
+          - type: texture
             name: launchTexture
-            readableName: Launch Texture
-        lastmod: 1713626566632
-        uid: hkqDP8GpPhDNWK
+            readableName: launchTexture
+          - type: checkbox
+            name: canRotate
+            readableName: Can Rotate
+          - type: tandem
+            name: shadow
+            readableName: Shadow
+        lastmod: 1713641602668
+        uid: fM86kwpJ7mNRfL
   - type: folder
     uid: 85qk5WJqmpFKh9
     colorClass: accent1
