@@ -126,6 +126,8 @@ scripts:
           }, false, true).filter((v) => templates.isCopy(v))
           return copies ? copies.filter((v, i, arr) => behaviors.has(v, bName)) : []
       }
+  - name: Global Player
+    code: var PlayerInfo
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -7954,6 +7956,7 @@ assets:
                       })
                   }
               }
+              PlayerInfo = this
             arguments: {}
             lib: core
           - eventKey: OnActionPress
@@ -7972,7 +7975,7 @@ assets:
           - type: template
             name: bomb
             readableName: Bomb
-        lastmod: 1713642915127
+        lastmod: 1713645640743
         uid: hkqDP8GpPhDNWK
       - type: behavior
         name: Character
