@@ -579,7 +579,7 @@ scripts:
         equal(actual: any, expected: any, message?: string): void
         ok(condition: any, message?: string): void
         plan(count: number): void
-        fail(message: string)
+        fail(message: string): void
       }
 
 
@@ -591,7 +591,7 @@ scripts:
           let timeoutHandle: number;
 
           const assert = {
-              equal: (actual, expected, message = 'Values do not match') => {
+              equal: (actual: any, expected: any, message = 'Values do not match') => {
                   executed++;
                   if (actual !== expected) {
                       errors.push(new Error(`${message} - Expected: ${expected}, Actual: ${actual}`));
@@ -606,7 +606,7 @@ scripts:
               plan: (count: number) => {
                   planned = count;
               },
-              fail: (message) => {
+              fail: (message: string) => {
                   executed++;
                   errors.push(new Error(`Fail: ${message}`));
               },
@@ -624,15 +624,7 @@ scripts:
               }
           };
 
-          callback(assert);
-
-          // Check for pending asynchronous operations
-          if (isAsync) {
-              // Allow a little extra time for async operations to complete
-              timeoutHandle = setTimeout(finalize, 100);
-          } else {
-              finalize();
-          }
+          callback(assert)
       }
 
 

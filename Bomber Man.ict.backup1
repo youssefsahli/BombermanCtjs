@@ -577,51 +577,66 @@ scripts:
 
       interface IAssert {
         equal(actual: any, expected: any, message?: string): void
-        ok(condition: any, message: string): void
+        ok(condition: any, message?: string): void
         plan(count: number): void
+        fail(message: string)
       }
 
 
-      function test(title, callback) {
-        let planned = 0;
-        let executed = 0;
-        let contextDump = {};
+      function test(title: string, callback: (assert: IAssert)=> void) {
+          let planned = 0;
+          let executed = 0;
+          let errors = [];
+          let isAsync = false;
+          let timeoutHandle: number;
 
-        const assert: IAssert = {
-          equal: (actual, expected, message = 'Values do not match') => {
-            executed++;
-            if (actual !== expected) {
-              contextDump = { actual, expected }; // Capture relevant variables
-              throw new Error(`${message} - Expected: ${expected}, Actual: ${actual}`);
-            }
-          },
-          ok: (condition, message = 'Condition is not truthy') => {
-            executed++;
-            if (!condition) {
-              contextDump = { condition }; // Capture relevant variables
-              throw new Error(`${message} - Condition was false`);
-            }
-          },
-          plan: (count) => {
-            planned = count;
-          }
-        };
+          const assert = {
+              equal: (actual, expected, message = 'Values do not match') => {
+                  executed++;
+                  if (actual !== expected) {
+                      errors.push(new Error(`${message} - Expected: ${expected}, Actual: ${actual}`));
+                  }
+              },
+              ok: (condition, message = 'Condition is not truthy') => {
+                  executed++;
+                  if (!condition) {
+                      errors.push(new Error(message));
+                  }
+              },
+              plan: (count: number) => {
+                  planned = count;
+              },
+              fail: (message) => {
+                  executed++;
+                  errors.push(new Error(`Fail: ${message}`));
+              },
+          };
 
-        try {
-          callback(assert); // Run the test callback
-          if (executed !== planned) {
-            contextDump = { executed, planned }; // Capture execution counts
-            throw new Error(`Test did not execute the planned number of assertions. Planned: ${planned}, Executed: ${executed}`);
+          // Delay finalization to handle asynchronous code
+          const finalize = () => {
+              if (executed !== planned) {
+                  errors.push(new Error(`Test did not execute the planned number of assertions. Planned: ${planned}, Executed: ${executed}`));
+              }
+              if (errors.length > 0) {
+                  console.error(`[FAIL] ${title}: ${errors.map(e => e.message).join('\n')}`);
+              } else {
+                  console.log(`[PASS] ${title}`);
+              }
+          };
+
+          callback(assert);
+
+          // Check for pending asynchronous operations
+          if (isAsync) {
+              // Allow a little extra time for async operations to complete
+              timeoutHandle = setTimeout(finalize, 100);
+          } else {
+              finalize();
           }
-          console.log(`[PASS] ${title}`);
-        } catch (error) {
-          console.error(`[FAIL] ${title}: ${error.message}`);
-          console.error('Assertion Context:', JSON.stringify(contextDump, null, 2));
-        }
       }
 
 
-      test('initialize state machine with state', (assert: IAssert) => {
+      test('initialize state machine with state', assert => {
         assert.plan(1)
         const machine = mood('init')
         assert.equal(machine.state(), 'init')
@@ -673,7 +688,6 @@ scripts:
           }, 'resolved'],
           'resolved': [function () {
             assert.ok('executed')
-            // @note should speify in documentation that should use this. to avoid initialization issues
             assert.equal(this.state(), 'resolved')
           }]
         })
