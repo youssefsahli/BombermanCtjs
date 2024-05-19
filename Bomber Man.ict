@@ -1,4 +1,4 @@
-ctjsVersion: 4.1.0
+ctjsVersion: 4.0.2
 backups: 3
 language: typescript
 notes: |-
@@ -1669,19 +1669,19 @@ assets:
         uid: WRtfF6Tk9B9PCM
         padding: 1
         isBlank: false
-      - lastmod: 1713619489716
+      - lastmod: 1715590306029
         type: texture
         name: EndiveMan
         untill: 0
         grid:
-          - 3
+          - 4
           - 1
         axis:
           - 0
           - 0
         marginx: 0
         marginy: 0
-        imgWidth: 96
+        imgWidth: 128
         imgHeight: 32
         width: 32
         height: 32
@@ -1690,13 +1690,14 @@ assets:
         origname: iCQhj3Mr1jcckCt.png
         shape: rect
         left: 0
-        right: 96
+        right: 32
         top: 0
         bottom: 32
         uid: CQhj3Mr1jcckCt
         padding: 1
         isBlank: false
-        source: /home/youssef/ct.js/Projects/Bomber Man/export/EndiveMan.png
+        source: /home/youssef/ct.js/Projects/Bomber Man/export/EndiveManIdle.png
+        r: 16
       - lastmod: 1713619780578
         type: texture
         name: WallDestroy
@@ -1916,14 +1917,14 @@ assets:
           TimerExplosion: 3
           timerExplosion: 3
           radius: 48
-          matterEnable: true
+          matterEnable: false
           matterRestitution: 0.2
           matterFriction: 0.5
           matterFrictionStatic: 0.5
           matterFrictionAir: 0.1
           explosionTime: 1
           damage: 1
-        lastmod: 1713644592787
+        lastmod: 1716074600191
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -18163,7 +18164,7 @@ assets:
               if (this.randomTile) this.currentFrame = IntFromInterval(0,
               this.totalFrames-1)
 
-              this.cgroup = this.destroyable ? "Destroyable" : null
+              this.cgroup = this.destroyable? "Destroyable" : null
             arguments: {}
             lib: core
         specification:
@@ -18214,7 +18215,7 @@ assets:
             arguments: {}
             lib: core
         specification: []
-        lastmod: 1713814356700
+        lastmod: 1715592375263
         uid: D2QzrCH25djNhz
         extendTypes: ''
       - type: behavior
@@ -18230,6 +18231,7 @@ assets:
               }
 
               this.currentHealth = this.maxHealth
+
               this.damage = (v: number = 1): Promise<void> => {
                   this.currentHealth = u.clamp(0, this.currentHealth-v, this.maxHealth)
                   this.tint = 0xFF0000
@@ -18241,12 +18243,16 @@ assets:
                       duration: 500,
                       curve: tween.easeInCubic
                   }).then(() => {
-                      if (this.currentHealth<=0) this.state.trigger('kill', this)
+                      this.state.trigger('damage', this)
                   })
               }
 
-              const state = Mood({
-                  'living': ['kill', (me: BasicCopy) => {}, 'dead'],
+              this.state = Mood({
+                  'living': ['damage', (me: BasicCopy & Healthy) => {
+                      this.currentHealth -= 1;
+                      console.log(this.currentHealth);
+                      return (this.currentHealth <= 0) ? 'dead' : 'living'
+                  }, arg => arg],
                   'dead': [(me: BasicCopy) =>{ me.kill = true }]
               })
             arguments: {}
@@ -18256,7 +18262,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-        lastmod: 1715284821180
+        lastmod: 1715593445633
         uid: 5zf9gNNDpcJ4DJ
         extendTypes: ''
       - type: behavior
@@ -18325,14 +18331,14 @@ assets:
             readableName: Speed
           - type: sliderAndNumber
             name: aggressivity
-            readableName: Agressivity
+            readableName: Aggressivity
           - type: sliderAndNumber
             name: fleeing
             readableName: Fleeing
           - type: sliderAndNumber
             name: roaming
             readableName: Roaming
-        lastmod: 1715261299843
+        lastmod: 1715591402087
         uid: qW21LMMR65fMcb
         extendTypes: ''
       - type: behavior
@@ -18362,7 +18368,6 @@ assets:
                       })
                   }
               }
-              PlayerInfo = this
             arguments: {}
             lib: core
           - eventKey: OnActionPress
@@ -18491,34 +18496,13 @@ assets:
     name: UX
     lastmod: 1713387343153
     entries:
-      - type: template
-        baseClass: SpritedCounter
-        name: HealthBar
-        depth: 0
-        texture: 3HWWTzKHdrDHrd
-        playAnimationOnStart: false
-        loopAnimation: true
-        animationFPS: 30
-        visible: true
-        events: []
-        extends: {}
-        lastmod: 1713814423999
-        uid: rmqHhhwWcw6rKD
-        behaviors: []
-        tilingSettings:
-          scrollSpeedX: 0
-          scrollSpeedY: 0
-          isUi: false
-        repeaterSettings:
-          defaultCount: 3
-        extendTypes: ''
       - type: room
         oncreate: ''
         onstep: ''
         ondraw: ''
         onleave: ''
-        gridX: 64
-        gridY: 64
+        gridX: 32
+        gridY: 32
         diagonalGrid: false
         disableGrid: false
         simulate: true
@@ -18543,31 +18527,18 @@ assets:
               x: 1
               'y': 1
             rotation: 0
-            uid: rmqHhhwWcw6rKD
+            uid: RdgcWDmzgPrLTh
             exts: {}
             customProperties: {}
             bindings: {}
-            align:
-              frame:
-                x1: 0
-                y1: 0
-                x2: 100
-                y2: 100
-              alignX: start
-              alignY: start
-              padding:
-                left: 0
-                top: 0
-                right: 0
-                bottom: 0
         tiles: []
         extends: {}
-        lastmod: 1713814824006
+        lastmod: 1715592356339
         events: []
         behaviors: []
         uid: q43W3HDGpJ4RGM
         extendTypes: ''
-      - lastmod: 1713814442285
+      - lastmod: 1715592268717
         type: texture
         name: BombermanHead
         untill: 0
@@ -18585,17 +18556,37 @@ assets:
         height: 32
         offx: 0
         offy: 0
-        origname: i3HWWTzKHdrDHrd.png
+        origname: i9QHTJ39TwTbqjJ.png
         shape: rect
         left: 0
         right: 32
         top: 0
         bottom: 32
-        uid: 3HWWTzKHdrDHrd
+        uid: 9QHTJ39TwTbqjJ
         padding: 1
         isBlank: false
         source: /home/youssef/ct.js/Projects/Bomber Man/export/BombermanHead.png
         tiled: true
+      - type: template
+        baseClass: SpritedCounter
+        name: BombermanHealth
+        depth: 0
+        texture: 9QHTJ39TwTbqjJ
+        playAnimationOnStart: false
+        loopAnimation: true
+        animationFPS: 30
+        visible: true
+        events: []
+        extends: {}
+        lastmod: 1715592314366
+        uid: RdgcWDmzgPrLTh
+        behaviors: []
+        tilingSettings:
+          scrollSpeedX: 0
+          scrollSpeedY: 0
+          isUi: false
+        repeaterSettings:
+          defaultCount: 3
   - type: folder
     uid: n5FQDp8LhWT4cb
     colorClass: text
