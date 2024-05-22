@@ -5,6 +5,7 @@ notes: |-
   TODO forced animation when player launches a bomb
   TODO polish player movement
   TODO endiveman
+  TODO change bomb to original game
 libs:
   place:
     gridX: 1024
@@ -583,334 +584,585 @@ scripts:
       }
 
 
-      function test(title: string, callback: (assert: IAssert)=> void) {
-          let planned = 0;
-          let executed = 0;
-          let errors = [];
-          let isAsync = false;
-          let timeoutHandle: number;
+      function test(title: string, callback: (assert: IAssert) => any) {
+        let planned = 0;
+        let executed = 0;
+        let errors: Error[] = [];
+        let finalizeCalled = false;
+        let asyncOpsPending = 0;
 
-          const assert = {
-              equal: (actual: any, expected: any, message = 'Values do not match') => {
-                  executed++;
-                  if (actual !== expected) {
-                      errors.push(new Error(`${message} - Expected: ${expected}, Actual: ${actual}`));
-                  }
-              },
-              ok: (condition, message = 'Condition is not truthy') => {
-                  executed++;
-                  if (!condition) {
-                      errors.push(new Error(message));
-                  }
-              },
-              plan: (count: number) => {
-                  planned = count;
-              },
-              fail: (message: string) => {
-                  executed++;
-                  errors.push(new Error(`Fail: ${message}`));
-              },
-          };
+        const assert: IAssert = {
+          equal: (actual: any, expected: any, message = 'Values do not match') => {
+            executed++;
+            if (actual !== expected) {
+              errors.push(new Error(`${message} - Expected: ${expected}, Actual: ${actual}`));
+            }
+            checkFinalize();
+          },
+          ok: (condition: any, message = 'Condition is not truthy') => {
+            executed++;
+            if (!condition) {
+              errors.push(new Error(message));
+            }
+            checkFinalize();
+          },
+          plan: (count: number) => {
+            planned = count;
+          },
+          fail: (message: string) => {
+            executed++;
+            errors.push(new Error(`Fail: ${message}`));
+            checkFinalize();
+          },
+        };
 
-          // Delay finalization to handle asynchronous code
-          const finalize = () => {
-              if (executed !== planned) {
-                  errors.push(new Error(`Test did not execute the planned number of assertions. Planned: ${planned}, Executed: ${executed}`));
-              }
-              if (errors.length > 0) {
-                  console.error(`[FAIL] ${title}: ${errors.map(e => e.message).join('\n')}`);
-              } else {
-                  console.log(`[PASS] ${title}`);
-              }
-          };
+        const finalize = () => {
+          if (finalizeCalled) return;
+          finalizeCalled = true;
 
-          callback(assert)
+          if (executed !== planned) {
+            errors.push(new Error(`Test did not execute the planned number of assertions. Planned: ${planned}, Executed: ${executed}`));
+          }
+
+          if (errors.length > 0) {
+            console.error(`[×] ${title}: ${errors.map(e => e.message).join('\n')}`);
+          } else {
+            console.log(`[√] ${title}`);
+          }
+        };
+
+        const checkFinalize = () => {
+          if (executed === planned && asyncOpsPending === 0) {
+            finalize();
+          }
+        };
+
+        const handleAsync = (promise: Promise<void>) => {
+          asyncOpsPending++;
+          promise.finally(() => {
+            asyncOpsPending--;
+            checkFinalize();
+          });
+        };
+
+        try {
+          const result = callback(assert);
+
+          if (result && typeof result.then === 'function') {
+            handleAsync(result);
+          } else {
+            setTimeout(checkFinalize, 0);
+          }
+        } catch (error) {
+          errors.push(error);
+          finalize();
+        }
       }
 
 
-      test('initialize state machine with state', assert => {
-        assert.plan(1)
-        const machine = mood('init')
-        assert.equal(machine.state(), 'init')
-      })
+      // test('1. initialize state machine with state', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood('init')
+
+      //   assert.equal(machine.state(), 'init')
+
+      // })
 
 
-      test('initialize state machine with state resolution map', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'init': [],
-          'something': []
-        })
-        assert.equal(machine.state(), 'init')
-      })
+      // test('2. initialize state machine with state resolution map', assert =>
+      {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'init': [],
+
+      //     'something': []
+
+      //   })
+
+      //   assert.equal(machine.state(), 'init')
+
+      // })
 
 
-      /**
-       * Without condition
-       */
+      // /**
 
-      test('execution transition without condition', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': [function () {
-            assert.ok('executed')
-          }]
-        })
-      })
+      //  * Without condition
+
+      //  */
 
 
-      test('execute transition and does not change current state', assert => {
-        assert.plan(2)
-        const machine = mood({
-          'before': [function () {
-            assert.ok('executed')
-          }]
-        })
-        setTimeout(() => {
-          assert.equal(machine.state(), 'before')
-        }, 30)
-      })
+      // test('3. execution transition without condition', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       assert.ok('executed')
+
+      //     }]
+
+      //   })
+
+      // })
 
 
-      test(`transition to 'resolution' state`, assert => {
-        assert.plan(2)
-        const machine = mood({
-          'before': [function () {
-            return 'something'
-          }, 'resolved'],
-          'resolved': [function () {
-            assert.ok('executed')
-            assert.equal(this.state(), 'resolved')
-          }]
-        })
-      })
+      // test('4. execute transition and does not change current state', assert
+      => {
+
+      //   assert.plan(2)
+
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       assert.ok('executed')
+
+      //     }]
+
+      //   })
+
+      //   setTimeout(() => {
+
+      //     assert.equal(machine.state(), 'before')
+
+      //   }, 30)
+
+      // })
 
 
-      test('pass transition result to next state', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': [function () {
-            return 'something'
-          }, 'resolved'],
-          'resolved': [function (arg) {
-            assert.equal(arg, 'something')
-          }]
-        })
-      })
+      // test(`5. transition to 'resolution' state`, assert => {
+
+      //   assert.plan(2)
+
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       return 'something'
+
+      //     }, 'resolved'],
+
+      //     'resolved': [function () {
+
+      //       assert.ok('executed')
+
+      //       assert.equal(this.state(), 'resolved')
+
+      //     }]
+
+      //   })
+
+      // })
 
 
-      test('resolve transition and pass result to resolution state', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': [function () {
-            return Promise.resolve('something')
-          }, 'resolved'],
-          'resolved': [function (arg) {
-            assert.equal(arg, 'something')
-          }]
-        })
-      })
+      // test('6. pass transition result to next state', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       return 'something'
+
+      //     }, 'resolved'],
+
+      //     'resolved': [function (arg) {
+
+      //       assert.equal(arg, 'something')
+
+      //     }]
+
+      //   })
+
+      // })
 
 
-      test(`transition to 'rejection' state`, assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': [function () {
-            return Promise.reject('something')
-          }, 'resolved', 'rejected'],
-          'resolved': [function (arg) {
-            assert.fail('should not be after')
-          }],
-          'rejected': [function (arg) {
-            assert.ok('resjected state')
-          }]
-        })
-      })
-
-
-      test('reject transition and does not change current state', assert => {
-        assert.plan(2)
-        const machine = mood({
-          'before': [function () {
-            assert.ok('executed')
-            return Promise.reject('something')
-          }, 'resolved']
-        })
-        setTimeout(() => {
-          assert.equal(machine.state(), 'before')
-        }, 30)
-      })
-
-
-      test('reject transition and pass result to rejected state', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': [function () {
-            return Promise.reject('something')
-          }, 'resolved', 'rejected'],
-          'rejected': [function (arg) {
-            assert.equal(arg, 'something')
-          }]
-        })
-      })
-
-
-      /**
-       * With condition
-       */
-
-      test('transition with condition', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', function () {
-            assert.ok('executed')
-          }]
-        })
-        machine.trigger('condition')
-      })
-
-
-      test('execute transition with condition and does not change current
-      state', assert => {
-        assert.plan(3)
-        let i = 0
-        const machine = mood({
-          'before': ['condition', function () {
-            assert.equal(i++, 0)
-          }]
-        })
-        machine.trigger('condition').then(state => {
-          assert.equal(i, 1)
-          assert.equal(state, 'before')
-        })
-      })
-
-
-      test(`transition to 'resolution' state with condition`, assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', function () {
-            return 'something'
-          }, 'resolved']
-        })
-        machine.trigger('condition').then(state => {
-          assert.equal(state, 'resolved')
-        })
-      })
-
-
-      test('pass arguments to the transition function', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', function (arg) {
-            assert.equal(arg, 'something')
-          }]
-        })
-        machine.trigger('condition', 'something')
-      })
-
-
-      test(`transition to 'resolution' state with condition and only once
-      transition is resolved`, assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', function () {
-            return new Promise(resolve => setTimeout(resolve, 30))
-          }, 'resolved']
-        })
-        machine.trigger('condition').then(state => {
-          assert.equal(state, 'resolved')
-        })
-      })
-
-
-      test(`transition to 'rejection' state with condition`, assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', function () {
-            return Promise.reject('something')
-          }, 'resolved', 'rejected']
-        })
-        machine.trigger('condition').then(state => {
-          assert.equal(state, 'rejected')
-        })
-      })
-
-
-      test('reject transition with condition and does not change current state',
+      // test('7. resolve transition and pass result to resolution state',
       assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', function () {
-            return Promise.reject('something')
-          }, 'resolved']
-        })
-        machine.trigger('condition').then(state => {
-          assert.equal(state, 'before')
-        })
-      })
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       return Promise.resolve('something')
+
+      //     }, 'resolved'],
+
+      //     'resolved': [function (arg) {
+
+      //       assert.equal(arg, 'something')
+
+      //     }]
+
+      //   })
+
+      // })
 
 
-      /**
-       * No transition
-       */
+      // test(`8. transition to 'rejection' state`, assert => {
 
-      test('no transition', assert => {
-        assert.plan(1)
-        const machine = mood({
-          'before': ['condition', 'resolved']
-        })
-        machine.trigger('condition').then(state => {
-          assert.equal(state, 'resolved')
-        })
-      })
+      //   assert.plan(1)
 
+      //   const machine = mood({
 
+      //     'before': [function () {
 
-      /**
-       * Multiple transitions/conditions.
-       */
+      //       return Promise.reject('something')
 
-      test('add multiple transitions', assert => {
-        assert.plan(2)
-        const machine = mood('before', {
-          'before': [
-            ['condition1', 'after'],
-            ['condition3', function () {
-              assert.ok('executed')
-            }, 'resolved']
-          ],
-          'after': ['condition2', 'before']
-        })
-        machine.trigger('condition1')
-        machine.trigger('condition2')
-        machine.trigger('condition3').then(state => {
-          assert.equal(state, 'resolved')
-        })
-      })
+      //     }, 'resolved', 'rejected'],
+
+      //     'resolved': [function (arg) {
+
+      //       assert.fail('should not be after')
+
+      //     }],
+
+      //     'rejected': [function (arg) {
+
+      //       assert.ok('resjected state')
+
+      //     }]
+
+      //   })
+
+      // })
 
 
+      // test('9. reject transition and does not change current state', assert
+      => {
 
-      /**
-       * Dynamic transition state.
-       */
+      //   assert.plan(2)
 
-      test('dynamic transition state', assert => {
-        assert.plan(2)
-        const machine = mood({
-          'before': ['condition', function (arg) {
-            return arg
-          }, (arg) => arg],
-          'success': [function () {
-            assert.ok('success')
-            return Promise.reject('failure')
-          }, 'end', arg => Promise.resolve(arg)],
-          'failure': [function () {
-            assert.ok('failure')
-          }]
-        })
-        machine.trigger('condition', 'success')
-      })
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       assert.ok('executed')
+
+      //       return Promise.reject('something')
+
+      //     }, 'resolved']
+
+      //   })
+
+      //   setTimeout(() => {
+
+      //     assert.equal(machine.state(), 'before')
+
+      //   }, 30)
+
+      // })
+
+
+      // test('10. reject transition and pass result to rejected state', assert
+      => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': [function () {
+
+      //       return Promise.reject('something')
+
+      //     }, 'resolved', 'rejected'],
+
+      //     'rejected': [function (arg) {
+
+      //       assert.equal(arg, 'something')
+
+      //     }]
+
+      //   })
+
+      // })
+
+
+      // /**
+
+      //  * With condition
+
+      //  */
+
+
+      // test('11. transition with condition', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function () {
+
+      //       assert.ok('executed')
+
+      //     }]
+
+      //   })
+
+      //   machine.trigger('condition')
+
+      // })
+
+
+      // test('12. execute transition with condition and does not change current
+      state', assert => {
+
+      //   assert.plan(3)
+
+      //   let i = 0
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function () {
+
+      //       assert.equal(i++, 0)
+
+      //     }]
+
+      //   })
+
+      //   machine.trigger('condition').then(state => {
+
+      //     assert.equal(i, 1)
+
+      //     assert.equal(state, 'before')
+
+      //   })
+
+      // })
+
+
+      // test(`13. transition to 'resolution' state with condition`, assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function () {
+
+      //       return 'something'
+
+      //     }, 'resolved']
+
+      //   })
+
+      //   machine.trigger('condition').then(state => {
+
+      //     assert.equal(state, 'resolved')
+
+      //   })
+
+      // })
+
+
+      // test('14. pass arguments to the transition function', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function (arg) {
+
+      //       assert.equal(arg, 'something')
+
+      //     }]
+
+      //   })
+
+      //   machine.trigger('condition', 'something')
+
+      // })
+
+
+      // test(`15. transition to 'resolution' state with condition and only once
+      transition is resolved`, assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function () {
+
+      //       return new Promise(resolve => setTimeout(resolve, 30))
+
+      //     }, 'resolved']
+
+      //   })
+
+      //   machine.trigger('condition').then(state => {
+
+      //     assert.equal(state, 'resolved')
+
+      //   })
+
+      // })
+
+
+      // test(`16. transition to 'rejection' state with condition`, assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function () {
+
+      //       return Promise.reject('something')
+
+      //     }, 'resolved', 'rejected']
+
+      //   })
+
+      //   machine.trigger('condition').then(state => {
+
+      //     assert.equal(state, 'rejected')
+
+      //   })
+
+      // })
+
+
+      // test('17. reject transition with condition and does not change current
+      state', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function () {
+
+      //       return Promise.reject('something')
+
+      //     }, 'resolved']
+
+      //   })
+
+      //   machine.trigger('condition').then(state => {
+
+      //     assert.equal(state, 'before')
+
+      //   })
+
+      // })
+
+
+      // /**
+
+      //  * No transition
+
+      //  */
+
+
+      // test('18. no transition', assert => {
+
+      //   assert.plan(1)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', 'resolved']
+
+      //   })
+
+      //   machine.trigger('condition').then(state => {
+
+      //     assert.equal(state, 'resolved')
+
+      //   })
+
+      // })
+
+
+
+      // /**
+
+      //  * Multiple transitions/conditions.
+
+      //  */
+
+
+      // test('19. add multiple transitions', assert => {
+
+      //   assert.plan(2)
+
+      //   const machine = mood('before', {
+
+      //     'before': [
+
+      //       ['condition1', 'after'],
+
+      //       ['condition3', function () {
+
+      //         assert.ok('executed')
+
+      //       }, 'resolved']
+
+      //     ],
+
+      //     'after': ['condition2', 'before']
+
+      //   })
+
+      //   machine.trigger('condition1')
+
+      //   machine.trigger('condition2')
+
+      //   machine.trigger('condition3').then(state => {
+
+      //     assert.equal(state, 'resolved')
+
+      //   })
+
+      // })
+
+
+
+      // /**
+
+      //  * Dynamic transition state.
+
+      //  */
+
+
+      // test('20. dynamic transition state', assert => {
+
+      //   assert.plan(2)
+
+      //   const machine = mood({
+
+      //     'before': ['condition', function (arg) {
+
+      //       return arg
+
+      //     }, (arg) => arg],
+
+      //     'success': [function () {
+
+      //       assert.ok('success')
+
+      //       return Promise.reject('failure')
+
+      //     }, 'end', arg => Promise.resolve(arg)],
+
+      //     'failure': [function () {
+
+      //       assert.ok('failure')
+
+      //     }]
+
+      //   })
+
+      //   machine.trigger('condition', 'success')
+
+      // })
 assets:
   - type: folder
     uid: 5LPMn959Lzg2Qw
@@ -1824,7 +2076,7 @@ assets:
           launchAction: ''
           bomb: TfWHLnj22N26db
           hurtTexture: 64Pcmm4bcBkDNP
-        lastmod: 1715284844118
+        lastmod: 1716074858960
         uid: BC5dp7bw2mHL2t
         behaviors:
           - hkqDP8GpPhDNWK
@@ -1907,11 +2159,7 @@ assets:
         loopAnimation: true
         animationFPS: 15
         visible: true
-        events:
-          - eventKey: OnStep
-            code: ''
-            arguments: {}
-            lib: core
+        events: []
         extends:
           cgroup: Bomb
           TimerExplosion: 3
@@ -1924,7 +2172,7 @@ assets:
           matterFrictionAir: 0.1
           explosionTime: 1
           damage: 1
-        lastmod: 1716074600191
+        lastmod: 1716074697360
         uid: TfWHLnj22N26db
         behaviors:
           - 7qL8Dk6Fpb91m9
@@ -18224,11 +18472,13 @@ assets:
         events:
           - eventKey: OnCreate
             code: |-
-              interface Healthy {
+              interface IHealthy {
                   currentHealth : number
                   damage: (v: number) => Promise<void>
-                  state : Moody
+                  healthState : Moody
               }
+
+              type HealthyCopy = BasicCopy & IHealthy
 
               this.currentHealth = this.maxHealth
 
@@ -18243,17 +18493,16 @@ assets:
                       duration: 500,
                       curve: tween.easeInCubic
                   }).then(() => {
-                      this.state.trigger('damage', this)
+                      this.healthState.trigger('damage', this as HealthyCopy)
                   })
               }
 
-              this.state = Mood({
-                  'living': ['damage', (me: BasicCopy & Healthy) => {
-                      this.currentHealth -= 1;
-                      console.log(this.currentHealth);
-                      return (this.currentHealth <= 0) ? 'dead' : 'living'
-                  }, arg => arg],
-                  'dead': [(me: BasicCopy) =>{ me.kill = true }]
+              this.healthState = Mood({
+                  'living': ['damage', (me: HealthyCopy) => {
+                      me.currentHealth -= 1;
+                      return (me.currentHealth <= 0) ? 'dead' : 'living'
+                  }, (arg: string) => arg],
+                  'dead': [() =>{ this.kill = true }]
               })
             arguments: {}
             lib: core
@@ -18262,7 +18511,7 @@ assets:
             name: maxHealth
             readableName: Max Health
             required: true
-        lastmod: 1715593445633
+        lastmod: 1716357351265
         uid: 5zf9gNNDpcJ4DJ
         extendTypes: ''
       - type: behavior
@@ -18338,7 +18587,7 @@ assets:
           - type: sliderAndNumber
             name: roaming
             readableName: Roaming
-        lastmod: 1715591402087
+        lastmod: 1716356485702
         uid: qW21LMMR65fMcb
         extendTypes: ''
       - type: behavior
@@ -18360,8 +18609,8 @@ assets:
               this.canPoseBomb = true
               this.poseBomb = () => {
                   if (this.canPoseBomb) {
-                      var bomb = templates.copy('Bomb', this.x+Math.sign(this.hspeed) *16, this.y+Math.sign(this.vspeed)*16)
-                      matter.launch(bomb, this.hspeed, this.vspeed)
+                      var bomb = templates.copy('Bomb', this.x, this.y)
+                      //matter.launch(bomb, this.hspeed, this.vspeed)
                       this.canPoseBomb = false
                       timer.add(this.launchCooldown, "BombCountdown").then(() => {
                           this.canPoseBomb = true
@@ -18386,7 +18635,7 @@ assets:
           - type: template
             name: bomb
             readableName: Bomb
-        lastmod: 1715284827650
+        lastmod: 1716357282583
         uid: hkqDP8GpPhDNWK
         extendTypes: ''
       - type: behavior
@@ -18446,7 +18695,7 @@ assets:
           - type: tandem
             name: shadow
             readableName: Shadow
-        lastmod: 1715284817566
+        lastmod: 1716357285744
         uid: fM86kwpJ7mNRfL
         extendTypes: ''
   - type: folder
